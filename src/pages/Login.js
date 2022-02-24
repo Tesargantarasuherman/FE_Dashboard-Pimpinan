@@ -1,6 +1,23 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
 
 function Login() {
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    useEffect(() => {
+    })
+    
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        axios.post(`http://localhost:8080/suratonlinebackend/api/index.php/login`, { 'email': email, 'password': password },{ headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+            'Content-Type': 'multipart/form-data',
+        }}).then(res => {
+            console.log(res)
+        })
+        console.log(password)
+    }
     return (
         <div className="container">
             {/* Outer Row */}
@@ -15,16 +32,16 @@ function Login() {
                                         <div className="text-center">
                                             <h1 className="h4 text-gray-900 mb-4">Selamat Datang</h1>
                                         </div>
-                                        <form className="user">
+                                        <form className="user" onSubmit={handleSubmit}>
                                             <div className="form-group">
-                                                <input type="email" className="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address..." />
+                                                <input type="email" className="form-control form-control-user" onChange={(e) => setEmail(e.target.value)} aria-describedby="emailHelp" placeholder="Enter Email Address..." />
                                             </div>
                                             <div className="form-group">
-                                                <input type="password" className="form-control form-control-user" id="exampleInputPassword" placeholder="Password" />
+                                                <input type="password" className="form-control form-control-user" onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
                                             </div>
-                                            <a href="index.html" className="btn btn-primary btn-user btn-block">
+                                            <button type="submit" className="btn btn-primary btn-user btn-block">
                                                 Login
-                                            </a>
+                                            </button>
                                         </form>
                                         <hr />
                                     </div>
