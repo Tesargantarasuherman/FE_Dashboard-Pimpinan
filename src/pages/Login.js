@@ -1,7 +1,9 @@
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import { AuthContext } from '../contexts/authContext'
 
 function Login() {
+    const {isLogin, setIsLogin} = useContext(AuthContext)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     useEffect(() => {
@@ -39,7 +41,7 @@ function Login() {
                                             <div className="form-group">
                                                 <input type="password" className="form-control form-control-user" onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
                                             </div>
-                                            <button type="submit" className="btn btn-primary btn-user btn-block">
+                                            <button type="submit" className="btn btn-primary btn-user btn-block" onClick={()=>setIsLogin(true)}>
                                                 Login
                                             </button>
                                         </form>

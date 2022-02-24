@@ -1,7 +1,9 @@
 import React, { useContext, useState } from 'react'
+import { AuthContext } from '../contexts/authContext'
 import { SidebarContext } from '../contexts/sidebar'
 
 function Topbar() {
+    const {isLogin, setIsLogin} = useContext(AuthContext)
     const {sidebar,setSidebar} = useContext(SidebarContext)
     
     return (
@@ -179,10 +181,10 @@ function Topbar() {
                             Activity Log
                         </a>
                         <div className="dropdown-divider" />
-                        <a className="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                        <button onClick={()=>setIsLogin(false)} className="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                             <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400" />
                             Logout
-                        </a>
+                        </button>
                     </div>
                 </li>
             </ul>

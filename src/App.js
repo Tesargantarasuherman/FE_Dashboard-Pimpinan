@@ -10,11 +10,12 @@ import {
 import Login from './pages/Login';
 import Home from './pages/Home';
 import MainPage from './routes/main/MainPage';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { SidebarContext } from './contexts/sidebar';
+import { AuthContext } from './contexts/authContext';
 
 function App() {
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] =  useState(false);
   const [sidebar, setSidebar] = useState(true);
   // useEffect(()=>{
   //   if(isLogin){
@@ -22,7 +23,7 @@ function App() {
   //   }
   // },[isLogin])
   return (
-
+    <AuthContext.Provider value={{ isLogin, setIsLogin }}>
     <SidebarContext.Provider value={{ sidebar, setSidebar }}>
       {
         isLogin ?
@@ -37,6 +38,7 @@ function App() {
       {/* <Route path="/" element={<Login />} />
         <Route path="/home" element={<Home />} /> */}
     </SidebarContext.Provider>
+    </AuthContext.Provider>
   );
 }
 
