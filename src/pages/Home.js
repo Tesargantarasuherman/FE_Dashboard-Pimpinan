@@ -53,32 +53,13 @@ function Home() {
     }, [])
     return (
         <div className="container-fluid">
-            {/* Page Heading */}
-            <div className="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 className="h3 mb-0 text-gray-800">Dashboard</h1>
-                <a href="#" className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i className="fas fa-download fa-sm text-white-50" /> Generate
-                </a>
-            </div>
-            {/* Content Row */}
-            <div className="row">
-                {/* Earnings (Monthly) Card Example */}
-                <Card />
-                {/* Earnings (Monthly) Card Example */}
-                <Card />
-                {/* Earnings (Monthly) Card Example */}
-                <CardProggress />
-                {/* Pending Requests Card Example */}
-                <Card />
-            </div>
-            {/* Content Row */}
             <div className="row">
                 {/* Area Chart */}
-                <div className="col-xl-4 col-lg-6">
-                    <div className="card shadow mb-4">
-                        {/* Card Header - Dropdown */}
-                        <div className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <div className="col-md-4">
+                    <div class="card shadow">
+                    <div className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                             <h6 className="m-0 font-weight-bold text-primary">
-                                Waktu Shalat Hari Ini
+                            Jadwal Shalat Hari Ini
                             </h6>
                             <div className="dropdown no-arrow">
                                 <a className="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -93,34 +74,97 @@ function Home() {
                                 </div>
                             </div>
                         </div>
-                        {/* Card Body */}
-                        <div className="card-body">
-                            <table className="table table-striped table-responsive">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Imsak</th>
-                                        <th scope="col">Subuh</th>
-                                        <th scope="col">Terbit</th>
-                                        <th scope="col">Duhur</th>
-                                        <th scope="col">Asar</th>
-                                        <th scope="col">Magrib</th>
-                                        <th scope="col">Isya</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>{timeSalat.Imsak}</td>
-                                        <td>{timeSalat.Fajr}</td>
-                                        <td>{timeSalat.Sunrise}</td>
-                                        <td>{timeSalat.Dhuhr}</td>
-                                        <td>{timeSalat.Asr}</td>
-                                        <td>{timeSalat.Maghrib}</td>
-                                        <td>{timeSalat.Isha}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <div class="card-body">
+                            <div className="d-flex justify-content-between align-items-center">
+                                <h5 className='w-25 font-weight-bold'>
+                                    {timeSalat.Imsak}
+                                </h5>
+                                <h6 className='w-75'>
+                                    Imsak
+                                </h6>
+                            </div>
+                            <hr />
+                            <div className="d-flex justify-content-between align-items-center">
+                                <h5 className='w-25 font-weight-bold'>
+                                    {timeSalat.Fajr}
+                                </h5>
+                                <h6 className='w-75'>
+                                    Subuh
+                                </h6>
+                            </div>
+                            <hr />
+                            <div className="d-flex justify-content-between align-items-center">
+                                <h5 className='w-25 font-weight-bold'>
+                                    {timeSalat.Sunrise}
+                                </h5>
+                                <h6 className='w-75'>
+                                    Terbit
+                                </h6>
+                            </div>
+                            <hr />
+                            <div className="d-flex justify-content-between align-items-center">
+                                <h5 className='w-25 font-weight-bold'>
+                                    {timeSalat.Dhuhr}
+                                </h5>
+                                <h6 className='w-75'>
+                                    Dzuhur
+                                </h6>
+                            </div>
+                            <hr />
+                            <div className="d-flex justify-content-between align-items-center">
+                                <h5 className='w-25 font-weight-bold'>
+                                    {timeSalat.Asr}
+                                </h5>
+                                <h6 className='w-75'>
+                                    Ashar
+                                </h6>
+                            </div>
+                            <hr />
+                            <div className="d-flex justify-content-between align-items-center">
+                                <h5 className='w-25 font-weight-bold'>
+                                    {timeSalat.Maghrib}
+                                </h5>
+                                <h6 className='w-75'>
+                                    Maghrib
+                                </h6>
+                            </div>
+                            <hr />
+                            <div className="d-flex justify-content-between align-items-center">
+                                <h5 className='w-25 font-weight-bold'>
+                                    {timeSalat.Isha}
+                                </h5>
+                                <h6 className='w-75'>
+                                    Isya
+                                </h6>
+                            </div>
                         </div>
                     </div>
+                    {/* <h6 className="font-weight-bold">
+                        Berita
+                    </h6>
+                    <div id="carouselExampleControls" className="carousel slide" data-ride="carousel">
+                        <div className="carousel-inner">
+                            <div className="carousel-item active">
+                                <Card />
+                            </div>
+                            <div className="carousel-item">
+                                <Card />
+                            </div>
+                            <div className="carousel-item">
+                                <Card />
+                            </div>
+                        </div>
+                        <a className="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                            <span className="carousel-control-prev-icon" aria-hidden="true" />
+                            <span className="sr-only">Previous</span>
+                        </a>
+                        <a className="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                            <span className="carousel-control-next-icon" aria-hidden="true" />
+                            <span className="sr-only">Next</span>
+                        </a>
+                    </div> */}
+
+
                 </div>
                 {/* Pie Chart */}
                 <div className="col-xl-8 col-lg-8">
