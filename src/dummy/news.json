@@ -1,0 +1,36 @@
+{
+  "data": [
+    {
+      "id": "0",
+      "date": "2022-03-09T18:00:41Z",
+      "title": "Twitch streaming esports team’s series C. Chamath-like, sketchy venture capitalist. ADA-buying dropshipping guru. Coinbase competing stealth startup.",
+      "author": "erasurewincing",
+      "authorImage": "https://img.bandung.go.id/images/news/2022/03/01/header/164613102061-mesin-pengolah-sampah-karang-taruna-gedebage-dipakai-kota-kota-besar-di-indonesia.jpg",
+      "tag": ["Kota", "Wirausaha", "Kabar Baik"]
+    },
+    {
+      "id": "1",
+      "date": "2022-03-21T18:00:41Z",
+      "title": "Techstars windsurfing college drop-out. TikToking, Secondary Market buyer. Accredited investor software engineer. Y-combinator raised Facebook PM. Solidity focused crypto mining installation.",
+      "author": "denimmandarin",
+      "authorImage": "https://img.bandung.go.id/images/news/2022/03/01/galeri/164613102031.jpg",
+      "tag": ["Wisata", "Wirausaha", "Makanan"]
+    },
+    {
+        "id": "2",
+        "date": "2022-03-21T18:00:41Z",
+        "title": "Churn increasing product-market fit pivot. College Dropout, overenthusiastic founder. Friends and Family raising, rationalist Job-seeker Churn increasing product-market fit pivot.",
+        "author": "tweetreceiver",
+        "authorImage": "https://img.bandung.go.id/images/news/2022/03/01/galeri/164613102038.jpg",
+        "tag": ["Festival", "Goodtalk", "Teknologi"]
+    },
+    {
+        "id": "3",
+        "date": "2022-03-21T18:00:41Z",
+        "title": "Churn increasing product-market fit pivot. College Dropout, overenthusiastic founder. Friends and Family raising, rationalist Job-seeker Churn increasing product-market fit pivot.",
+        "author": "tweetreceiver",
+        "authorImage": "https://img.bandung.go.id/images/news/2022/03/01/galeri/164613102077.jpg",
+        "tag": ["Festival", "Goodtalk", "Teknologi"]
+    }
+  ]
+}

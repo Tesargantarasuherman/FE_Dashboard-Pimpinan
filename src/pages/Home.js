@@ -3,8 +3,12 @@ import React, { useEffect, useState } from 'react'
 import Card from '../components/Card';
 import CardProggress from '../components/CardProggress';
 import { Inject, ScheduleComponent, Day, Week, WorkWeek, Month, Agenda } from '@syncfusion/ej2-react-schedule'
-
+import data from '../dummy/news.json'
+import CardBerita from '../components/CardBerita';
+const _news = data.data
 function Home() {
+    const [news, setNews] = useState(_news)
+
     let dataAgenda = new Object();
     let _dataAgenda = [];
     const [timeSalat, setTimeSalat] = useState([]);
@@ -57,9 +61,9 @@ function Home() {
                 {/* Area Chart */}
                 <div className="col-md-4">
                     <div class="card shadow">
-                    <div className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <div className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                             <h6 className="m-0 font-weight-bold text-primary">
-                            Jadwal Shalat Hari Ini
+                                Jadwal Shalat Hari Ini
                             </h6>
                             <div className="dropdown no-arrow">
                                 <a className="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -195,6 +199,31 @@ function Home() {
                                 }}>
                                 <Inject services={[Day, Week, WorkWeek, Month, Agenda]} />
                             </ScheduleComponent>
+                        </div>
+                    </div>
+                </div>
+                <div className="col-md-12">
+                    <div className="card shadow mb-4">
+                        {/* Card Header - Dropdown */}
+                        <div className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                            <h6 className="m-0 font-weight-bold text-primary">
+                                Berita
+                            </h6>
+                            <div className="card-body">
+
+                                <div className="row">
+                                    {
+                                        news.map(news => {
+                                            return (
+                                                <div className="col-md-3 my-2">
+                                                    <CardBerita news={news} />
+                                                </div>
+                                            )
+                                        })
+                                    }
+
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

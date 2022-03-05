@@ -10,10 +10,10 @@ function Sidebar() {
             <ul className={`navbar-nav bg-gradient-primary sidebar sidebar-dark accordion ${sidebar ? '' : 'toggled'}`} id="accordionSidebar">
                 {/* Sidebar - Brand */}
                 <a className="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                    <div className="sidebar-brand-icon rotate-n-15">
-                        <i className="fas fa-laugh-wink" />
+                    <div className="sidebar-brand-icon">
+                        <img src="https://2.bp.blogspot.com/-z0rE6HnMtgQ/Wg-abxMBAgI/AAAAAAAAFD0/uHCcB-EiI0kxrer74nEL4KszPn2zAMCRQCLcBGAs/s1600/Kota%2BBandung.png" alt="" height={55} width={65} srcset="" />
                     </div>
-                    <div className="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+                    <div className="sidebar-brand-text mx-3">Dashboard Pimpinan</div>
                 </a>
                 {/* Divider */}
                 <hr className="sidebar-divider my-0" />
