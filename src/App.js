@@ -15,7 +15,7 @@ import { SidebarContext } from './contexts/sidebar';
 import { AuthContext } from './contexts/authContext';
 
 function App() {
-  const [isLogin, setIsLogin] =  useState(false);
+  const [isLogin, setIsLogin] =  useState(localStorage.getItem('login'));
   const [sidebar, setSidebar] = useState(true);
   // useEffect(()=>{
   //   if(isLogin){

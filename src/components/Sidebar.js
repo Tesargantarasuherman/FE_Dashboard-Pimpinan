@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { SidebarContext } from '../contexts/sidebar'
 import Logo from '../img/bsc 1.png'
 import LogoDescription from '../img/bsc 2.png'
@@ -16,21 +17,27 @@ function Sidebar() {
                         <img src={Logo} alt="" height={55} width={65} srcset="" />
                     </div>
                     <div className="sidebar-brand-text mx-3">
-                    <img src={LogoDescription} alt="" height={55} width={120} srcset="" />
+                        <img src={LogoDescription} alt="" height={55} width={120} srcset="" />
                     </div>
                 </a>
                 {/* Divider */}
                 <hr className="sidebar-divider my-0" />
                 {/* Nav Item - Dashboard */}
+                <div className="sidebar-heading">Menu</div>
                 <li className="nav-item active">
-                    <a className="nav-link" href="index.html">
-                        <i class="fa fa-home" aria-hidden="true"></i>
-                        <span>Beranda</span></a>
+                    <Link className="nav-link text-light" to="/">
+                        <i class="fa fa-home text-light" aria-hidden="true"></i>
+                        <span>Beranda</span>
+                    </Link>
+                </li>
+                <li className="nav-item active">
+                    <Link className="nav-link text-light" to="/aplikasi">
+                        <i class="fa fa-home text-light" aria-hidden="true"></i>
+                        <span>Aplikasi</span></Link>
                 </li>
                 {/* Divider */}
                 <hr className="sidebar-divider" />
                 {/* Heading */}
-                <div className="sidebar-heading">Interface</div>
                 {/* Nav Item - Pages Collapse Menu */}
                 <li className="nav-item">
                     <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">

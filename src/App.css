@@ -40,7 +40,11 @@
 .App-link {
   color: #61dafb;
 }
-
+.nav-item.active{
+  background-color: #425EBD !important;
+  margin:10px 0px !important;
+  border-radius: 10px !important;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

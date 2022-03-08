@@ -11,14 +11,22 @@ function Login() {
     
     const handleSubmit = (e) => {
         e.preventDefault()
-        axios.post(`http://localhost:8080/suratonlinebackend/api/index.php/login`, { 'email': email, 'password': password },{ headers: {
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-            'Content-Type': 'multipart/form-data',
-        }}).then(res => {
-            console.log(res)
-        })
-        console.log(password)
+        if(email == 'kepaladinas@bandung.go.id' && password =='123456'){
+            localStorage.setItem('login',true)
+            return window.location.reload();
+        }
+        else{
+            alert('email tidak terdaftar atau password salah')
+        }
+
+        // axios.post(`http://localhost:8080/suratonlinebackend/api/index.php/login`, { 'email': email, 'password': password },{ headers: {
+        //     'Access-Control-Allow-Origin': '*',
+        //     'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+        //     'Content-Type': 'multipart/form-data',
+        // }}).then(res => {
+        //     console.log(res)
+        // })
+        // console.log(password)
     }
     return (
         <div className="container">
@@ -41,7 +49,7 @@ function Login() {
                                             <div className="form-group">
                                                 <input type="password" className="form-control form-control-user" onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
                                             </div>
-                                            <button type="submit" className="btn btn-primary btn-user btn-block" onClick={()=>setIsLogin(true)}>
+                                            <button type="submit" className="btn btn-primary btn-user btn-block">
                                                 Login
                                             </button>
                                         </form>

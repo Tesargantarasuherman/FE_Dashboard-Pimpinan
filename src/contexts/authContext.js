@@ -5,9 +5,7 @@ import {
 export const AuthContext = createContext();
 const AuthContextProvider = (props) => {
     const [isLogin, setIsLogin] = useState(false);
-    const toggleAuth = () => {
-        setIsLogin(true)
-    }
+
     return (
         <AuthContext.Provider value={{ isLogin:isLogin,setIsLogin,setIsLogin}}>
             {/* asign children to another component */}
