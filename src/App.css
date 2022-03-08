@@ -34,7 +34,9 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
-
+.bg-white{
+  background-color: white;
+}
 .App-link {
   color: #61dafb;
 }
