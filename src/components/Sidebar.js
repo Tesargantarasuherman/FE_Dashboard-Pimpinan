@@ -3,10 +3,19 @@ import { Link } from 'react-router-dom'
 import { SidebarContext } from '../contexts/sidebar'
 import Logo from '../img/bsc 1.png'
 import LogoDescription from '../img/bsc 2.png'
-function Sidebar() {
-    const { sidebar, setSidebar } = useContext(SidebarContext)
-    const [active, setActive] = useState(false)
+import data_sidebar from '../localdata/sidebar';
+import { useNavigate } from "react-router-dom";
 
+function Sidebar() {
+    const navigate = useNavigate();
+    const { sidebar, setSidebar } = useContext(SidebarContext)
+    const [active, setActive] = useState('')
+    const [dataSidebar, setDataSidebar] = useState(data_sidebar)
+
+    const actionSetActive = (params) => {
+        setActive(params.name)
+        navigate(`/${params.link}`);
+    }
     return (
         <>
             {/* Sidebar */}
@@ -24,22 +33,23 @@ function Sidebar() {
                 <hr className="sidebar-divider my-0" />
                 {/* Nav Item - Dashboard */}
                 <div className="sidebar-heading">Menu</div>
-                <li className="nav-item active">
-                    <Link className="nav-link text-light" to="/">
-                        <i class="fa fa-home text-light" aria-hidden="true"></i>
-                        <span>Beranda</span>
-                    </Link>
-                </li>
-                <li className="nav-item active">
-                    <Link className="nav-link text-light" to="/aplikasi">
-                        <i class="fa fa-home text-light" aria-hidden="true"></i>
-                        <span>Aplikasi</span></Link>
-                </li>
+                {
+                    dataSidebar.map(sidebar => {
+                        return (
+                            <li className={`nav-item ${active == sidebar.name ? 'active' : ''}`}>
+                                <div className={`btn nav-link text-secondary font-weight-bold ${active == sidebar.name ? 'text-light' : ''}`} onClick={() => actionSetActive(sidebar)}>
+                                    <i class={`fa ${sidebar.icon} font-weight-bold ${active == sidebar.name ? 'text-light' : ''}`} aria-hidden="true"></i>
+                                    <span>{sidebar.name}</span>
+                                </div>
+                            </li>
+                        )
+                    })
+                }
                 {/* Divider */}
                 <hr className="sidebar-divider" />
                 {/* Heading */}
                 {/* Nav Item - Pages Collapse Menu */}
-                <li className="nav-item">
+                {/* <li className="nav-item">
                     <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                         <i className="fas fa-fw fa-cog" />
                         <span>Smart City</span>
@@ -50,7 +60,7 @@ function Sidebar() {
                             <a className="collapse-item" href="cards.html">Cards</a>
                         </div>
                     </div>
-                </li>
+                </li> */}
                 {/* Divider */}
                 <hr className="sidebar-divider d-none d-md-block" />
                 {/* Sidebar Toggler (Sidebar) */}
