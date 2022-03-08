@@ -17,11 +17,9 @@ import { AuthContext } from './contexts/authContext';
 function App() {
   const [isLogin, setIsLogin] =  useState(localStorage.getItem('login'));
   const [sidebar, setSidebar] = useState(true);
-  // useEffect(()=>{
-  //   if(isLogin){
-  //     window.location.href = "/dashboard";
-  //   }
-  // },[isLogin])
+  useEffect(()=>{
+    console.log(isLogin)
+  },[])
   return (
     <AuthContext.Provider value={{ isLogin, setIsLogin }}>
     <SidebarContext.Provider value={{ sidebar, setSidebar }}>

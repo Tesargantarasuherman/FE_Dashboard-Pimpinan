@@ -132,34 +132,157 @@ function Home() {
                         </div>
                     </div>
                 </div>
-                <div className="col-xl-8 col-lg-8">
+                <div className="col-xl-12 col-lg-12 col-sm-12 col-md-12">
                     <div className="card shadow mb-4">
-                        {/* Card Header - Dropdown */}
-                        <div className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                            <h6 className="m-0 font-weight-bold text-primary">
+                        <div className="card-body">
+                            <h6 className="m-0 font-weight-bold text-secondary">
                                 Agenda
                             </h6>
-                            <div className="dropdown no-arrow">
-                                <a className="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i className="fas fa-ellipsis-v fa-sm fa-fw text-gray-400" />
-                                </a>
-                                <div className="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                                    <div className="dropdown-header">Dropdown Header:</div>
-                                    <a className="dropdown-item" href="#">Action</a>
-                                    <a className="dropdown-item" href="#">Another action</a>
-                                    <div className="dropdown-divider" />
-                                    <a className="dropdown-item" href="#">Something else here</a>
+                            <div className="row mt-4">
+                                <div className="col-md-8">
+                                    <ScheduleComponent currentView='Month'
+                                        eventSettings={{
+                                            dataSource: agenda
+                                        }}>
+                                        <Inject services={[Day, Week, WorkWeek, Month, Agenda]} />
+                                    </ScheduleComponent>
+                                </div>
+                                <div className="col-md-4">
+                                    <h6 className="m-0 font-weight-bold text-secondary">
+                                        23 Maret 2022
+                                    </h6>
+                                    <div className="mt-4">
+                                        <div className="d-flex justify-content-between align-items-center">
+                                            <div className='w-25'>
+                                                <h5 className='font-weight-bold'>
+                                                    09:00
+                                                </h5>
+                                            </div>
+                                            <div className='w-75'>
+                                                <h6 className='font-weight-bold m-0'>
+                                                    Kegiatan 1
+                                                </h6>
+                                                <h6>
+                                                    Zoom Meeting
+                                                </h6>
+                                            </div>
+                                        </div>
+                                        <hr className="m-0"/>
+                                        <div className="d-flex justify-content-between align-items-center">
+                                            <div className='w-25'>
+                                                <h5 className='font-weight-bold'>
+                                                    11:00
+                                                </h5>
+                                            </div>
+                                            <div className='w-75'>
+                                                <h6 className='font-weight-bold m-0'>
+                                                    Kegiatan 2
+                                                </h6>
+                                                <h6>
+                                                    Zoom Meeting
+                                                </h6>
+                                            </div>
+                                        </div>
+                                        <hr className="m-0"/>
+                                        <div className="d-flex justify-content-between align-items-center">
+                                            <div className='w-25'>
+                                                <h5 className='font-weight-bold'>
+                                                    13:00
+                                                </h5>
+                                            </div>
+                                            <div className='w-75'>
+                                                <h6 className='font-weight-bold m-0'>
+                                                    Kegiatan 3
+                                                </h6>
+                                                <h6>
+                                                    Zoom Meeting
+                                                </h6>
+                                            </div>
+                                        </div>
+                                        <hr className="m-0"/>
+                                        <div className="d-flex justify-content-between align-items-center">
+                                            <div className='w-25'>
+                                                <h5 className='font-weight-bold'>
+                                                    14:00
+                                                </h5>
+                                            </div>
+                                            <div className='w-75'>
+                                                <h6 className='font-weight-bold m-0'>
+                                                    Kegiatan 4
+                                                </h6>
+                                                <h6>
+                                                    Zoom Meeting
+                                                </h6>
+                                            </div>
+                                        </div>
+                                        <hr className="m-0"/>
+                                        <div className="d-flex justify-content-between align-items-center">
+                                            <div className='w-25'>
+                                                <h5 className='font-weight-bold'>
+                                                    15:00
+                                                </h5>
+                                            </div>
+                                            <div className='w-75'>
+                                                <h6 className='font-weight-bold m-0'>
+                                                    Kegiatan 5
+                                                </h6>
+                                                <h6>
+                                                    Zoom Meeting
+                                                </h6>
+                                            </div>
+                                        </div>
+                                        <hr className="m-0"/>
+                                        <div className="d-flex justify-content-between align-items-center">
+                                            <div className='w-25'>
+                                                <h5 className='font-weight-bold'>
+                                                    16:00
+                                                </h5>
+                                            </div>
+                                            <div className='w-75'>
+                                                <h6 className='font-weight-bold m-0'>
+                                                    Kegiatan 6
+                                                </h6>
+                                                <h6>
+                                                    Zoom Meeting
+                                                </h6>
+                                            </div>
+                                        </div>
+                                        <hr className="m-0"/>
+                                        <div className="d-flex justify-content-between align-items-center">
+                                            <div className='w-25'>
+                                                <h5 className='font-weight-bold'>
+                                                    17:00
+                                                </h5>
+                                            </div>
+                                            <div className='w-75'>
+                                                <h6 className='font-weight-bold m-0'>
+                                                    Kegiatan 7
+                                                </h6>
+                                                <h6>
+                                                    Zoom Meeting
+                                                </h6>
+                                            </div>
+                                        </div>
+                                        <hr className="m-0"/>
+                                        <div className="d-flex justify-content-between align-items-center">
+                                            <div className='w-25'>
+                                                <h5 className='font-weight-bold'>
+                                                    18:00
+                                                </h5>
+                                            </div>
+                                            <div className='w-75'>
+                                                <h6 className='font-weight-bold m-0'>
+                                                    Kegiatan 7
+                                                </h6>
+                                                <h6>
+                                                    Zoom Meeting
+                                                </h6>
+                                            </div>
+                                        </div>
+                                        <hr className="m-0"/>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        {/* Card Body */}
-                        <div className="card-body">
-                            <ScheduleComponent currentView='Month'
-                                eventSettings={{
-                                    dataSource: agenda
-                                }}>
-                                <Inject services={[Day, Week, WorkWeek, Month, Agenda]} />
-                            </ScheduleComponent>
                         </div>
                     </div>
                 </div>

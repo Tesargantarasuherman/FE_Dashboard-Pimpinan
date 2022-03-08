@@ -1,10 +1,17 @@
 import React, { useContext, useState } from 'react'
 import { AuthContext } from '../contexts/authContext'
 import { SidebarContext } from '../contexts/sidebar'
+import { useNavigate } from "react-router-dom";
+
 function Topbar() {
+    const navigate = useNavigate();
     const {isLogin, setIsLogin} = useContext(AuthContext)
     const {sidebar,setSidebar} = useContext(SidebarContext)
-    
+    const Logout =()=>{
+        localStorage.removeItem('login')
+        navigate(`/`);
+        return window.location.reload();
+    }
     return (
         <nav className='navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow'>
             {/* Sidebar Toggle (Topbar) */}
@@ -58,7 +65,7 @@ function Topbar() {
                             Profile
                         </a>
                         <div className="dropdown-divider" />
-                        <button onClick={()=>setIsLogin(false)} className="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                        <button onClick={Logout} className="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                             <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400" />
                             Logout
                         </button>

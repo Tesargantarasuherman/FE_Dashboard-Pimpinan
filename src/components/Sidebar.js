@@ -21,14 +21,14 @@ function Sidebar() {
             {/* Sidebar */}
             <ul className={`navbar-nav bg-white shadow sidebar sidebar-light accordion ${sidebar ? '' : 'toggled'}`} id="accordionSidebar">
                 {/* Sidebar - Brand */}
-                <a className="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                <Link className="sidebar-brand d-flex align-items-center justify-content-center" to="/">
                     <div className="sidebar-brand-icon">
                         <img src={Logo} alt="" height={55} width={65} srcset="" />
                     </div>
                     <div className="sidebar-brand-text mx-3">
                         <img src={LogoDescription} alt="" height={55} width={120} srcset="" />
                     </div>
-                </a>
+                </Link>
                 {/* Divider */}
                 <hr className="sidebar-divider my-0" />
                 {/* Nav Item - Dashboard */}
@@ -62,7 +62,6 @@ function Sidebar() {
                     </div>
                 </li> */}
                 {/* Divider */}
-                <hr className="sidebar-divider d-none d-md-block" />
                 {/* Sidebar Toggler (Sidebar) */}
                 <div className="text-center d-none d-md-inline">
                     <button className="rounded-circle border-0" id="sidebarToggle" onClick={() => setSidebar(!sidebar)} />
