@@ -15,7 +15,7 @@ const data_sidebar = [
     {
         name: 'Data dan Statistik',
         link: 'data',
-        icon: 'fa-desktop'
+        icon: 'fa-table'
 
     }
 ]
