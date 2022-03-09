@@ -13,6 +13,7 @@ import MainPage from './routes/main/MainPage';
 import { useContext, useEffect, useState } from 'react';
 import { SidebarContext } from './contexts/sidebar';
 import { AuthContext } from './contexts/authContext';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const [isLogin, setIsLogin] =  useState(localStorage.getItem('login'));

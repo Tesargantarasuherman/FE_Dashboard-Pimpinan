@@ -11,6 +11,12 @@ const data_sidebar = [
         link: 'aplikasi',
         icon: 'fa-desktop'
 
+    },
+    {
+        name: 'Data dan Statistik',
+        link: 'data',
+        icon: 'fa-desktop'
+
     }
 ]
 export default data_sidebar

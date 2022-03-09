@@ -1,22 +1,31 @@
 import axios from 'axios'
 import React, { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../contexts/authContext'
+import { ToastContainer, toast } from 'react-toastify';
 
 function Login() {
-    const {isLogin, setIsLogin} = useContext(AuthContext)
+    const { isLogin, setIsLogin } = useContext(AuthContext)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     useEffect(() => {
     })
-    
+
     const handleSubmit = (e) => {
         e.preventDefault()
-        if(email == 'kepaladinas@bandung.go.id' && password =='123456'){
-            localStorage.setItem('login',true)
+        if (email == 'kepaladinas@bandung.go.id' && password == '123456') {
+            localStorage.setItem('login', true)
             return window.location.reload();
         }
-        else{
-            alert('email tidak terdaftar atau password salah')
+        else {
+            toast.error('Email tidak terdaftar atau password salah', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
         }
 
         // axios.post(`http://localhost:8080/suratonlinebackend/api/index.php/login`, { 'email': email, 'password': password },{ headers: {
@@ -30,7 +39,17 @@ function Login() {
     }
     return (
         <div className="container">
-            {/* Outer Row */}
+            <ToastContainer
+                position="top-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />            {/* Outer Row */}
             <div className="row justify-content-center">
                 <div className="col-xl-10 col-lg-12 col-md-9">
                     <div className="card o-hidden border-0 shadow-lg my-5">

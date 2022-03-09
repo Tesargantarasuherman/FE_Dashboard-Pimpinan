@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 function Sidebar() {
     const navigate = useNavigate();
     const { sidebar, setSidebar } = useContext(SidebarContext)
-    const [active, setActive] = useState('')
+    const [active, setActive] = useState(`Dashboard`)
     const [dataSidebar, setDataSidebar] = useState(data_sidebar)
 
     const actionSetActive = (params) => {
