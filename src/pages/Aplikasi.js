@@ -92,7 +92,7 @@ function Aplikasi() {
               </h6>
               <div className="row mt-4">
                 <div className="col-md-4">
-                  <Chart options={optionsPie} series={seriesPie} type="pie" height={300} />
+                  <Chart options={optionsPie} series={seriesPie} type="pie" height={300} style={{minWidth:'100%'}} />
                 </div>
                 <div className="col-md-8">
                   <table class="table table-bordered">
