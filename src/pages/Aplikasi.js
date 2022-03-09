@@ -9,7 +9,7 @@ function Aplikasi() {
       width: 380,
       type: 'pie',
     },
-    colors: ['#F44336', '#E91E63'],
+    colors: ['#ffb142', '#E91E63'],
     labels: ['Layanan Publik', 'Administrasi Pemerintahan'],
     responsive: [{
       breakpoint: 480,
@@ -26,7 +26,7 @@ function Aplikasi() {
   }
   const series = [{
     name: 'Jumlah',
-    data: [21, 22, 10, 28, 16, 21, 13, 30,45,42,12,31,34,32,21,32,26]
+    data: [21, 22, 10, 28, 16, 21, 13, 30,45,42,12,31,34,32,21,32,26,25]
   }]
   const options = {
     chart: {
@@ -38,7 +38,7 @@ function Aplikasi() {
         }
       }
     },
-    colors: ['#F44336', '#E91E63', '#9C27B0'],
+    colors: ['#F44336','#ffb142','#218c74', '#E91E63', '#9C27B0'],
     plotOptions: {
       bar: {
         columnWidth: '50%',
@@ -74,7 +74,7 @@ function Aplikasi() {
       ],
       labels: {
         style: {
-          colors: ['#F44336', '#E91E63', '#9C27B0'],
+          colors: ['#F44336','#ffb142','#218c74', '#E91E63', '#9C27B0'],
           fontSize: '12px'
         }
       }

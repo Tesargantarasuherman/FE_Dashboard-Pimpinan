@@ -25,7 +25,7 @@ function Home() {
                 }
             }
         },
-        colors: ['#F44336', '#E91E63', '#9C27B0'],
+        colors: [ '#E91E63', '#9C27B0','#1dd1a1','#F44336','#feca57','#01a3a4','#34ace0','#227093'],
         plotOptions: {
             bar: {
                 columnWidth: '50%',
@@ -51,7 +51,7 @@ function Home() {
             ],
             labels: {
                 style: {
-                    colors: ['#F44336', '#E91E63', '#9C27B0'],
+                    colors: ['#F44336', '#9C27B0','#1dd1a1', '#E91E63','#feca57','#01a3a4','#34ace0','#227093'],
                     fontSize: '12px'
                 }
             }
