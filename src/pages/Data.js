@@ -13,7 +13,8 @@ function Data() {
                 Authorization: 'RkplDPdGFxTSjARZkZUYi3FgRdakJy',
             }
         }).then(res => {
-            setCovid(res.data.data)
+            console.log(res)
+            // setCovid(res.data.data)
         })
     }
     return (
