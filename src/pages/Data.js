@@ -6,11 +6,28 @@ import Chart from 'react-apexcharts';
 function Data() {
     const [covid, setCovid] = useState([]);
     const [nilai, setNilai] = useState([]);
+    const [konfirmasiAktif, setKonfirmasiAktif] = useState([]);
+    const [konfirmasiSembuh, setKonfirmasiSembuh] = useState([]);
+    const [konfirmasiMeninggal, setKonfirmasiMeninggal] = useState([]);
     const [tanggal, setTanggal] = useState([]);
-    const series = [{
-        name: 'Nilai',
-        data: nilai
-    }]
+    const series = [
+        {
+            name: 'Terkonfirmasi',
+            data: nilai
+        },
+        {
+            name: 'Konsfirmasi Aktif',
+            data: konfirmasiAktif
+        },
+        {
+            name: 'Konsfirmasi Sembuh',
+            data: konfirmasiSembuh
+        },
+        {
+            name: 'Konsfirmasi Meninggal',
+            data: konfirmasiMeninggal
+        },
+    ]
     const options = {
         chart: {
             height: 350,
@@ -44,13 +61,22 @@ function Data() {
             let data = res.data.data
             let tanggalCovid = []
             let dataCovid = []
+            let dataCovidAktif = []
+            let dataCovidSembuh = []
+            let dataCovidMeninggal = []
             for (let i = 0; i < data.length; i++) {
                 dataCovid.push(data[i].positif)
+                dataCovidAktif.push(data[i].positif_dirawat)
+                dataCovidSembuh.push(data[i].sembuh)
+                dataCovidMeninggal.push(data[i].meninggal)
                 tanggalCovid.push(moment(data[i].date).format("LL"))
             }
             console.log(dataCovid)
             setCovid(res.data.data)
             setNilai(dataCovid)
+            setKonfirmasiAktif(dataCovidAktif)
+            setKonfirmasiSembuh(dataCovidSembuh)
+            setKonfirmasiMeninggal(dataCovidMeninggal)
             setTanggal(tanggalCovid)
         }
         )
