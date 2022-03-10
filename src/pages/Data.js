@@ -88,7 +88,7 @@ function Data() {
                 <div className="col-md-12">
                     <div className="card">
                         <div className="card-body">
-                            <h6 className="m-0 font-weight-bold ">Grafik Kasus Terkonfirmasi Positif Covid di Kota Bandung</h6>
+                            <h6 className="m-0 font-weight-bold ">Grafik Covid-19 di Kota Bandung</h6>
                             {
                                 nilai.length > 0 ? <Chart options={options} series={series} type="area" height={350} />
                                     :
