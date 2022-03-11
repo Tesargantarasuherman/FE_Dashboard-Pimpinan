@@ -2,19 +2,24 @@ import axios from 'axios'
 import React, { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../contexts/authContext'
 import { ToastContainer, toast } from 'react-toastify';
+import { useNavigate,useHistory } from "react-router-dom";
 
 function Login() {
-    const { isLogin, setIsLogin } = useContext(AuthContext)
+    const navigate = useNavigate();
+    const [isLogin, setIsLogin] = useState(localStorage.getItem('login'));
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     useEffect(() => {
-    })
+        if(isLogin){
+            navigate(`/home`);
+        }
+    }, [])
 
     const handleSubmit = (e) => {
         e.preventDefault()
         if (email == 'kepaladinas@bandung.go.id' && password == '123456') {
             localStorage.setItem('login', true)
-            return window.location.reload();
+            navigate(`/home`);
         }
         else {
             toast.error('Email tidak terdaftar atau password salah', {
@@ -38,7 +43,7 @@ function Login() {
         // console.log(password)
     }
     return (
-        <div className="container">
+        <div className="container" style={{ minHeight: '100vh' }}>
             <ToastContainer
                 position="top-center"
                 autoClose={5000}

@@ -1,12 +1,19 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import React, { useContext } from 'react'
+import React, { useContext,useState,useEffect } from 'react'
 import Topbar from "../../components/Topbar";
 import Sidebar from "../../components/Sidebar";
 import routes from '../index'
-function MainPage(props) {
+import { useNavigate } from "react-router-dom";
 
+function MainPage(props) {
+    const navigate = useNavigate();
+    const [isLogin, setIsLogin] = useState(localStorage.getItem('login'));
+    useEffect(() => {
+        if(!isLogin){
+            navigate(`/`);
+        }
+    }, [])
     return (
-        <BrowserRouter>
             <div id="wrapper">
                 {/* Render Sidebar */}
                 <Routes>
@@ -38,7 +45,6 @@ function MainPage(props) {
                     </div>
                 </div>
             </div>
-        </BrowserRouter>
     )
 }
 

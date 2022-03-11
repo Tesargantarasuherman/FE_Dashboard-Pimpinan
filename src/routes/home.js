@@ -1,6 +1,6 @@
 import Home from "../pages/Home";
 
-const root = "/";
+const root = "/home";
 
 const user = [
     {

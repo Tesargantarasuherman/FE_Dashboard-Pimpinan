@@ -17,6 +17,12 @@ const data_sidebar = [
         link: 'data',
         icon: 'fa-table'
 
+    },
+    {
+        name: 'Data CCTV',
+        link: 'cctv',
+        icon: 'fa-camera'
+
     }
 ]
 export default data_sidebar

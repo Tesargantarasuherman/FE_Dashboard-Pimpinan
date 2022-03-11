@@ -1,4 +1,4 @@
-import Data from "../pages/Data";
+import Data from "../pages/Data/Data";
 
 const root = "/data";
 
