@@ -8,7 +8,7 @@ function CovidKecamatan() {
     const [nilai, setNilai] = useState([]);
     const [kecamatan, setKecamatan] = useState([]);
     const [kodeKecamatan, setKodeKecamatan] = useState(3273180);
-    const [namaKecamatan, setNamaKecamatan] = useState('');
+    const [namaKecamatan, setNamaKecamatan] = useState('ANDIR');
     const [konfirmasiAktif, setKonfirmasiAktif] = useState([]);
     const [konfirmasiSembuh, setKonfirmasiSembuh] = useState([]);
     const [konfirmasiMeninggal, setKonfirmasiMeninggal] = useState([]);
@@ -96,9 +96,9 @@ function CovidKecamatan() {
             <div className="col-md-12">
                 <div className="card">
                     <div className="card-body">
-                        <h6 className="m-0 font-weight-bold ">Tabel Covid di Kota Bandung</h6>
+                        <h6 className="m-0 font-weight-bold ">Grafik PerKecamatan</h6>
                         <div class="form-group">
-                            <label>Kecamatan</label>
+                            <label>Pilih Kecamatan</label>
                             <select class="form-control" onChange={changeKodeKecamatan}>
                                 {
                                     kecamatan.map(kecamatan => {

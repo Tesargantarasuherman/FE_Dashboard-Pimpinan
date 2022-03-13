@@ -2,7 +2,7 @@
 const data_sidebar = [
     {
         name: 'Dashboard',
-        link: '',
+        link: 'home',
         icon: 'fa-home'
 
     },
