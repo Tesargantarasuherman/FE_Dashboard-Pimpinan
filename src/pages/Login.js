@@ -2,15 +2,15 @@ import axios from 'axios'
 import React, { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../contexts/authContext'
 import { ToastContainer, toast } from 'react-toastify';
-import { useNavigate,useHistory } from "react-router-dom";
-
+import { useNavigate, useHistory } from "react-router-dom";
+import Image from '../img/bsc.png'
 function Login() {
     const navigate = useNavigate();
     const [isLogin, setIsLogin] = useState(localStorage.getItem('login'));
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     useEffect(() => {
-        if(isLogin){
+        if (isLogin) {
             navigate(`/home`);
         }
     }, [])
@@ -63,8 +63,9 @@ function Login() {
                             <div className="row body-login">
                                 <div className="col-lg-6 offset-md-3">
                                     <div className="p-5">
+                                        <img src={Image} alt="" srcset="" className='w-100' />
                                         <div className="text-center">
-                                            <h1 className="h4 text-gray-900 mb-4">Selamat Datang</h1>
+                                            <h6 className="h6 text-gray-600 font-weight-bold mb-4">DASHBOARD PIMPINAN</h6>
                                         </div>
                                         <form className="user" onSubmit={handleSubmit}>
                                             <div className="form-group">
@@ -78,6 +79,7 @@ function Login() {
                                             </button>
                                         </form>
                                         <hr />
+
                                     </div>
                                 </div>
                             </div>

@@ -79,7 +79,7 @@ function Data() {
         switch (active) {
             case "chart":
                 return (
-                    <div className="card-body">
+                    <div className="card-body" >
                         {
                             nilai.length > 0 ?
                                 <Line options={options} data={data} />
@@ -97,7 +97,7 @@ function Data() {
                 return (
                     <div className="card-body">
                         <h6 className="m-0 font-weight-bold ">Tabel Covid di Kota Bandung</h6>
-                        <table className="table table-striped table-responsive mt-4" style={{ maxHeight: 700 }}>
+                        <table className="table table-striped table-responsive mt-4" style={{ maxHeight: 500 }}>
                             <thead>
                                 <tr>
                                     <th scope="col">Tanggal</th>

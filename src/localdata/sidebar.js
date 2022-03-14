@@ -14,9 +14,18 @@ const data_sidebar = [
     },
     {
         name: 'Data dan Statistik',
-        link: 'data',
-        icon: 'fa-table'
+        data: [
+            {
+                name: 'Data dan Statistik',
+                link: 'data',
+                icon: 'fa-table'
+            }, {
+                name: 'Vaksin',
+                link: 'vaksin',
+                icon: 'fa-table'
 
+            }
+        ]
     },
     {
         name: 'Data CCTV',

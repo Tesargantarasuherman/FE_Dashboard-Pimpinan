@@ -32,40 +32,6 @@ function CovidKecamatan() {
     const [konfirmasiSembuh, setKonfirmasiSembuh] = useState([]);
     const [konfirmasiMeninggal, setKonfirmasiMeninggal] = useState([]);
     const [tanggal, setTanggal] = useState([]);
-    // const series = [
-    //     {
-    //         name: 'Terkonfirmasi',
-    //         data: nilai.length > 1 ? nilai : [0, 0, 0, 0]
-    //     },
-    //     {
-    //         name: 'Konsfirmasi Aktif',
-    //         data: konfirmasiAktif.length > 1 ? konfirmasiAktif : [0, 0, 0, 0]
-    //     },
-    //     {
-    //         name: 'Konsfirmasi Sembuh',
-    //         data: konfirmasiSembuh.length > 1 ? konfirmasiSembuh : [0, 0, 0, 0]
-    //     },
-    //     {
-    //         name: 'Konsfirmasi Meninggal',
-    //         data: konfirmasiMeninggal.length > 1 ? konfirmasiMeninggal : [0, 0, 0, 0]
-    //     },
-    // ]
-    // const options = {
-    //     chart: {
-    //         height: 350,
-    //         type: 'area'
-    //     },
-    //     dataLabels: {
-    //         enabled: false
-    //     },
-    //     stroke: {
-    //         curve: 'smooth'
-    //     },
-    //     xaxis: {
-    //         type: 'date',
-    //         categories: tanggal
-    //     },
-    // }
     const options = {
         responsive: true,
         plugins: {
@@ -119,8 +85,8 @@ function CovidKecamatan() {
             setKecamatan(res.data.data)
         })
     }
-    const GetCovidByKecamatan = () => {
-        axios.get(`https://covid19.bandung.go.id/api/covid19bdg/v1/covid/list?kode=${kodeKecamatan}`, {
+    const GetCovidByKecamatan = (param) => {
+        axios.get(`https://covid19.bandung.go.id/api/covid19bdg/v1/covid/list?kode=${param ? param : kodeKecamatan}`, {
             headers: {
                 Authorization: 'RkplDPdGFxTSjARZkZUYi3FgRdakJy',
             }
@@ -147,8 +113,7 @@ function CovidKecamatan() {
         })
     }
     const changeKodeKecamatan = (e) => {
-        setKodeKecamatan(e.target.value)
-        GetCovidByKecamatan()
+        GetCovidByKecamatan(e.target.value)
     }
     return (
         <div className="row my-4">

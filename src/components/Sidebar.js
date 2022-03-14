@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { SidebarContext } from '../contexts/sidebar'
 import Logo from '../img/bsc 1.png'
@@ -9,13 +9,22 @@ import { useNavigate } from "react-router-dom";
 function Sidebar() {
     const navigate = useNavigate();
     const { sidebar, setSidebar } = useContext(SidebarContext)
-    const [active, setActive] = useState(``)
+    const [active, setActive] = useState('home')
     const [dataSidebar, setDataSidebar] = useState(data_sidebar)
-
+    useEffect(() => {
+        let uri_ = window.location.href;
+        let _uri = [];
+        _uri = uri_.split('/')
+        let active_url = _uri.slice(-1).pop()
+        setActive(active_url)
+        console.log(dataSidebar)
+    }, [])
     const actionSetActive = (params) => {
-        setActive(params.name)
+        setActive(params.link)
         navigate(`/${params.link}`);
     }
+
+
     return (
         <>
             {/* Sidebar */}
@@ -36,33 +45,38 @@ function Sidebar() {
                 {
                     dataSidebar.map(sidebar => {
                         return (
-                            <li className={`nav-item ${active == sidebar.name ? 'active' : ''}`}>
-                                <div className={`btn nav-link text-secondary font-weight-bold ${active == sidebar.name ? 'text-light' : ''}`} onClick={() => actionSetActive(sidebar)}>
-                                    <i class={`fa ${sidebar.icon} font-weight-bold ${active == sidebar.name ? 'text-light' : ''}`} aria-hidden="true"></i>
-                                    <span>{sidebar.name}</span>
-                                </div>
-                            </li>
+                            sidebar.data ? (
+                                <li className="nav-item">
+                                    <a className="nav-link collapsed font-weight-bold" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                        <i className="fas fa-fw fa-cog" />
+                                        <span>{sidebar.name}</span>
+                                    </a>
+                                    <div id="collapseTwo" className="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                                        <div className="bg-primary py-2 collapse-inner rounded">
+                                            {
+                                                sidebar.data.map(data=>{
+                                                    return(
+                                                        <a className="collapse-item text-light" onClick={() => actionSetActive(data)}>{data.name}</a>
+                                                    )
+                                                })
+                                            }
+                                        </div>
+                                    </div>
+                                </li>
+                            )
+                                :
+                                <li className={`nav-item ${active == sidebar.link ? 'active' : ''}`}>
+                                    <div className={`btn nav-link text-secondary font-weight-bold ${active == sidebar.link ? 'text-light' : ''}`} onClick={() => actionSetActive(sidebar)}>
+                                        <i class={`fa ${sidebar.icon} font-weight-bold ${active == sidebar.link ? 'text-light' : ''}`} aria-hidden="true"></i>
+                                        <span>{sidebar.name}</span>
+                                    </div>
+                                </li>
                         )
                     })
                 }
                 {/* Divider */}
                 <hr className="sidebar-divider" />
-                {/* Heading */}
-                {/* Nav Item - Pages Collapse Menu */}
-                {/* <li className="nav-item">
-                    <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                        <i className="fas fa-fw fa-cog" />
-                        <span>Smart City</span>
-                    </a>
-                    <div id="collapseTwo" className="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                        <div className="bg-white py-2 collapse-inner rounded">
-                            <a className="collapse-item" href="buttons.html">Buttons</a>
-                            <a className="collapse-item" href="cards.html">Cards</a>
-                        </div>
-                    </div>
-                </li> */}
-                {/* Divider */}
-                {/* Sidebar Toggler (Sidebar) */}
+
                 <div className="text-center d-none d-md-inline">
                     <button className="rounded-circle border-0" id="sidebarToggle" onClick={() => setSidebar(!sidebar)} />
                 </div>

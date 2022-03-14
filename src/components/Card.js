@@ -6,7 +6,7 @@ function Card({ icon, title, value, color, col, type, bgItem,iconProgress, value
             <div className={`card ${type}-${color} shadow h-100 py-2`}>
                 <div className="card-body">
                     <div className="row no-gutters align-items-center">
-                        <div className={`col-auto ${bgItem}-${color}  p-2 rounded text-light`}>
+                        <div className={`col-auto ${bgItem}-${color} d-none d-md-none d-lg-block p-2 rounded text-light`}>
                             {icon}
                         </div>
                         <div className="col-md-6 ml-4">
