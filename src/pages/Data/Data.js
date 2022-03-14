@@ -199,7 +199,7 @@ function Data() {
 
     return (
         <div className="container-fluid">
-            <h6 className="m-0 font-weight-bold ">Data Covid</h6>
+            <h6 className="m-0 font-weight-bold ">Data Covid-19</h6>
             <label htmlFor="">Update Terakhir, {moment(covidUpdate.date).format("LL")}</label>
             <div className="row my-4">
                 <Card icon={<i class="fa fa-lg fa-asterisk" aria-hidden="true"></i>} iconProgress={covidUpdate.dpositif > 0 ? <i className='fa fa-lg fa-angle-double-up'> </i> : <i className='fa fa-lg fa-angle-double-down'> </i>} valueProgress={covidUpdate?.dpositif?.toLocaleString()} title={'Total Konfirmasi'} value={covidUpdate?.positif?.toLocaleString()} color={'primary'} col={3} type={'border-left'} bgItem={'bg'} />

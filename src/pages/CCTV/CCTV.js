@@ -53,8 +53,6 @@ function CCTV() {
                               <td>
                                 {cctv.vendor}
                               </td>
-                              <td>
-                              <video controls width="300px" height="auto" src="blob:https://pelindung.bandung.go.id/9d48e26a-77b3-4d0c-884a-8a2e67ede84b"></video>                              </td>
                             </tr>
 
                           )
