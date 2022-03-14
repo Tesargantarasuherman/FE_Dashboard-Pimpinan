@@ -17,13 +17,11 @@ function Sidebar() {
         _uri = uri_.split('/')
         let active_url = _uri.slice(-1).pop()
         setActive(active_url)
-        console.log(dataSidebar)
     }, [])
-    const actionSetActive = (params) => {
+    const actionSetActive = (parentParams, params) => {
         setActive(params.link)
-        navigate(`/${params.link}`);
+        navigate(`${parentParams ? `/${parentParams.link}` : ''}/${params.link}`);
     }
-
 
     return (
         <>
@@ -54,9 +52,9 @@ function Sidebar() {
                                     <div id="collapseTwo" className="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                                         <div className="bg-primary py-2 collapse-inner rounded">
                                             {
-                                                sidebar.data.map(data=>{
-                                                    return(
-                                                        <a className="collapse-item text-light" onClick={() => actionSetActive(data)}>{data.name}</a>
+                                                sidebar.data.map(data => {
+                                                    return (
+                                                        <a className="collapse-item text-light" onClick={() => actionSetActive(sidebar, data)}>{data.name}</a>
                                                     )
                                                 })
                                             }
@@ -66,7 +64,7 @@ function Sidebar() {
                             )
                                 :
                                 <li className={`nav-item ${active == sidebar.link ? 'active' : ''}`}>
-                                    <div className={`btn nav-link text-secondary font-weight-bold ${active == sidebar.link ? 'text-light' : ''}`} onClick={() => actionSetActive(sidebar)}>
+                                    <div className={`btn nav-link text-secondary font-weight-bold ${active == sidebar.link ? 'text-light' : ''}`} onClick={() => actionSetActive(null, sidebar)}>
                                         <i class={`fa ${sidebar.icon} font-weight-bold ${active == sidebar.link ? 'text-light' : ''}`} aria-hidden="true"></i>
                                         <span>{sidebar.name}</span>
                                     </div>

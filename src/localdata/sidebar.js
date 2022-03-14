@@ -14,10 +14,12 @@ const data_sidebar = [
     },
     {
         name: 'Data dan Statistik',
+        link:'data',
+        icon: 'fa-desktop',
         data: [
             {
                 name: 'Data dan Statistik',
-                link: 'data',
+                link: 'covid19',
                 icon: 'fa-table'
             }, {
                 name: 'Vaksin',

@@ -1,11 +1,18 @@
 import Data from "../pages/Data/Data";
+import Vaksin from "../pages/Data/Vaksin/Vaksin";
 
 const root = "/data";
 
 const data = [
     {
-        path: `${root}`,
+        path: `${root}/covid19`,
         component: <Data/>,
+        navbar: true,
+        sidebar: true,
+    },
+    {
+        path: `${root}/vaksin`,
+        component: <Vaksin/>,
         navbar: true,
         sidebar: true,
     },
