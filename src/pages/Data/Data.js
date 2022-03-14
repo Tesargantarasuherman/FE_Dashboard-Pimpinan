@@ -15,6 +15,7 @@ import {
     Legend
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
+import CardProggress from '../../components/CardProggress';
 ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -161,7 +162,7 @@ function Data() {
                 Authorization: 'RkplDPdGFxTSjARZkZUYi3FgRdakJy',
             }
         }).then(res => {
-            console.log('update',res.data.data)
+            console.log('update', res.data.data)
             setCovidUpdate(res.data.data)
         })
     }
@@ -205,6 +206,8 @@ function Data() {
                 <Card icon={<i class="fa fa-lg fa-asterisk" aria-hidden="true"></i>} iconProgress={covidUpdate.daktif > 0 ? <i className='fa fa-lg fa-angle-double-up'> </i> : <i className='fa fa-lg fa-angle-double-down'> </i>} valueProgress={covidUpdate?.daktif?.toLocaleString()} title={'Konfirmasi Aktif'} value={covidUpdate?.positif_dirawat?.toLocaleString()} color={'primary'} col={3} type={'border-left'} bgItem={'bg'} />
                 <Card icon={<i class="fa fa-lg fa-asterisk" aria-hidden="true"></i>} iconProgress={covidUpdate.dsembuh > 0 ? <i className='fa fa-lg fa-angle-double-up'> </i> : <i className='fa fa-lg fa-angle-double-down'> </i>} valueProgress={covidUpdate?.dsembuh?.toLocaleString()} title={'Konfirmasi Sembuh'} value={covidUpdate?.sembuh?.toLocaleString()} color={'primary'} col={3} type={'border-left'} bgItem={'bg'} />
                 <Card icon={<i class="fa fa-lg fa-asterisk" aria-hidden="true"></i>} iconProgress={covidUpdate.dmeninggal > 0 ? <i className='fa fa-lg fa-angle-double-up'> </i> : <i className='fa fa-lg fa-angle-double-down'> </i>} valueProgress={covidUpdate?.dmeninggal?.toLocaleString()} title={'Konfirmasi Meninggal'} value={covidUpdate?.meninggal?.toLocaleString()} color={'primary'} col={3} type={'border-left'} bgItem={'bg'} />
+                <CardProggress title={'Suspek'} total={covidUpdate.suspek} totalProgress={covidUpdate.dsuspek } dipantau={covidUpdate.suspek_dipantau} dipantauProgress={covidUpdate.dsuspek_dipantau} discarded={covidUpdate.suspek_discarded} discardedProgress={covidUpdate.dsuspek_discarded} />
+                <CardProggress title={'Kontak Erat'} total={covidUpdate.kontak_erat} totalProgress={covidUpdate.dkontak_erat} dipantau={covidUpdate.kontak_erat_dipantau} dipantauProgress={covidUpdate.dkontak_erat_dipantau} discarded={covidUpdate.kontak_erat_discarded} discardedProgress={covidUpdate.dkontak_erat_discarded} />
                 <div className="col-md-12">
                     <div className="card">
                         <div className="d-flex justify-content-end my-4 mr-4">
