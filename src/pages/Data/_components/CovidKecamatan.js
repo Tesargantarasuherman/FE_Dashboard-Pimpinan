@@ -2,7 +2,26 @@ import React, { useEffect, useState } from 'react'
 import moment from "moment";
 import Chart from 'react-apexcharts';
 import axios from 'axios'
-
+import {
+    Chart as ChartJS,
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend
+} from 'chart.js';
+import { Line } from 'react-chartjs-2';
+ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend
+);
 function CovidKecamatan() {
     const [covid, setCovid] = useState([]);
     const [nilai, setNilai] = useState([]);
@@ -13,40 +32,80 @@ function CovidKecamatan() {
     const [konfirmasiSembuh, setKonfirmasiSembuh] = useState([]);
     const [konfirmasiMeninggal, setKonfirmasiMeninggal] = useState([]);
     const [tanggal, setTanggal] = useState([]);
-    const series = [
-        {
-            name: 'Terkonfirmasi',
-            data: nilai.length > 1 ? nilai : [0, 0, 0, 0]
-        },
-        {
-            name: 'Konsfirmasi Aktif',
-            data: konfirmasiAktif.length > 1 ? konfirmasiAktif : [0, 0, 0, 0]
-        },
-        {
-            name: 'Konsfirmasi Sembuh',
-            data: konfirmasiSembuh.length > 1 ? konfirmasiSembuh : [0, 0, 0, 0]
-        },
-        {
-            name: 'Konsfirmasi Meninggal',
-            data: konfirmasiMeninggal.length > 1 ? konfirmasiMeninggal : [0, 0, 0, 0]
-        },
-    ]
+    // const series = [
+    //     {
+    //         name: 'Terkonfirmasi',
+    //         data: nilai.length > 1 ? nilai : [0, 0, 0, 0]
+    //     },
+    //     {
+    //         name: 'Konsfirmasi Aktif',
+    //         data: konfirmasiAktif.length > 1 ? konfirmasiAktif : [0, 0, 0, 0]
+    //     },
+    //     {
+    //         name: 'Konsfirmasi Sembuh',
+    //         data: konfirmasiSembuh.length > 1 ? konfirmasiSembuh : [0, 0, 0, 0]
+    //     },
+    //     {
+    //         name: 'Konsfirmasi Meninggal',
+    //         data: konfirmasiMeninggal.length > 1 ? konfirmasiMeninggal : [0, 0, 0, 0]
+    //     },
+    // ]
+    // const options = {
+    //     chart: {
+    //         height: 350,
+    //         type: 'area'
+    //     },
+    //     dataLabels: {
+    //         enabled: false
+    //     },
+    //     stroke: {
+    //         curve: 'smooth'
+    //     },
+    //     xaxis: {
+    //         type: 'date',
+    //         categories: tanggal
+    //     },
+    // }
     const options = {
-        chart: {
-            height: 350,
-            type: 'area'
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'top',
+            },
+            title: {
+                display: true,
+                text: 'Grafik Perkembangan Covid-19 di Kota Bandung',
+            },
         },
-        dataLabels: {
-            enabled: false
-        },
-        stroke: {
-            curve: 'smooth'
-        },
-        xaxis: {
-            type: 'date',
-            categories: tanggal
-        },
-    }
+    };
+
+    const labels = tanggal;
+
+    const data = {
+        labels,
+        datasets: [
+            {
+                label: 'Terkonfirmasi',
+                data: nilai.length > 1 ? nilai : [0, 0, 0, 0],
+                backgroundColor: 'rgba(255, 99, 132, 0.5)',
+            },
+            {
+                label: 'Konsfirmasi Aktif',
+                data: konfirmasiAktif.length > 1 ? konfirmasiAktif : [0, 0, 0, 0],
+                backgroundColor: 'rgba(53, 162, 235, 0.5)',
+            },
+            {
+                label: 'Konsfirmasi Sembuh',
+                data: konfirmasiSembuh.length > 1 ? konfirmasiSembuh : [0, 0, 0, 0],
+                backgroundColor: 'rgb(139,200,143)',
+            },
+            {
+                label: 'Konsfirmasi Meninggal',
+                data: konfirmasiMeninggal.length > 1 ? konfirmasiMeninggal : [0, 0, 0, 0],
+                backgroundColor: 'rgb(254,136,66)',
+            },
+        ],
+    };
     useEffect(() => {
         getKecamatan()
         GetCovidByKecamatan()
@@ -112,7 +171,10 @@ function CovidKecamatan() {
                         <div className="row">
                             <div className="col-md-12">
                                 {
-                                    nilai.length > 0 ? <Chart options={options} series={series} type="area" height={350} />
+                                    nilai.length > 0 ? 
+                                    // <Chart options={options} series={series} type="area" height={350} />
+                                    <Line options={options} data={data} />
+
                                         :
                                         <div className=' d-flex justify-content-center my-4'>
                                             <div className="spinner-border" role="status">
