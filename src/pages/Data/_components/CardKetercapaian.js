@@ -7,7 +7,7 @@ function CardKetercapaian({title,valueKesehatan,valuePetugasPublik,valueLanjutUs
                 <div class="col-xl-12 col-md-12 mb-4">
                     <div class="card shadow h-100 py-2">
                         <div class="card-body">
-                            <h5 className="mb-0 font-weight-bold text-gray-600 mb-2 text-uppercase mb-4">{title}</h5>
+                            <div className=" text-sm mb-0 font-weight-bold text-gray-600 mb-2 text-uppercase mb-4">{title}</div>
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2 text-center">
                                     <div className="row">
