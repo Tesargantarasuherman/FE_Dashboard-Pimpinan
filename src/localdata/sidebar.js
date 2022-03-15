@@ -18,7 +18,7 @@ const data_sidebar = [
         icon: 'fa-desktop',
         data: [
             {
-                name: 'Data dan Statistik',
+                name: 'Covid 19',
                 link: 'covid19',
                 icon: 'fa-table'
             }, {
