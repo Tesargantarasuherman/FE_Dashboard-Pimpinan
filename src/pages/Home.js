@@ -7,9 +7,13 @@ import data from '../dummy/news.json'
 import CardBerita from '../components/CardBerita';
 import Chart from 'react-apexcharts';
 import { FaMosque } from "react-icons/fa";
+import axios from 'axios';
+
 const _news = data.data
 function Home() {
-    const [news, setNews] = useState(_news)
+    const [user, setUser] = useState(useState(JSON.parse(localStorage.getItem('data'))))
+    const [token, setToken] = useState(null)
+    const [password, setPassword] = useState('')
 
     const series = [{
         name: 'Jumlah',
@@ -25,7 +29,7 @@ function Home() {
                 }
             }
         },
-        colors: [ '#E91E63', '#9C27B0','#1dd1a1','#F44336','#feca57','#01a3a4','#34ace0','#227093'],
+        colors: ['#E91E63', '#9C27B0', '#1dd1a1', '#F44336', '#feca57', '#01a3a4', '#34ace0', '#227093'],
         plotOptions: {
             bar: {
                 columnWidth: '50%',
@@ -51,7 +55,7 @@ function Home() {
             ],
             labels: {
                 style: {
-                    colors: ['#F44336', '#9C27B0','#1dd1a1', '#E91E63','#feca57','#01a3a4','#34ace0','#227093'],
+                    colors: ['#F44336', '#9C27B0', '#1dd1a1', '#E91E63', '#feca57', '#01a3a4', '#34ace0', '#227093'],
                     fontSize: '12px'
                 }
             }
@@ -60,35 +64,34 @@ function Home() {
     let _dataAgenda = [];
     const [timeSalat, setTimeSalat] = useState([]);
     const [agenda, setAgenda] = useState(null);
-    const [data, setData] = useState([
-        {
-            id: "1",
-            perihal: "Bimbingan Teknis 1",
-            lokasi: "Bandung",
-            tanggal_mulai: "2022-02-01",
-            tanggal_selesai: "2022-02-02",
-            jam_mulai: "08:30:00",
-            jam_selesai: "12:00:00",
-        },
-        {
-            id: "2",
-            perihal: "Bimbingan Teknis Lanjutan",
-            lokasi: "Bandung",
-            tanggal_mulai: "2022-02-10",
-            tanggal_selesai: "2022-02-11",
-            jam_mulai: "08:30:00",
-            jam_selesai: "12:00:00",
-        },
-        {
-            id: "3",
-            perihal: "Bimbingan Teknis Lanjutan 3",
-            lokasi: "Bandung",
-            tanggal_mulai: "2022-02-13",
-            tanggal_selesai: "2022-02-14",
-            jam_mulai: "08:30:00",
-            jam_selesai: "12:00:00",
-        }
-    ]);
+    const [data, setData] = useState([]);
+
+    const getAgenda = () => {
+        let data = new FormData();
+        var today = new Date();
+        var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+        data.append('token', user[0].token);
+        data.append('start', '2019-06-01');
+        data.append('end', date);
+
+
+        axios.post(`http://localhost:8080/suratonlinebackend/api/index.php/agenda`, data, {
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then(res => {
+            console.log(res.data,'data')
+            let _data = res.data;
+            for (let i = 0; i < _data.length; i++) {
+                _dataAgenda.push({ Id: _data[i].id, Subject: _data[i].perihal, StartTime: _data[i].tanggal_mulai + ' ' + _data[i].jam_mulai, EndTime: _data[i].tanggal_selesai + ' ' + _data[i].jam_selesai })
+            }
+            setAgenda(_dataAgenda)
+        }).catch(err => {
+
+        })
+    }
 
     useEffect(() => {
         Axios.get(`https://api.pray.zone/v2/times/today.json?city=bandung`).then(res => {
@@ -98,8 +101,9 @@ function Home() {
         for (let i = 0; i < data.length; i++) {
             _dataAgenda.push({ Id: data[i].id, Subject: data[i].perihal, StartTime: data[i].tanggal_mulai + ' ' + data[i].jam_mulai, EndTime: data[i].tanggal_selesai + ' ' + data[i].jam_selesai })
         }
-        setAgenda(_dataAgenda)
-        console.log(_dataAgenda)
+        getAgenda()
+        // setAgenda(_dataAgenda)
+        // console.log(_dataAgenda)
     }, [])
     return (
         <div className="container-fluid">
@@ -167,7 +171,7 @@ function Home() {
                                                 </h6>
                                             </div>
                                         </div>
-                                        <hr className="m-0"/>
+                                        <hr className="m-0" />
                                         <div className="d-flex justify-content-between align-items-center">
                                             <div className='w-25'>
                                                 <h5 className='font-weight-bold'>
@@ -183,7 +187,7 @@ function Home() {
                                                 </h6>
                                             </div>
                                         </div>
-                                        <hr className="m-0"/>
+                                        <hr className="m-0" />
                                         <div className="d-flex justify-content-between align-items-center">
                                             <div className='w-25'>
                                                 <h5 className='font-weight-bold'>
@@ -199,7 +203,7 @@ function Home() {
                                                 </h6>
                                             </div>
                                         </div>
-                                        <hr className="m-0"/>
+                                        <hr className="m-0" />
                                         <div className="d-flex justify-content-between align-items-center">
                                             <div className='w-25'>
                                                 <h5 className='font-weight-bold'>
@@ -215,7 +219,7 @@ function Home() {
                                                 </h6>
                                             </div>
                                         </div>
-                                        <hr className="m-0"/>
+                                        <hr className="m-0" />
                                         <div className="d-flex justify-content-between align-items-center">
                                             <div className='w-25'>
                                                 <h5 className='font-weight-bold'>
@@ -231,7 +235,7 @@ function Home() {
                                                 </h6>
                                             </div>
                                         </div>
-                                        <hr className="m-0"/>
+                                        <hr className="m-0" />
                                         <div className="d-flex justify-content-between align-items-center">
                                             <div className='w-25'>
                                                 <h5 className='font-weight-bold'>
@@ -247,7 +251,7 @@ function Home() {
                                                 </h6>
                                             </div>
                                         </div>
-                                        <hr className="m-0"/>
+                                        <hr className="m-0" />
                                         <div className="d-flex justify-content-between align-items-center">
                                             <div className='w-25'>
                                                 <h5 className='font-weight-bold'>
@@ -263,7 +267,7 @@ function Home() {
                                                 </h6>
                                             </div>
                                         </div>
-                                        <hr className="m-0"/>
+                                        <hr className="m-0" />
                                         <div className="d-flex justify-content-between align-items-center">
                                             <div className='w-25'>
                                                 <h5 className='font-weight-bold'>
@@ -279,7 +283,7 @@ function Home() {
                                                 </h6>
                                             </div>
                                         </div>
-                                        <hr className="m-0"/>
+                                        <hr className="m-0" />
                                     </div>
                                 </div>
                             </div>

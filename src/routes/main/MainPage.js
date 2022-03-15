@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 function MainPage(props) {
     const navigate = useNavigate();
-    const [isLogin, setIsLogin] = useState(localStorage.getItem('login'));
+    const [isLogin, setIsLogin] = useState(JSON.parse(localStorage.getItem('data')));
     useEffect(() => {
         if(!isLogin){
             navigate(`/`);

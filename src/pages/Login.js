@@ -4,9 +4,11 @@ import { AuthContext } from '../contexts/authContext'
 import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate, useHistory } from "react-router-dom";
 import Image from '../img/bsc.png'
+const qs = require('querystring');
+
 function Login() {
     const navigate = useNavigate();
-    const [isLogin, setIsLogin] = useState(localStorage.getItem('login'));
+    const [isLogin, setIsLogin] = useState(localStorage.getItem('data'));
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     useEffect(() => {
@@ -18,7 +20,7 @@ function Login() {
     const handleSubmit = (e) => {
         e.preventDefault()
         if (email == 'kepaladinas@bandung.go.id' && password == '123456') {
-            localStorage.setItem('login', true)
+            localStorage.setItem('data', true)
             navigate(`/home`);
         }
         else {
@@ -33,14 +35,45 @@ function Login() {
             });
         }
 
-        // axios.post(`http://localhost:8080/suratonlinebackend/api/index.php/login`, { 'email': email, 'password': password },{ headers: {
-        //     'Access-Control-Allow-Origin': '*',
-        //     'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-        //     'Content-Type': 'multipart/form-data',
-        // }}).then(res => {
-        //     console.log(res)
+        // let data = new FormData();
+        // data.append('email', email);
+        // data.append('password', password);
+        // data.append('regid', password);
+
+        // axios.post(`http://localhost:8080/suratonlinebackend/api/index.php/login`, data, {
+        //     headers: {
+        //         'Access-Control-Allow-Origin': '*',
+        //         'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+        //         'Content-Type': 'application/x-www-form-urlencoded'
+        //     }
+        // }).then(res => {
+        //     if (res.data.status == true) {
+        //         localStorage.setItem('data',JSON.stringify(res.data.data))
+        //         navigate(`/home`);
+        //         console.log(res.data.data)
+        //     }
+        //     else{
+        //         toast.error(res.data.message, {
+        //             position: "top-center",
+        //             autoClose: 5000,
+        //             hideProgressBar: false,
+        //             closeOnClick: true,
+        //             pauseOnHover: true,
+        //             draggable: true,
+        //             progress: undefined,
+        //         });
+        //     }
+        // }).catch(err => {
+        //     toast.error('Email tidak terdaftar atau password salah', {
+        //         position: "top-center",
+        //         autoClose: 5000,
+        //         hideProgressBar: false,
+        //         closeOnClick: true,
+        //         pauseOnHover: true,
+        //         draggable: true,
+        //         progress: undefined,
+        //     });
         // })
-        // console.log(password)
     }
     return (
         <div className="container" style={{ minHeight: '100vh' }}>
@@ -69,7 +102,7 @@ function Login() {
                                         </div>
                                         <form className="user" onSubmit={handleSubmit}>
                                             <div className="form-group">
-                                                <input type="email" className="form-control form-control-user" onChange={(e) => setEmail(e.target.value)} aria-describedby="emailHelp" placeholder="Enter Email Address..." />
+                                                <input type="email" name="email" className="form-control form-control-user" onChange={(e) => setEmail(e.target.value)} aria-describedby="emailHelp" placeholder="Enter Email Address..." />
                                             </div>
                                             <div className="form-group">
                                                 <input type="password" className="form-control form-control-user" onChange={(e) => setPassword(e.target.value)} placeholder="Password" />

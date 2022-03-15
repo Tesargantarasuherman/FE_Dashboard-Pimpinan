@@ -8,7 +8,7 @@ function Topbar() {
     const {isLogin, setIsLogin} = useContext(AuthContext)
     const {sidebar,setSidebar} = useContext(SidebarContext)
     const Logout =()=>{
-        localStorage.removeItem('login')
+        localStorage.removeItem('data')
         navigate(`/`);
         return window.location.reload();
     }

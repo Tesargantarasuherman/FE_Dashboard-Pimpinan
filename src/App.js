@@ -16,7 +16,7 @@ import { AuthContext } from './contexts/authContext';
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
-  const [isLogin, setIsLogin] = useState(localStorage.getItem('login'));
+  const [isLogin, setIsLogin] = useState(JSON.parse(localStorage.getItem('data')));
   const [sidebar, setSidebar] = useState(true);
   useEffect(() => {
     console.log(isLogin)
