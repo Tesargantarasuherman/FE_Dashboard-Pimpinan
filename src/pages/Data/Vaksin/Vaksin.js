@@ -10,7 +10,7 @@ function Vaksin() {
     const [vaksin3, setVaksin3] = useState([]);
     useEffect(() => {
         axios.get(`http://data.bandung.go.id/service/index.php/vaksinasi/terkini`).then(res => {
-            console.log(res.data.data)
+            console.log(res)
             setVaksin(res.data)
             setVaksin1(res.data.data[0])
             setVaksin2(res.data.data[1])
