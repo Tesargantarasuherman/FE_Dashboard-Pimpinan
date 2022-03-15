@@ -25,7 +25,6 @@ const data_sidebar = [
                 name: 'Vaksin',
                 link: 'vaksin',
                 icon: 'fa-table'
-
             }
         ]
     },
@@ -33,7 +32,6 @@ const data_sidebar = [
         name: 'Data CCTV',
         link: 'cctv',
         icon: 'fa-camera'
-
     }
 ]
 export default data_sidebar
