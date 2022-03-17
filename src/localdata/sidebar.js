@@ -31,7 +31,7 @@ const data_sidebar = [
     {
         name: 'SPBE',
         link:'spbe',
-        icon: 'fa-desktop',
+        icon: 'fa-cog',
         data: [
             {
                 name: 'Peraturan Perundangan',

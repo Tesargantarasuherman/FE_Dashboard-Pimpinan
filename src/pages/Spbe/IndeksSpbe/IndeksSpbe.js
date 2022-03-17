@@ -4,7 +4,7 @@ import Chart from 'react-apexcharts';
 function IndeksSpbe() {
   const series = [{
     name: 'Nilai Indeks',
-    data: [3,3,4,5,3.5,4]
+    data: [0,3,4,5,3.5,4]
   }]
   const options = {
     chart: {
@@ -51,7 +51,7 @@ function IndeksSpbe() {
       <div className="card">
         <div className="card-body">
           <h6 className="m-0 font-weight-bold ">Indeks SPBE</h6>
-          <Chart options={options} series={series} type="bar" height={300} />
+          <Chart options={options} series={series} type="area" height={300} />
 
         </div>
       </div>

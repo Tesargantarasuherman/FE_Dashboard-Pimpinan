@@ -46,7 +46,7 @@ function Sidebar() {
                             sidebar.data ? (
                                 <li className="nav-item">
                                     <a className="nav-link collapsed font-weight-bold" href="#" data-toggle="collapse" data-target={`#${sidebar.link}`} aria-expanded="true" aria-controls="collapseTwo">
-                                        <i className="fas fa-fw fa-cog" />
+                                        <i className={`fas fa-fw ${sidebar.icon}`} />
                                         <span>{sidebar.name}</span>
                                     </a>
                                     <div id={`${sidebar.link}`} className="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">

@@ -48,7 +48,7 @@ function CCTV() {
                             <tr key={i}>
                               <td>{cctv.cctv_name}</td>
                               <td className='text-uppercase'>{cctv.dinas}</td>
-                              <td>{cctv.status_cctv}</td>
+                              <td>{cctv.status_cctv == 'ON' ? <i class="fa fa-check text-success" aria-hidden="true"></i> : <i className="fa fa-time text-danger" aria-hidden="true"></i>} </td>
                               <td className='text-uppercase'>
                                 {cctv.vendor}
                               </td>
