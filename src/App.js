@@ -27,18 +27,6 @@ function App() {
         <BrowserRouter>
           <MainPage />
         </BrowserRouter>
-        {/* {
-        isLogin ?
-          <MainPage />
-          :
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Login />} />
-            </Routes>
-          </BrowserRouter>
-      } */}
-        {/* <Route path="/" element={<Login />} />
-        <Route path="/home" element={<Home />} /> */}
       </SidebarContext.Provider>
     </AuthContext.Provider>
   );

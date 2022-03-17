@@ -1,6 +1,6 @@
 import React from 'react'
 
-function CardProggress({title,total,totalProgress,dipantau,dipantauProgress,discarded,discardedProgress}) {
+function CardProggress({ title, total, totalProgress, dipantau, dipantauProgress, discarded, discardedProgress }) {
     return (
         <div class="col-xl-6 col-md-6 mb-4">
             <div class="card border-bottom-primary shadow h-100 py-2">

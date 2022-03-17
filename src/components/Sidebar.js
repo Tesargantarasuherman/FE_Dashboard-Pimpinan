@@ -45,11 +45,11 @@ function Sidebar() {
                         return (
                             sidebar.data ? (
                                 <li className="nav-item">
-                                    <a className="nav-link collapsed font-weight-bold" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                    <a className="nav-link collapsed font-weight-bold" href="#" data-toggle="collapse" data-target={`#${sidebar.link}`} aria-expanded="true" aria-controls="collapseTwo">
                                         <i className="fas fa-fw fa-cog" />
                                         <span>{sidebar.name}</span>
                                     </a>
-                                    <div id="collapseTwo" className="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                                    <div id={`${sidebar.link}`} className="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                                         <div className="bg-primary py-2 collapse-inner rounded">
                                             {
                                                 sidebar.data.map(data => {

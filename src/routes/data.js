@@ -1,4 +1,4 @@
-import Data from "../pages/Data/Data";
+import Data from "../pages/Data/Covid/Covid";
 import Vaksin from "../pages/Data/Vaksin/Vaksin";
 
 const root = "/data";

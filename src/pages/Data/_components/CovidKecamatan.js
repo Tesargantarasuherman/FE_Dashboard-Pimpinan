@@ -82,6 +82,7 @@ function CovidKecamatan() {
                 Authorization: 'RkplDPdGFxTSjARZkZUYi3FgRdakJy',
             }
         }).then(res => {
+            console.log(res.data.data)
             setKecamatan(res.data.data)
         })
     }

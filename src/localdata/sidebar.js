@@ -29,6 +29,22 @@ const data_sidebar = [
         ]
     },
     {
+        name: 'SPBE',
+        link:'spbe',
+        icon: 'fa-desktop',
+        data: [
+            {
+                name: 'Peraturan Perundangan',
+                link: 'peraturan-perundangan',
+                icon: 'fa-table'
+            }, {
+                name: 'Indeks SPBE',
+                link: 'indeks-spbe',
+                icon: 'fa-table'
+            }
+        ]
+    },
+    {
         name: 'Data CCTV',
         link: 'cctv',
         icon: 'fa-camera'
