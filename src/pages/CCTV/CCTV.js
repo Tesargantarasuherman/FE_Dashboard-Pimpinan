@@ -53,7 +53,6 @@ function Cctv() {
                                 {cctv.vendor}
                               </td>
                             </tr>
-
                           )
                         })
                       }
