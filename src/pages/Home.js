@@ -63,6 +63,7 @@ function Home() {
     }
     let _dataAgenda = [];
     const [timeSalat, setTimeSalat] = useState([]);
+    const [weather,setWeather] = useState([]);
     const [agenda, setAgenda] = useState(null);
     const [data, setData] = useState([]);
 
@@ -92,18 +93,21 @@ function Home() {
 
         })
     }
+    const getWeather=()=>{
+        axios.get(`https://mantra.bandung.go.id/mantra/json/diskominfo/cuaca/sekarang`).then(res=>{
+            console.log(res.data.response.data)
+            setWeather(res.data.response.data.main)
+
+        })
+    }
 
     useEffect(() => {
         Axios.get(`https://api.pray.zone/v2/times/today.json?city=bandung`).then(res => {
             let salat = res.data.results.datetime[0].times
             setTimeSalat(salat)
         })
-        for (let i = 0; i < data.length; i++) {
-            _dataAgenda.push({ Id: data[i].id, Subject: data[i].perihal, StartTime: data[i].tanggal_mulai + ' ' + data[i].jam_mulai, EndTime: data[i].tanggal_selesai + ' ' + data[i].jam_selesai })
-        }
         getAgenda()
-        // setAgenda(_dataAgenda)
-        // console.log(_dataAgenda)
+        getWeather()
     }, [])
     return (
         <div className="container-fluid">
@@ -132,7 +136,7 @@ function Home() {
                         <div className="col-md-3">
                             <Card icon={<i class="fa fa-2x fa-calendar" aria-hidden="true"></i>} title={'Selasa'} value={`02 Maret`} color={'danger'} />
                             <Card icon={<i class="fa fa-2x" aria-hidden="true"> <FaMosque /></i>} title={'Ashar'} value={`15:06`} color={'danger'} />
-                            <Card icon={<i class="fa fa-2x fa-sun" aria-hidden="true"></i>} title={'Suhu'} value={`24 Derajat`} color={'danger'} />
+                            <Card icon={<i class="fa fa-2x fa-sun" aria-hidden="true"></i>} title={'Suhu'} value={weather.temp} color={'danger'} />
                         </div>
                     </div>
                 </div>
