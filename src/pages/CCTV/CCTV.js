@@ -4,7 +4,7 @@ import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 
 const position = [51.505, -0.09]
 
-function CCTV() {
+function Cctv() {
   const [cctv, setCCTV] = useState([])
   const [viewport, setViewPort] = useState({
     latitude: 45.4211,
@@ -78,4 +78,4 @@ function CCTV() {
   )
 }
 
-export default CCTV
+export default Cctv
