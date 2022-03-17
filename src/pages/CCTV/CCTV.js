@@ -37,7 +37,6 @@ function Cctv() {
                     <th scope="col">Dinas</th>
                     <th scope="col">Status</th>
                     <th scope="col">Vendor</th>
-
                   </tr>
                 </thead>
                 {
@@ -48,9 +47,9 @@ function Cctv() {
                           return (
                             <tr key={i}>
                               <td>{cctv.cctv_name}</td>
-                              <td>{cctv.dinas}</td>
+                              <td className='text-uppercase'>{cctv.dinas}</td>
                               <td>{cctv.status_cctv}</td>
-                              <td>
+                              <td className='text-uppercase'>
                                 {cctv.vendor}
                               </td>
                             </tr>
