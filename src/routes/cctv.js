@@ -1,11 +1,11 @@
-import CCTV from "../pages/Cctv/Cctv";
+import Cctv from "../pages/Cctv/Cctv";
 
 const root = "/cctv";
 
 const cctv = [
     {
         path: `${root}`,
-        component: <CCTV/>,
+        component: <Cctv/>,
         navbar: true,
         sidebar: true,
     },
