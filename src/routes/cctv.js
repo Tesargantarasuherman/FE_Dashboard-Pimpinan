@@ -1,4 +1,4 @@
-import Cctv from "../pages/Cctv/Cctv";
+import Cctv from "../pages/CCTV/CCTV";
 
 const root = "/cctv";
 
