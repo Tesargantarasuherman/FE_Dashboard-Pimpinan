@@ -14,6 +14,9 @@ import { useContext, useEffect, useState } from 'react';
 import { SidebarContext } from './contexts/sidebar';
 import { AuthContext } from './contexts/authContext';
 import 'react-toastify/dist/ReactToastify.css';
+import 'mapbox-gl/dist/mapbox-gl.css';
+import 'leaflet/dist/leaflet.css';
+
 
 function App() {
   const [isLogin, setIsLogin] = useState(JSON.parse(localStorage.getItem('data')));

@@ -45,9 +45,48 @@ const data_sidebar = [
         ]
     },
     {
-        name: 'Data CCTV',
-        link: 'cctv',
-        icon: 'fa-camera'
-    }
+        name: 'Persandian dan Keamanan Informasi',
+        link:'persandian',
+        icon: 'fa-cog',
+        data: [
+            {
+                name: 'CSIRT',
+                link: 'csirt',
+                icon: 'fa-table'
+            }, {
+                name: 'Pentest',
+                link: 'pentest',
+                icon: 'fa-table'
+            }, {
+                name: 'Insiden Siber',
+                link: 'insiden-siber',
+                icon: 'fa-table'
+            }, {
+                name: 'SE/TTE',
+                link: 'insiden-siber',
+                icon: 'fa-table'
+            }
+        ]
+    },
+    {
+        name: 'Insfrastruktur TIK',
+        link:'infrastruktur-tik',
+        icon: 'fa-cogs',
+        data: [
+            {
+                name: 'Menara Telekomunikasi',
+                link: 'menara-telekomunikasi',
+                icon: 'fa-table'
+            }, {
+                name: 'Wifi',
+                link: 'wifi',
+                icon: 'fa-table'
+            }, {
+                name: 'Data CCTV',
+                link: 'cctv',
+                icon: 'fa-camera'
+            }
+        ]
+    },
 ]
 export default data_sidebar

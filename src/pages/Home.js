@@ -63,10 +63,11 @@ function Home() {
     }
     let _dataAgenda = [];
     const [timeSalat, setTimeSalat] = useState([]);
-    const [weather,setWeather] = useState([]);
+    const [weather, setWeather] = useState([]);
     const [agenda, setAgenda] = useState(null);
     const [data, setData] = useState([]);
-
+    var today = new Date();
+    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
     const getAgenda = () => {
         let data = new FormData();
         var today = new Date();
@@ -83,7 +84,7 @@ function Home() {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         }).then(res => {
-            console.log(res.data,'data')
+            console.log(res.data, 'data')
             let _data = res.data;
             for (let i = 0; i < _data.length; i++) {
                 _dataAgenda.push({ Id: _data[i].id, Subject: _data[i].perihal, StartTime: _data[i].tanggal_mulai + ' ' + _data[i].jam_mulai, EndTime: _data[i].tanggal_selesai + ' ' + _data[i].jam_selesai })
@@ -93,8 +94,8 @@ function Home() {
 
         })
     }
-    const getWeather=()=>{
-        axios.get(`https://mantra.bandung.go.id/mantra/json/diskominfo/cuaca/sekarang`).then(res=>{
+    const getWeather = () => {
+        axios.post(`https://mantra.bandung.go.id/mantra/json/diskominfo/cuaca/sekarang`).then(res => {
             console.log(res.data.response.data)
             setWeather(res.data.response.data.main)
 
@@ -157,7 +158,7 @@ function Home() {
                                 </div>
                                 <div className="col-md-4">
                                     <h6 className="m-0 font-weight-bold text-secondary">
-                                        23 Maret 2022
+                                        {date}
                                     </h6>
                                     <div className="mt-4">
                                         <div className="d-flex justify-content-between align-items-center">
