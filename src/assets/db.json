@@ -1,0 +1,87 @@
+{
+  "locations": [
+    {
+      "description": "Das SEZ bietet ein großes Sport-, Freizeit- und Erholungsangebot. Ab sofort könnt ihr das SEZ für Events unter: sez@glut.berlin anmieten. Kommt vorbei und genießt den industriellen Charm einer in Vergessenheit geglaubten Location. ",
+      "name": "Sukajadi",
+      "geometry": {
+        "lat": "-6.890394",
+        "lng": "107.588980"
+      }
+    }
+  ],
+  "criminals": [
+    {
+      "description": "Penjambretan",
+      "link": "https://www.youtube.com/embed/gIB2egm7tL8",
+      "name": "Sukajadi",
+      "category": "criminals",
+      "geometry": {
+        "lat": "-6.917907",
+        "lng": "107.677767"
+      }
+    },
+    {
+      "description": "Pencopetan",
+      "link": "https://www.youtube.com/embed/os6exj_GZnk",
+      "name": "Sukajadi",
+      "category": "criminals",
+      "geometry": {
+        "lat": "-6.942333",
+        "lng": "107.577144"
+      }
+    }
+  ],
+  "cctv": [
+    {
+      "description": "Diskominfo",
+      "link": "https://www.youtube.com/embed/gIB2egm7tL8",
+      "name": "Sukajadi",
+      "geometry": {
+        "lat": "-6.917907",
+        "lng": "107.677767"
+      }
+    }
+  ],
+  "markets": [
+    {
+      "description": "Diskominfo",
+      "name": "Pasar Sukajadi",
+      "date": "23-01-2021",
+      "category": "markets",
+      "price": {
+        "bawang": "120.000",
+        "cabai": "120.000"
+      },
+      "geometry": {
+        "lat": "-6.917907",
+        "lng": "107.677767"
+      }
+    }
+  ],
+  "news": [
+    {
+      "id": 1,
+      "title": "Masa Pandemi Covid-19, Wakil Wali Kota Dorong Pemuda Berwirausaha",
+      "link_image":"https://humas.bandung.go.id/img/2021/999/h_3.jpg",
+      "description": "WAKIL Wali Kota Bandung, Yana Mulyana yakin pemuda mampu berinovasi dan menjadi agen perubahan. Termasuk memanfaatkan peluang untuk berwirausaha di saat pandemi seperto sekarang ini. “Di tengah pandemi, saya harap pemuda memiliki cara baru berbisnis. Pemuda menjadi ujung tombak apa yang menjadi tantangan kita semua,” ujarnya saat menjadi narasumber kegiatan Latihan Dasar Kepemimpinan Mahasiswa (LDKM) Universitas Pasundan Bandung, yang diselenggarakan secara virtual, Sabtu (6 Februari 2021). Sesuai tema “Menumbuhkan Karakter Kepemimpinan Dalam Diri Generasi Muda di Era Pandemi Covid-19”, wakil wali kota yakin para pemuda mampu mengelola usaha. Ia mencontohkan, online shop mampu berkembang, asalkan para pelaku usaha terus mempromosikan dan tangguh terhadap tantangan dan hambatan."
+    },
+    {
+      "id": 2,
+      "title": "Pemkot Bandung Berupaya Jamin Kesehatan Seluruh Warga",
+      "link_image":"https://humas.bandung.go.id/img/2021/999/j1.jpg",
+      "description": "PEMERINTAH Kota (Pemkot) Bandung berupaya maksimal untuk menjamin kesehatan warganya. Yakni, melalui program universal Health Coverage (UHC). Pernyataan ini dilontarkan Wakil Wali Kota Bandung, Yana Mulyana usai menjenguk Rama Firmansyah, bocah 5 tahun yang mengalami masalah syaraf di bagian perut hingga membuncit. Kini Rama sudah ditangani oleh Pemkot Bandung melalui program UHC dan baru saja menjalani operasi."
+    },
+    {
+      "id": 3,
+      "title": "Tampung Usulan Masyarakat Lewat Musrenbang, Pemkot Dorong Program Pemulihan Ekonomi",
+      "link_image":"https://humas.bandung.go.id/img/2021/999/mmm_5.jpg",
+      "description": "HumasBandung - Pemerintah Kota (Pemkot) Bandung mulai menampung aspirasi masyarakat untuk penyusunan Rencana Kerja Pemerintah Daerah (RKPD) tahun 2022. Saat ini, prioritas usulan masyarakat pada program pemulihan ekonomi akibat terdampak pandemi Covid-19. Ketua Paguyuban Camat Kota Bandung, Firman Nugraha menuturkan, sebagian besar usulan masyarakat memang didominasi oleh pembangunan fisik berupa infrastruktur. Namun, mengingat situasi terkini maka kebutuhan untuk mendongrak kembali ekonomi kerakyatan dirasa sangat diperlukan. Usulan warga ini dihimpun melalui Musyawarah Perencanan dan Pembangunan (Musrenbang) di level kecamatan yang berlangsung pada 1 -11 Feberuari 2021."
+    },
+    {
+      "id": 4,
+      "title": "Agenda Balai Kota, Sabtu (6 Februari)",
+      "link_image":"https://humas.bandung.go.id/img/2021/999/agen.jpg",
+      "description": "HumasBandung - Rencana kegiatan Wali Kota, Wakil Wali Kota, Sekretaris Daerah (Sekda), Satuan Kerja Perangkat Daerah (SKPD) di lingkungan Pemerintah Kota (Pemkot) Bandung pada hari Sabtu (6 Februari 2021) terangkum berikut ini. Jadwal rencana kegiatan ini sewaktu-waktu. Pukul 08.00 WIB, Wakil Wali Kota menghadiri Peringatan Hari Ulang Tahun ke-13 Partai Gerindra melalui Video Confrence (zoom) di Ruang Bamus DPRD Kota Bandung."
+    }
+  ]
+}

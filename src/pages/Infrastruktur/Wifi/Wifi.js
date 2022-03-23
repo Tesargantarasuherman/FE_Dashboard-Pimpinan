@@ -2,20 +2,20 @@ import axios from 'axios'
 import Map from 'react-map-gl';
 import React, { useEffect, useState } from 'react'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import { cctvIcon, policeIcon } from '../../../components/VenueLocationIcon';
+import { wifiIcon } from '../../../components/VenueLocationIcon';
 
 
-function Cctv() {
-  const [cctv, setCCTV] = useState([]);
+function Wifi() {
+  const [wifi, setWifi] = useState([]);
   const [position, setPosition] = useState({ lat: null, lng: null, name: '' })
   const [center,setCenter] = useState({lat:-6.914744,lng:107.609810})
   useEffect(() => {
     axios.get(`https://pelindung.bandung.go.id:8443/api/cek`).then(res => {
       console.log(res.data, 'data')
-      setCCTV(res.data)
+      setWifi(res.data)
     })
   }, [])
-  const setActiveCCTV = (val) => {
+  const setActiveWifi = (val) => {
     console.log(val)
     setPosition({
       lat: val.lat,
@@ -27,12 +27,12 @@ function Cctv() {
 
   return (
     <div className="container-fluid">
-      <h6 className="m-0 font-weight-bold ">Data CCTV</h6>
+      <h6 className="m-0 font-weight-bold ">Data wifi</h6>
       <div className="row my-4">
         <div className="col-md-4">
           <div className="card">
             <div className="card-body">
-              <h6 className="m-0 font-weight-bold ">Tabel CCTV di Kota Bandung ({cctv.length})</h6>
+              <h6 className="m-0 font-weight-bold ">Tabel wifi di Kota Bandung ({wifi.length})</h6>
               <table className="table table-striped table-responsive mt-4" style={{ maxHeight: '74.5vh' }}>
                 <thead>
                   <tr>
@@ -43,17 +43,17 @@ function Cctv() {
                   </tr>
                 </thead>
                 {
-                  cctv.length > 0 ?
+                  wifi.length > 0 ?
                     <tbody>
                       {
-                        cctv?.map((cctv, i) => {
+                        wifi?.map((wifi, i) => {
                           return (
-                            <tr key={i} onClick={() => setActiveCCTV(cctv)}>
-                              <td >{cctv.cctv_name}</td>
-                              <td className='text-uppercase'>{cctv.dinas}</td>
-                              <td>{cctv.status_cctv == 'ON' ? <i class="fa fa-check text-success" aria-hidden="true"></i> : <i className="fa fa-time text-danger" aria-hidden="true"></i>} </td>
+                            <tr key={i} onClick={() => setActiveWifi(wifi)}>
+                              <td >{wifi.cctv_name}</td>
+                              <td className='text-uppercase'>{wifi.dinas}</td>
+                              <td>{wifi.status_cctv == 'ON' ? <i class="fa fa-check text-success" aria-hidden="true"></i> : <i className="fa fa-time text-danger" aria-hidden="true"></i>} </td>
                               <td className='text-uppercase'>
-                                {cctv.vendor}
+                                {wifi.vendor}
                               </td>
                             </tr>
                           )
@@ -82,11 +82,11 @@ function Cctv() {
                   attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-                {cctv.map(cctv => {
+                {wifi.map(wifi => {
                   return (
-                    <Marker position={position.lat !=null ?position :{lat:cctv.lat,lng:cctv.lng}} icon={cctvIcon}>
+                    <Marker position={position.lat !=null ?position :{lat:wifi.lat,lng:wifi.lng}} icon={wifiIcon}>
                       <Popup>
-                        {position.name !='' ?position.name : cctv.cctv_name}
+                        {position.name !='' ?position.name : wifi.cctv_name}
                       </Popup>
                     </Marker>
                   )
@@ -100,4 +100,4 @@ function Cctv() {
   )
 }
 
-export default Cctv
+export default Wifi

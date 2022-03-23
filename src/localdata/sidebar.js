@@ -63,7 +63,7 @@ const data_sidebar = [
                 icon: 'fa-table'
             }, {
                 name: 'SE/TTE',
-                link: 'insiden-siber',
+                link: 'tte',
                 icon: 'fa-table'
             }
         ]
