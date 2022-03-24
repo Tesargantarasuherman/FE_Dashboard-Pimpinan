@@ -1,27 +1,61 @@
 import axios from 'axios'
 import Map from 'react-map-gl';
 import React, { useEffect, useState } from 'react'
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, Circle, useMap } from 'react-leaflet';
 import { cctvIcon, policeIcon } from '../../../components/VenueLocationIcon';
 
+function Markers({ data }) {
+  const map = useMap();
+  return (
+    data.length > 0 &&
+    data.map((marker, index) => {
+      return (
+        <Marker
+          eventHandlers={{
+            click: () => {
+              map.setView(
+                [
+                  marker.lat,
+                  marker.lng
+                ],
+                18
+              );
+            }
+          }}
+          key={index}
+          position={{
+            lat: marker.lat,
+            lng: marker.lng
+          }}
+          icon={cctvIcon}
+        >
+          <Popup>
+            <span>{marker.cctv_name}</span>
+          </Popup>
+        </Marker>
+      );
+    })
+  );
+}
 
 function Cctv() {
   const [cctv, setCCTV] = useState([]);
   const [position, setPosition] = useState({ lat: null, lng: null, name: '' })
-  const [center,setCenter] = useState({lat:-6.914744,lng:107.609810})
+  const [center, setCenter] = useState({ lat: -6.914744, lng: 107.609810 })
   useEffect(() => {
+    console.log(position.lat, 'lat')
     axios.get(`https://pelindung.bandung.go.id:8443/api/cek`).then(res => {
       console.log(res.data, 'data')
       setCCTV(res.data)
     })
   }, [])
   const setActiveCCTV = (val) => {
-    console.log(val)
     setPosition({
       lat: val.lat,
       lng: val.lng,
       name: val.cctv_name
     })
+    console.log(position)
   }
 
 
@@ -48,7 +82,8 @@ function Cctv() {
                       {
                         cctv?.map((cctv, i) => {
                           return (
-                            <tr key={i} onClick={() => setActiveCCTV(cctv)}>
+                            // <tr key={i} onClick={() => setActiveCCTV(cctv)}>
+                            <tr key={i}>
                               <td >{cctv.cctv_name}</td>
                               <td className='text-uppercase'>{cctv.dinas}</td>
                               <td>{cctv.status_cctv == 'ON' ? <i class="fa fa-check text-success" aria-hidden="true"></i> : <i className="fa fa-time text-danger" aria-hidden="true"></i>} </td>
@@ -77,20 +112,20 @@ function Cctv() {
         <div className="col-md-8">
           <div className="card">
             <div className="card-body">
-              <MapContainer center={center} zoom={13} scrollWheelZoom={false} style={{ height: '80vh', width: '100wh' }}>
+              <MapContainer center={position.lat != null ? { lat: position.lat, lng: position.lng } : center} zoom={position.name == "" ? 12 : 18} scrollWheelZoom={true} style={{ height: '80vh', width: '100wh' }}>
                 <TileLayer
-                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-                {cctv.map(cctv => {
+                {/* {cctv.map(cctv => {
                   return (
-                    <Marker position={position.lat !=null ?position :{lat:cctv.lat,lng:cctv.lng}} icon={cctvIcon}>
+                    <Marker position={position.lat != null ? position : { lat: cctv.lat, lng: cctv.lng }} icon={cctvIcon}>
                       <Popup>
-                        {position.name !='' ?position.name : cctv.cctv_name}
+                        {position.name != '' ? position.name : cctv.cctv_name}
                       </Popup>
                     </Marker>
                   )
-                })}
+                })} */}
+                <Markers data={position.lat != null ? position : cctv} />
               </MapContainer>
             </div>
           </div>

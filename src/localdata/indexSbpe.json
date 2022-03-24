@@ -1,0 +1,335 @@
+{
+    "success": true,
+    "message": "Master Data Index SPBE",
+    "data": [
+      {
+        "id": 1,
+        "nama_indikator": "Tingkat Kematangan Kebijakan Internal Arsitektur SPBE Instansi Pusat/Pemerintah Daerah",
+        "bobot": 1.3,
+        "created_at": "2022-03-23T15:38:50.000000Z",
+        "updated_at": "2022-03-23T15:38:50.000000Z"
+      },
+      {
+        "id": 2,
+        "nama_indikator": "Tingkat Kematangan Kebijakan Internal Peta Rencana SPBE Instansi Pusat/Pemerintah Daerah",
+        "bobot": 1.3,
+        "created_at": "2022-03-23T15:39:13.000000Z",
+        "updated_at": "2022-03-23T15:39:13.000000Z"
+      },
+      {
+        "id": 3,
+        "nama_indikator": "Tingkat Kematangan Kebijakan Internal Manajemen Data",
+        "bobot": 1.3,
+        "created_at": "2022-03-23T15:40:14.000000Z",
+        "updated_at": "2022-03-23T15:40:14.000000Z"
+      },
+      {
+        "id": 4,
+        "nama_indikator": "Tingkat Kematangan Kebijakan Internal Pembangunan Aplikasi SPBE",
+        "bobot": 1.3,
+        "created_at": "2022-03-23T15:40:35.000000Z",
+        "updated_at": "2022-03-23T15:40:35.000000Z"
+      },
+      {
+        "id": 5,
+        "nama_indikator": "Tingkat Kematangan Kebijakan Internal Layanan Pusat Data",
+        "bobot": 1.3,
+        "created_at": "2022-03-23T15:40:55.000000Z",
+        "updated_at": "2022-03-23T15:40:55.000000Z"
+      },
+      {
+        "id": 6,
+        "nama_indikator": "Tingkat Kematangan Kebijakan Internal Layanan Jaringan Intra Instansi Pusat/Pemerintah Daerah",
+        "bobot": 1.3,
+        "created_at": "2022-03-23T15:41:10.000000Z",
+        "updated_at": "2022-03-23T15:41:10.000000Z"
+      },
+      {
+        "id": 7,
+        "nama_indikator": "Tingkat Kematangan Kebijakan Internal Penggunaan Sistem Penghubung Layanan Instansi Pusat/Pemerintah Daerah",
+        "bobot": 1.3,
+        "created_at": "2022-03-23T15:41:23.000000Z",
+        "updated_at": "2022-03-23T15:41:23.000000Z"
+      },
+      {
+        "id": 8,
+        "nama_indikator": "Tingkat Kematangan Kebijakan Internal Manajemen Keamanan Informasi",
+        "bobot": 1.3,
+        "created_at": "2022-03-23T15:41:32.000000Z",
+        "updated_at": "2022-03-23T15:41:32.000000Z"
+      },
+      {
+        "id": 9,
+        "nama_indikator": "Tingkat Kematangan Kebijakan Internal Audit TIK",
+        "bobot": 1.3,
+        "created_at": "2022-03-23T15:41:43.000000Z",
+        "updated_at": "2022-03-23T15:41:43.000000Z"
+      },
+      {
+        "id": 10,
+        "nama_indikator": "Tingkat Kematangan Kebijakan Internal Tim Koordinasi SPBE Instansi Pusat/Pemerintah Daerah",
+        "bobot": 1.3,
+        "created_at": "2022-03-23T15:41:57.000000Z",
+        "updated_at": "2022-03-23T15:41:57.000000Z"
+      },
+      {
+        "id": 11,
+        "nama_indikator": "Tingkat Kematangan Arsitektur SPBE Instansi Pusat/Pemerintah Daerah",
+        "bobot": 2.5,
+        "created_at": "2022-03-23T15:42:16.000000Z",
+        "updated_at": "2022-03-23T15:42:16.000000Z"
+      },
+      {
+        "id": 12,
+        "nama_indikator": "Tingkat Kematangan Peta Rencana SPBE Instansi Pusat/Pemerintah Daerah",
+        "bobot": 2.5,
+        "created_at": "2022-03-23T15:42:27.000000Z",
+        "updated_at": "2022-03-23T15:42:27.000000Z"
+      },
+      {
+        "id": 13,
+        "nama_indikator": "Tingkat Kematangan Keterpaduan Rencana dan Anggaran SPBE",
+        "bobot": 2.5,
+        "created_at": "2022-03-23T15:42:37.000000Z",
+        "updated_at": "2022-03-23T15:42:37.000000Z"
+      },
+      {
+        "id": 14,
+        "nama_indikator": "Tingkat Kematangan Inovasi Proses Bisnis SPBE",
+        "bobot": 2.5,
+        "created_at": "2022-03-23T15:42:58.000000Z",
+        "updated_at": "2022-03-23T15:42:58.000000Z"
+      },
+      {
+        "id": 15,
+        "nama_indikator": "Tingkat Kematangan Pembangunan Aplikasi SPBE",
+        "bobot": 2.5,
+        "created_at": "2022-03-23T15:43:14.000000Z",
+        "updated_at": "2022-03-23T15:43:14.000000Z"
+      },
+      {
+        "id": 16,
+        "nama_indikator": "Tingkat Kematangan Layanan Pusat Data",
+        "bobot": 2.5,
+        "created_at": "2022-03-23T15:43:21.000000Z",
+        "updated_at": "2022-03-23T15:43:21.000000Z"
+      },
+      {
+        "id": 17,
+        "nama_indikator": "Tingkat Kematangan Layanan Jaringan Intra Instansi Pusat/Pemerintah Daerah",
+        "bobot": 2.5,
+        "created_at": "2022-03-23T15:43:29.000000Z",
+        "updated_at": "2022-03-23T15:43:29.000000Z"
+      },
+      {
+        "id": 18,
+        "nama_indikator": "Tingkat Kematangan Penggunaan Sistem Penghubung Layanan Instansi Pusat/Pemerintah Daerah",
+        "bobot": 2.5,
+        "created_at": "2022-03-23T15:43:40.000000Z",
+        "updated_at": "2022-03-23T15:43:40.000000Z"
+      },
+      {
+        "id": 19,
+        "nama_indikator": "Tingkat Kematangan Pelaksanaan Tim Koordinasi SPBE Instansi Pusat/Pemerintah Daerah",
+        "bobot": 2.5,
+        "created_at": "2022-03-23T15:43:54.000000Z",
+        "updated_at": "2022-03-23T15:43:54.000000Z"
+      },
+      {
+        "id": 20,
+        "nama_indikator": "Tingkat Kematangan Kolaborasi Penerapan SPBE",
+        "bobot": 2.5,
+        "created_at": "2022-03-23T15:44:05.000000Z",
+        "updated_at": "2022-03-23T15:44:05.000000Z"
+      },
+      {
+        "id": 21,
+        "nama_indikator": "Tingkat Kematangan Penerapan Manajemen Risiko SPBE",
+        "bobot": 1.5,
+        "created_at": "2022-03-23T15:44:30.000000Z",
+        "updated_at": "2022-03-23T15:44:30.000000Z"
+      },
+      {
+        "id": 22,
+        "nama_indikator": "Tingkat Kematangan Penerapan Manajemen Keamanan Informasi",
+        "bobot": 1.5,
+        "created_at": "2022-03-23T15:45:01.000000Z",
+        "updated_at": "2022-03-23T15:45:01.000000Z"
+      },
+      {
+        "id": 23,
+        "nama_indikator": "Tingkat Kematangan Penerapan Manajemen Data",
+        "bobot": 1.5,
+        "created_at": "2022-03-23T15:45:13.000000Z",
+        "updated_at": "2022-03-23T15:45:13.000000Z"
+      },
+      {
+        "id": 24,
+        "nama_indikator": "Tingkat Kematangan Penerapan Manajemen Aset TIK",
+        "bobot": 1.5,
+        "created_at": "2022-03-23T15:45:22.000000Z",
+        "updated_at": "2022-03-23T15:45:22.000000Z"
+      },
+      {
+        "id": 25,
+        "nama_indikator": "Tingkat Kematangan Penerapan Kompetensi Sumber Daya Manusia",
+        "bobot": 1.5,
+        "created_at": "2022-03-23T15:45:31.000000Z",
+        "updated_at": "2022-03-23T15:45:31.000000Z"
+      },
+      {
+        "id": 26,
+        "nama_indikator": "Tingkat Kematangan Penerapan Manajemen Pengetahuan",
+        "bobot": 1.5,
+        "created_at": "2022-03-23T15:45:43.000000Z",
+        "updated_at": "2022-03-23T15:45:43.000000Z"
+      },
+      {
+        "id": 27,
+        "nama_indikator": "Tingkat Kematangan Penerapan Manajemen Perubahan",
+        "bobot": 1.5,
+        "created_at": "2022-03-23T15:45:49.000000Z",
+        "updated_at": "2022-03-23T15:45:49.000000Z"
+      },
+      {
+        "id": 28,
+        "nama_indikator": "Tingkat Kematangan Penerapan Manajemen Layanan SPBE",
+        "bobot": 1.5,
+        "created_at": "2022-03-23T15:45:56.000000Z",
+        "updated_at": "2022-03-23T15:45:56.000000Z"
+      },
+      {
+        "id": 29,
+        "nama_indikator": "Tingkat Kematangan Pelaksanaan Audit Infrastruktur SPBE",
+        "bobot": 1.5,
+        "created_at": "2022-03-23T15:46:03.000000Z",
+        "updated_at": "2022-03-23T15:46:03.000000Z"
+      },
+      {
+        "id": 30,
+        "nama_indikator": "Tingkat Kematangan Pelaksanaan Audit Aplikasi SPBE",
+        "bobot": 1.5,
+        "created_at": "2022-03-23T15:46:13.000000Z",
+        "updated_at": "2022-03-23T15:46:13.000000Z"
+      },
+      {
+        "id": 31,
+        "nama_indikator": "Tingkat Kematangan Pelaksanaan Audit Keamanan SPBE",
+        "bobot": 1.5,
+        "created_at": "2022-03-23T15:46:23.000000Z",
+        "updated_at": "2022-03-23T15:46:23.000000Z"
+      },
+      {
+        "id": 32,
+        "nama_indikator": "Tingkat Kematangan Layanan Perencanaan",
+        "bobot": 2.75,
+        "created_at": "2022-03-23T15:46:47.000000Z",
+        "updated_at": "2022-03-23T15:46:47.000000Z"
+      },
+      {
+        "id": 33,
+        "nama_indikator": "Tingkat Kematangan Layanan Penganggaran",
+        "bobot": 2.75,
+        "created_at": "2022-03-23T15:46:54.000000Z",
+        "updated_at": "2022-03-23T15:46:54.000000Z"
+      },
+      {
+        "id": 34,
+        "nama_indikator": "Tingkat Kematangan Layanan Keuangan",
+        "bobot": 2.75,
+        "created_at": "2022-03-23T15:47:02.000000Z",
+        "updated_at": "2022-03-23T15:47:02.000000Z"
+      },
+      {
+        "id": 35,
+        "nama_indikator": "Tingkat Kematangan Layanan Pengadaan Barang dan Jasa",
+        "bobot": 2.75,
+        "created_at": "2022-03-23T15:47:10.000000Z",
+        "updated_at": "2022-03-23T15:47:10.000000Z"
+      },
+      {
+        "id": 36,
+        "nama_indikator": "Tingkat Kematangan Layanan Kepegawaian",
+        "bobot": 2.75,
+        "created_at": "2022-03-23T15:47:19.000000Z",
+        "updated_at": "2022-03-23T15:47:19.000000Z"
+      },
+      {
+        "id": 37,
+        "nama_indikator": "Tingkat Kematangan Layanan Kearsipan Dinamis",
+        "bobot": 2.75,
+        "created_at": "2022-03-23T15:47:32.000000Z",
+        "updated_at": "2022-03-23T15:47:32.000000Z"
+      },
+      {
+        "id": 38,
+        "nama_indikator": "Tingkat Kematangan Layanan Pengelolaan Barang Milik Negara/Daerah",
+        "bobot": 2.75,
+        "created_at": "2022-03-23T15:47:42.000000Z",
+        "updated_at": "2022-03-23T15:47:42.000000Z"
+      },
+      {
+        "id": 39,
+        "nama_indikator": "Tingkat Kematangan Layanan Pengawasan Internal Pemerintah",
+        "bobot": 2.75,
+        "created_at": "2022-03-23T15:47:53.000000Z",
+        "updated_at": "2022-03-23T15:47:53.000000Z"
+      },
+      {
+        "id": 40,
+        "nama_indikator": "Tingkat Kematangan Layanan Akuntabilitas Kinerja Organisasi",
+        "bobot": 2.75,
+        "created_at": "2022-03-23T15:48:04.000000Z",
+        "updated_at": "2022-03-23T15:48:04.000000Z"
+      },
+      {
+        "id": 41,
+        "nama_indikator": "Tingkat Kematangan Layanan Kinerja Pegawai",
+        "bobot": 2.75,
+        "created_at": "2022-03-23T15:48:15.000000Z",
+        "updated_at": "2022-03-23T15:48:15.000000Z"
+      },
+      {
+        "id": 42,
+        "nama_indikator": "Tingkat Kematangan Layanan Pengaduan Pelayanan Publik",
+        "bobot": 3,
+        "created_at": "2022-03-23T15:48:28.000000Z",
+        "updated_at": "2022-03-23T15:48:28.000000Z"
+      },
+      {
+        "id": 43,
+        "nama_indikator": "Tingkat Kematangan Layanan Data Terbuka",
+        "bobot": 3,
+        "created_at": "2022-03-23T15:48:36.000000Z",
+        "updated_at": "2022-03-23T15:48:36.000000Z"
+      },
+      {
+        "id": 44,
+        "nama_indikator": "Tingkat Kematangan Jaringan Dokumentasi dan Informasi Hukum (JDIH)",
+        "bobot": 3,
+        "created_at": "2022-03-23T15:48:51.000000Z",
+        "updated_at": "2022-03-23T15:48:51.000000Z"
+      },
+      {
+        "id": 45,
+        "nama_indikator": "Tingkat Kematangan Layanan Publik Sektor 1",
+        "bobot": 3,
+        "created_at": "2022-03-23T15:49:02.000000Z",
+        "updated_at": "2022-03-23T15:49:02.000000Z"
+      },
+      {
+        "id": 46,
+        "nama_indikator": "Tingkat Kematangan Layanan Publik Sektor 2",
+        "bobot": 3,
+        "created_at": "2022-03-23T15:49:07.000000Z",
+        "updated_at": "2022-03-23T15:49:07.000000Z"
+      },
+      {
+        "id": 47,
+        "nama_indikator": "Tingkat Kematangan Layanan Publik Sektor 3",
+        "bobot": 3,
+        "created_at": "2022-03-23T15:49:11.000000Z",
+        "updated_at": "2022-03-23T15:49:11.000000Z"
+      }
+    ]
+  }

@@ -41,6 +41,10 @@ const data_sidebar = [
                 name: 'Indeks SPBE',
                 link: 'indeks-spbe',
                 icon: 'fa-table'
+            }, {
+                name: 'Domain Indikator',
+                link: 'domain-indikator',
+                icon: 'fa-table'
             }
         ]
     },

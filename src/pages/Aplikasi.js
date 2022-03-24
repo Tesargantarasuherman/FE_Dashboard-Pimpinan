@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Chart from 'react-apexcharts';
-
+import axios from 'axios'
 function Aplikasi() {
   const seriesPie = [21, 22]
 
@@ -80,6 +80,11 @@ function Aplikasi() {
       }
     }
   }
+  useEffect(()=>{
+    axios.get('https://aplikasi.bandung.go.id/wp-json/wp/v2/aplikasi?page=1&&per_page=100').then(res=>{
+      console.log(res,'axios')
+    })
+  })
   return (
     <div className="container-fluid">
       <h6 className="m-0 font-weight-bold ">Aplikasi</h6>
