@@ -87,7 +87,7 @@ function Cctv() {
   }
   const addCctv = () => {
     console.log(form)
-    axios.post(`http://api-dashboard-pimpinan.herokuapp.com/api/v1/add-master-data-cctv`, form).then(res => {
+    axios.post(`https://api-dashboard-pimpinan.herokuapp.com/api/v1/add-master-data-cctv`, form).then(res => {
       getAllCctv()
     }).catch(err => {
       console.log(err)
@@ -103,7 +103,7 @@ function Cctv() {
       status: !data.status
     }
     console.log(data)
-    axios.put(`http://api-dashboard-pimpinan.herokuapp.com/api/v1/update-master-data-cctv/${data.id}`, ubah_data).then(res => {
+    axios.put(`https://api-dashboard-pimpinan.herokuapp.com/api/v1/update-master-data-cctv/${data.id}`, ubah_data).then(res => {
       getAllCctv()
     }).catch(err => {
       console.log(err)
