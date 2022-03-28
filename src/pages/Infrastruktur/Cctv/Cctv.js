@@ -30,7 +30,7 @@ function Markers({ data }) {
             lat: marker.latitude,
             lng: marker.longitude
           }}
-          icon={marker.status == "aktif" ? cctvIcon : cctvIconNotActive}        >
+          icon={marker.status == true ? cctvIcon : cctvIconNotActive}        >
           <Popup>
             <span>{marker.lokasi}</span>
           </Popup>
@@ -48,7 +48,7 @@ function Cctv() {
   const [checked, setChecked] = useState(false)
   const [position, setPosition] = useState({ latitude: null, longitude: null, name: '', status: '' });
   const [center, setCenter] = useState({ lat: -6.914744, lng: 107.609810 });
-  
+
   useEffect(() => {
     getAllCctv()
   }, [])
@@ -88,6 +88,22 @@ function Cctv() {
   const addCctv = () => {
     console.log(form)
     axios.post(`http://api-dashboard-pimpinan.herokuapp.com/api/v1/add-master-data-cctv`, form).then(res => {
+      getAllCctv()
+    }).catch(err => {
+      console.log(err)
+    })
+  }
+  const ubahStatus = (data) => {
+    let ubah_data = {
+      lokasi: data.lokasi,
+      latitude: data.latitude,
+      longitude: data.longitude,
+      name: data.name,
+      vendor: data.vendor,
+      status: !data.status
+    }
+    console.log(data)
+    axios.put(`http://api-dashboard-pimpinan.herokuapp.com/api/v1/update-master-data-cctv/${data.id}`, ubah_data).then(res => {
       getAllCctv()
     }).catch(err => {
       console.log(err)
@@ -141,8 +157,8 @@ function Cctv() {
                             <td>
                               <div className="form-group">
                                 <select name="status" onChange={handleFormChange} className="form-control" style={{ fontSize: '12px', maxWidth: 80, maxHeight: 31, padding: 0 }}>
-                                  <option style={{ fontSize: '12px', fontWeight: 'bold' }} value="aktif">Aktif</option>
-                                  <option style={{ fontSize: '12px', fontWeight: 'bold' }} value="tidak aktif">Tidak</option>
+                                  <option style={{ fontSize: '12px', fontWeight: 'bold' }} value={true}>Aktif</option>
+                                  <option style={{ fontSize: '12px', fontWeight: 'bold' }} value={false}>Tidak</option>
                                 </select>
                               </div>
                             </td>
@@ -156,14 +172,14 @@ function Cctv() {
                       {
                         cctv?.map((cctv, i) => {
                           return (
-                            <tr key={i} onClick={() => setActiveCCTV(cctv)} style={{ fontSize: '12px', fontWeight: 'bold' }}>
-                             {/* <tr key={i}  style={{ fontSize: '12px', fontWeight: 500 }}> */}
+                            // <tr key={i} onClick={() => setActiveCCTV(cctv)} style={{ fontSize: '12px', fontWeight: 'bold' }}>
+                              <tr key={i}  style={{ fontSize: '12px', fontWeight: 500 }}> 
                               <td>
                                 {
                                   i != edit ? (
                                     cctv.lokasi)
                                     : (
-                                      <input type="text" className="form-control form-control-sm" value={cctv.lokasi} style={{ maxWidth: 80, maxHeight: 25 }} />
+                                      <input type="text" className="form-control form-control-sm" defaultValue={cctv.lokasi} style={{ maxWidth: 80, maxHeight: 25 }} />
                                     )
                                 }
                               </td>
@@ -172,7 +188,7 @@ function Cctv() {
                                   i != edit ? (
                                     cctv.latitude)
                                     : (
-                                      <input type="text" className="form-control form-control-sm" value={cctv.latitude} style={{ maxWidth: 80, maxHeight: 25 }} />
+                                      <input type="text" className="form-control form-control-sm" defaultValue={cctv.latitude} style={{ maxWidth: 80, maxHeight: 25 }} />
                                     )
                                 }
                               </td>
@@ -181,7 +197,7 @@ function Cctv() {
                                   i != edit ? (
                                     cctv.longitude)
                                     : (
-                                      <input type="text" className="form-control form-control-sm" value={cctv.longitude} style={{ maxWidth: 80, maxHeight: 25 }} />
+                                      <input type="text" className="form-control form-control-sm" defaultValue={cctv.longitude} style={{ maxWidth: 80, maxHeight: 25 }} />
                                     )
                                 }
                               </td>
@@ -191,7 +207,7 @@ function Cctv() {
                                     cctv.vendor
                                   )
                                     : (
-                                      <input type="text" className="form-control form-control-sm" value={cctv.vendor} style={{ maxWidth: 80, maxHeight: 25 }} />
+                                      <input type="text" className="form-control form-control-sm" defaultValue={cctv.vendor} style={{ maxWidth: 80, maxHeight: 25 }} />
                                     )
                                 }
                               </td>
@@ -199,14 +215,25 @@ function Cctv() {
                                 {/* <label>
                                   <Switch onChange={(checked)=>handleChange(checked,i)} checked={cctv.status=="aktif" ? checked :false} height={15} width={25}/>
                                 </label> */}
-                                {cctv.status == 'aktif' ? <button className='btn btn-outline-primary btn-sm' data-toggle="tooltip" data-placement="top" title="Ubah Status"><i className="fa fa-check text-success" aria-hidden="true"></i></button> : <button className='btn btn-outline-primary btn-sm' data-toggle="tooltip" data-placement="top" title="Ubah Status"><i className="fa fa-times text-danger" aria-hidden="true"></i></button>}
+                                <button className='btn btn-outline-primary btn-sm' data-toggle="tooltip" data-placement="top" title="Ubah Status" onClick={() => ubahStatus(cctv)}>
+                                  {
+                                    cctv.status == true ? <i className="fa fa-check text-success" aria-hidden="true"></i> : <i className="fa fa-times text-danger" aria-hidden="true"></i>
+                                  }
+                                </button>
                               </td>
                               <td>
-                                <button className="btn btn-primary btn-sm mr-2" onClick={() => setUbahData(i)}>Ubah</button>
                                 {
                                   i != edit ? (
-                                    null
-                                  ) : (
+                                    <div class="dropdown no-arrow">
+                                      <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-ellipsis-v fa-fw text-gray-800"></i>
+                                      </a>
+                                      <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                                        <a class="dropdown-item" href="#" onClick={() => setUbahData(i)}>
+                                          Ubah
+                                        </a>
+                                      </div>
+                                    </div>) : (
                                     <button className="btn btn-danger btn-sm" onClick={() => setEdit(null)}>Batal</button>
                                   )
                                 }
@@ -236,7 +263,7 @@ function Cctv() {
                 />
                 {cctv.map(cctv => {
                   return (
-                    <Marker position={position.lat != null ? position : { lat: cctv.latitude, lng: cctv.longitude }} icon={cctv.status == "aktif" ? cctvIcon : cctvIconNotActive}>
+                    <Marker position={position.lat != null ? position : { lat: cctv.latitude, lng: cctv.longitude }} icon={cctv.status == true ? cctvIcon : cctvIconNotActive}>
                       <Popup>
                         {position.name != '' ? position.name : cctv.lokasi}<br />
                         {cctv.status}
@@ -244,7 +271,7 @@ function Cctv() {
                     </Marker>
                   )
                 })}
-                <Markers data={position.longitude ? position: cctv} />
+                <Markers data={position.longitude ? position : cctv} />
               </MapContainer>
             </div>
           </div>

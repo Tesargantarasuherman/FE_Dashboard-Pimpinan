@@ -20,7 +20,17 @@ function Login() {
     const handleSubmit = (e) => {
         e.preventDefault()
         if (email == 'kepaladinas@bandung.go.id' && password == '123456') {
-            localStorage.setItem('data', true)
+            localStorage.setItem('data', JSON.stringify({
+                login: true,
+                role:'kepala dinas'
+            }))
+            navigate(`/home`);
+        }
+        if (email == 'admindashboard@bandung.go.id' && password == '123456') {
+            localStorage.setItem('data', JSON.stringify({
+                login: true,
+                role:'admin'
+            }))
             navigate(`/home`);
         }
         else {
