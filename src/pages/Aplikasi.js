@@ -81,8 +81,12 @@ function Aplikasi() {
     }
   }
   useEffect(()=>{
-    axios.get('https://aplikasi.bandung.go.id/wp-json/wp/v2/aplikasi?page=1&&per_page=100').then(res=>{
-      console.log(res,'axios')
+    axios.get('https://aplikasi.bandung.go.id/wp-json/api/v1/aplikasi?page=1&per_page=100',{
+      headers: {
+        'Pub-Key': '261b3b04f89120d8515b57cd1011610b8fd2272a',
+    }
+    }).then(res=>{
+      console.log(res,'axiosdd')
     })
   })
   return (
