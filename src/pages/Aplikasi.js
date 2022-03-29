@@ -26,7 +26,7 @@ function Aplikasi() {
   }
   const series = [{
     name: 'Jumlah',
-    data: [21, 22, 10, 28, 16, 21, 13, 30,45,42,12,31,34,32,21,32,26,25]
+    data: [21, 22, 10, 28, 16, 21, 13, 30, 45, 42, 12, 31, 34, 32, 21, 32, 26, 25]
   }]
   const options = {
     chart: {
@@ -38,7 +38,7 @@ function Aplikasi() {
         }
       }
     },
-    colors: ['#F44336','#ffb142','#218c74', '#E91E63', '#9C27B0'],
+    colors: ['#F44336', '#ffb142', '#218c74', '#E91E63', '#9C27B0'],
     plotOptions: {
       bar: {
         columnWidth: '50%',
@@ -74,19 +74,22 @@ function Aplikasi() {
       ],
       labels: {
         style: {
-          colors: ['#F44336','#ffb142','#218c74', '#E91E63', '#9C27B0'],
+          colors: ['#F44336', '#ffb142', '#218c74', '#E91E63', '#9C27B0'],
           fontSize: '12px'
         }
       }
     }
   }
-  useEffect(()=>{
-    axios.get('https://aplikasi.bandung.go.id/wp-json/api/v1/aplikasi?page=1&per_page=100',{
+  useEffect(() => {
+    axios.get('https://aplikasi.bandung.go.id/wp-json/api/v1/aplikasi?page=1&per_page=100', {
       headers: {
         'Pub-Key': '261b3b04f89120d8515b57cd1011610b8fd2272a',
-    }
-    }).then(res=>{
-      console.log(res,'axiosdd')
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+        'Content-Type': 'application/json'
+      }
+    }).then(res => {
+      console.log(res, 'axiosdd')
     })
   })
   return (
@@ -101,7 +104,7 @@ function Aplikasi() {
               </h6>
               <div className="row mt-4">
                 <div className="col-md-4">
-                  <Chart options={optionsPie} series={seriesPie} type="pie" height={300} style={{minWidth:'100%'}} />
+                  <Chart options={optionsPie} series={seriesPie} type="pie" height={300} style={{ minWidth: '100%' }} />
                 </div>
                 <div className="col-md-8">
                   <table class="table table-bordered">
