@@ -54,8 +54,8 @@ function Cctv() {
   }, [])
   const getAllCctv = () => {
     axios.get(`https://api-dashboard-pimpinan.herokuapp.com/api/v1/get-master-data-cctv`).then(res => {
-      console.log(res.data.data.data, 'data')
-      setCCTV(res.data.data.data)
+      console.log(res, 'data')
+      setCCTV(res.data.data)
     })
   }
   const setActiveCCTV = (val) => {
@@ -161,7 +161,7 @@ function Cctv() {
                         show ? (
                           <tr>
                             <td>
-                              <input type="text" value={form.lokasi}  name="lokasi" onChange={handleFormChange} className="form-control form-control-sm" placeholder="lokasi" style={{ maxWidth: 80 }} />
+                              <input type="text" value={form.lokasi} name="lokasi" onChange={handleFormChange} className="form-control form-control-sm" placeholder="lokasi" style={{ maxWidth: 80 }} />
                             </td>
                             <td>
                               <input type="text" value={form.latitude} name="latitude" onChange={handleFormChange} className="form-control form-control-sm" placeholder="latitude" style={{ maxWidth: 80 }} />
@@ -282,7 +282,7 @@ function Cctv() {
                 <TileLayer
                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-                {cctv.map(cctv => {
+                {cctv.length > 0 && cctv.map(cctv => {
                   return (
                     <Marker position={position.lat != null ? position : { lat: cctv.latitude, lng: cctv.longitude }} icon={cctv.status == true ? cctvIcon : cctvIconNotActive}>
                       <Popup>
