@@ -5,7 +5,8 @@ import index_spbe from '../../../localdata/indexSbpe.json'
 import index_spbe_pertahun from '../../../localdata/indexSbpePertahun.json'
 
 function IndeksSpbe() {
-  const [indexSpbe, setIndexSpbe] = useState();
+  const [indexSpbe, setIndexSpbe] = useState([]);
+  const [nilaiSpbe, setNilaiSpbe] = useState([]);
   const [daftarSpbe, setDaftarSpbe] = useState([]);
   const [indexSpbePertahun, setIndexSpbePertahun] = useState([]);
   const [active, setactive] = useState({ active: 'chart' });
@@ -29,7 +30,11 @@ function IndeksSpbe() {
   }, [])
   const getIndikatorSPBE = () => {
     axios.get(`http://api-dashboard-pimpinan.herokuapp.com/api/v1/get-master-indikator-spbe`).then(res => {
-      setIndexSpbe(res.data.data, 'dataindex')
+      setIndexSpbe(res.data.data)
+    })
+    axios.get(`http://api-dashboard-pimpinan.herokuapp.com/api/v1/get-index-spbe`).then(res => {
+      console.log(res.data.data, 'index')
+      setNilaiSpbe(res.data.data)
     })
   }
   const series = [{
@@ -164,17 +169,23 @@ function IndeksSpbe() {
               <tbody>
                 {
                   indexSpbe.map((data, index) => {
-                    return (
-                      <tr>
-                        <th scope="row">{index + 1}</th>
-                        <td>{data.nama_indikator}</td>
-                        <td>{data.bobot}</td>
-                        <td>
-                          <input type="text" class="form-control" placeholder="Nilai" style={{ maxWidth: 80, maxHeight: 25 }} />
-                        </td>
-                        <td>{data.skala_nilai}</td>
-                      </tr>
-                    )
+                    // return (
+                    //   nilaiSpbe.map((nilai) => {
+                    //       <tr>
+                    //         <th scope="row">{index + 1}</th>
+                    //         <td>{data.nama_indikator}</td>
+                    //         <td>{data.bobot}</td>
+                    //         <td>
+                    //           <input type="text" class="form-control" placeholder="Nilai" style={{ maxWidth: 80, maxHeight: 25 }} />
+                    //         </td>
+                    //         {
+                    //           nilai
+                    //         }
+
+                    //         <td>{nilai.id_indikator == data.id ? nilai.skala_nilai : ''}</td>
+                    //       </tr>
+                    //   })
+                    // )
                   })
                 }
                 <tr className="font-weight-bold">

@@ -83,7 +83,7 @@ function Aplikasi() {
   useEffect(() => {
     axios.get('https://aplikasi.bandung.go.id/wp-json/api/v1/aplikasi?page=1&per_page=100', {
       headers: {
-        'Pub-Key': '261b3b04f89120d8515b57cd1011610b8fd2272a',
+        Authorization: '261b3b04f89120d8515b57cd1011610b8fd2272a',
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
         'Accept': 'application/json'
