@@ -86,7 +86,7 @@ function Aplikasi() {
         'Pub-Key': '261b3b04f89120d8515b57cd1011610b8fd2272a',
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-        'Content-Type': 'application/json'
+        'Accept': 'application/json'
       }
     }).then(res => {
       console.log(res, 'axiosdd')

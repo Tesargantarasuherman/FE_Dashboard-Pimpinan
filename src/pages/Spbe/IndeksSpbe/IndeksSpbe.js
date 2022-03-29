@@ -1,33 +1,40 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import Chart from 'react-apexcharts';
 import index_spbe from '../../../localdata/indexSbpe.json'
 import index_spbe_pertahun from '../../../localdata/indexSbpePertahun.json'
 
 function IndeksSpbe() {
-  const [indexSpbe, setIndexSpbe] = useState(index_spbe.data);
+  const [indexSpbe, setIndexSpbe] = useState();
   const [daftarSpbe, setDaftarSpbe] = useState([]);
   const [indexSpbePertahun, setIndexSpbePertahun] = useState([]);
   const [active, setactive] = useState({ active: 'chart' });
 
   useEffect(() => {
-    let nama_spbe = indexSpbe
-    let index_spbe = index_spbe_pertahun.data.data
-    let data_spbe = [];
-    let _nama_spbe = [];
-    for (let i = 0; i < nama_spbe.length; i++) {
-      _nama_spbe.push([nama_spbe[i].nama_indikator]);
-    }
-    for (let i = 0; i < index_spbe.length; i++) {
-      data_spbe.push(index_spbe[i].skala_nilai);
-    }
+    getIndikatorSPBE()
+    // let nama_spbe = indexSpbe
+    // let index_spbe = index_spbe_pertahun.data.data
+    // let data_spbe = [];
+    // let _nama_spbe = [];
+    // for (let i = 0; i < nama_spbe.length; i++) {
+    //   _nama_spbe.push([nama_spbe[i].nama_indikator]);
+    // }
+    // for (let i = 0; i < index_spbe.length; i++) {
+    //   data_spbe.push(index_spbe[i].skala_nilai);
+    // }
     // console.log(indexSpbe)
-    setDaftarSpbe(_nama_spbe)
-    setIndexSpbePertahun(data_spbe)
+    // setDaftarSpbe(_nama_spbe)
+    // setIndexSpbePertahun(data_spbe)
     console.log(index_spbe_pertahun.data.data, 'nama_spbe')
   }, [])
+  const getIndikatorSPBE = () => {
+    axios.get(`http://api-dashboard-pimpinan.herokuapp.com/api/v1/get-master-indikator-spbe`).then(res => {
+      setIndexSpbe(res.data.data, 'dataindex')
+    })
+  }
   const series = [{
     name: 'Nilai Indeks',
-    data: [0, 3, 4, 5, 3.5, 4]
+    data: [0, 3.11, 3.72, 3.72, 3.19]
   }]
   const options = {
     chart: {
@@ -59,7 +66,6 @@ function IndeksSpbe() {
         [2019],
         [2020],
         [2021],
-        [2022],
       ],
       labels: {
         style: {
@@ -157,13 +163,15 @@ function IndeksSpbe() {
               </thead>
               <tbody>
                 {
-                  index_spbe_pertahun.data.data.map((data, index) => {
+                  indexSpbe.map((data, index) => {
                     return (
                       <tr>
                         <th scope="row">{index + 1}</th>
                         <td>{data.nama_indikator}</td>
-                        <td>{data.skala_nilai}</td>
-                        <td>{data.skala_nilai}</td>
+                        <td>{data.bobot}</td>
+                        <td>
+                          <input type="text" class="form-control" placeholder="Nilai" style={{ maxWidth: 80, maxHeight: 25 }} />
+                        </td>
                         <td>{data.skala_nilai}</td>
                       </tr>
                     )
