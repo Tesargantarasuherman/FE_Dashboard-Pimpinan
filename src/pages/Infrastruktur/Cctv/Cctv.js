@@ -43,10 +43,10 @@ function Markers({ data }) {
 function Cctv() {
   const [show, setShow] = useState(false);
   const [edit, setEdit] = useState(null);
-  const [form, setForm] = useState({ lokasi: "", latitude: "", longitude: "", vendor: "", dinas: "", status: "" });
+  const [form, setForm] = useState({ lokasi: "", latitude: "", longitude: "", vendor: "", dinas: "", status: true });
   const [cctv, setCCTV] = useState([]);
   const [checked, setChecked] = useState(false)
-  const [position, setPosition] = useState({ latitude: null, longitude: null, name: '', status: '' });
+  const [position, setPosition] = useState([{ lat: null, lng: null, lokasi: '', status: null }]);
   const [center, setCenter] = useState({ lat: -6.914744, lng: 107.609810 });
 
   useEffect(() => {
@@ -60,9 +60,9 @@ function Cctv() {
   }
   const setActiveCCTV = (val) => {
     setPosition({
-      latitude: val.latitude,
-      longitude: val.longitude,
-      name: val.lokasi,
+      lat: val.latitude,
+      lng: val.longitude,
+      lokasi: val.lokasi,
       status: val.status
     })
     console.log(position)
@@ -88,21 +88,39 @@ function Cctv() {
   const addCctv = () => {
     console.log(form)
     axios.post(`https://api-dashboard-pimpinan.herokuapp.com/api/v1/add-master-data-cctv`, form).then(res => {
+      setForm(
+        { lokasi: "", latitude: "", longitude: "", vendor: "", dinas: "", status: true }
+      )
+      getAllCctv();
+
+    }).catch(err => {
+      console.log(err)
+    })
+  }
+  const editCctv = (data) => {
+    let ubah_data = {
+      lokasi: form.lokasi == "" ? data.lokasi : form.lokasi,
+      latitude: form.latitude == "" ? data.latitude : form.latitude,
+      longitude: form.longitude == "" ? data.longitude : form.longitude,
+      vendor: form.vendor == "" ? data.vendor : form.vendor,
+      status: form.status == "" ? data.status : form.status
+    }
+    axios.put(`https://api-dashboard-pimpinan.herokuapp.com/api/v1/update-master-data-cctv/${data.id}`, ubah_data).then(res => {
+      setEdit(null);
       getAllCctv()
     }).catch(err => {
       console.log(err)
     })
   }
+
   const ubahStatus = (data) => {
     let ubah_data = {
       lokasi: data.lokasi,
       latitude: data.latitude,
       longitude: data.longitude,
-      name: data.name,
       vendor: data.vendor,
       status: !data.status
     }
-    console.log(data)
     axios.put(`https://api-dashboard-pimpinan.herokuapp.com/api/v1/update-master-data-cctv/${data.id}`, ubah_data).then(res => {
       getAllCctv()
     }).catch(err => {
@@ -114,7 +132,7 @@ function Cctv() {
     <div className="container-fluid">
       <h6 className="m-0 font-weight-bold ">Data CCTV</h6>
       <div className="row no-gutters my-4">
-        <div className="col-md-5">
+        <div className="col-md-6">
           <div className="card">
             <div className="card-body">
               <div className="d-flex justify-content-between">
@@ -143,16 +161,16 @@ function Cctv() {
                         show ? (
                           <tr>
                             <td>
-                              <input type="text" name="lokasi" onChange={handleFormChange} className="form-control form-control-sm" placeholder="lokasi" style={{ maxWidth: 80 }} />
+                              <input type="text" value={form.lokasi}  name="lokasi" onChange={handleFormChange} className="form-control form-control-sm" placeholder="lokasi" style={{ maxWidth: 80 }} />
                             </td>
                             <td>
-                              <input type="text" name="latitude" onChange={handleFormChange} className="form-control form-control-sm" placeholder="latitude" style={{ maxWidth: 80 }} />
+                              <input type="text" value={form.latitude} name="latitude" onChange={handleFormChange} className="form-control form-control-sm" placeholder="latitude" style={{ maxWidth: 80 }} />
                             </td>
                             <td>
-                              <input type="text" name="longitude" onChange={handleFormChange} className="form-control form-control-sm" placeholder="longitude" style={{ maxWidth: 80 }} />
+                              <input type="text" value={form.longitude} name="longitude" onChange={handleFormChange} className="form-control form-control-sm" placeholder="longitude" style={{ maxWidth: 80 }} />
                             </td>
                             <td>
-                              <input type="text" name="vendor" onChange={handleFormChange} className="form-control form-control-sm" placeholder="vendor" style={{ maxWidth: 80 }} />
+                              <input type="text" value={form.vendor} name="vendor" onChange={handleFormChange} className="form-control form-control-sm" placeholder="vendor" style={{ maxWidth: 80 }} />
                             </td>
                             <td>
                               <div className="form-group">
@@ -172,14 +190,14 @@ function Cctv() {
                       {
                         cctv?.map((cctv, i) => {
                           return (
-                            // <tr key={i} onClick={() => setActiveCCTV(cctv)} style={{ fontSize: '12px', fontWeight: 'bold' }}>
-                              <tr key={i}  style={{ fontSize: '12px', fontWeight: 500 }}> 
+                            <tr key={i} onClick={() => setActiveCCTV(cctv)} style={{ fontSize: '12px', fontWeight: 'bold' }}>
+                              {/* <tr key={i}  style={{ fontSize: '12px', fontWeight: 500 }}>  */}
                               <td>
                                 {
                                   i != edit ? (
                                     cctv.lokasi)
                                     : (
-                                      <input type="text" className="form-control form-control-sm" defaultValue={cctv.lokasi} style={{ maxWidth: 80, maxHeight: 25 }} />
+                                      <input type="text" name="lokasi" onChange={handleFormChange} className="form-control form-control-sm" defaultValue={cctv.lokasi} style={{ maxWidth: 80, maxHeight: 25 }} />
                                     )
                                 }
                               </td>
@@ -188,7 +206,7 @@ function Cctv() {
                                   i != edit ? (
                                     cctv.latitude)
                                     : (
-                                      <input type="text" className="form-control form-control-sm" defaultValue={cctv.latitude} style={{ maxWidth: 80, maxHeight: 25 }} />
+                                      <input type="text" name="latitude" onChange={handleFormChange} className="form-control form-control-sm" defaultValue={cctv.latitude} style={{ maxWidth: 80, maxHeight: 25 }} />
                                     )
                                 }
                               </td>
@@ -197,7 +215,7 @@ function Cctv() {
                                   i != edit ? (
                                     cctv.longitude)
                                     : (
-                                      <input type="text" className="form-control form-control-sm" defaultValue={cctv.longitude} style={{ maxWidth: 80, maxHeight: 25 }} />
+                                      <input type="text" name="longitude" onChange={handleFormChange} className="form-control form-control-sm" defaultValue={cctv.longitude} style={{ maxWidth: 80, maxHeight: 25 }} />
                                     )
                                 }
                               </td>
@@ -207,7 +225,7 @@ function Cctv() {
                                     cctv.vendor
                                   )
                                     : (
-                                      <input type="text" className="form-control form-control-sm" defaultValue={cctv.vendor} style={{ maxWidth: 80, maxHeight: 25 }} />
+                                      <input type="text" name="vendor" onChange={handleFormChange} className="form-control form-control-sm" defaultValue={cctv.vendor} style={{ maxWidth: 80, maxHeight: 25 }} />
                                     )
                                 }
                               </td>
@@ -234,7 +252,10 @@ function Cctv() {
                                         </a>
                                       </div>
                                     </div>) : (
-                                    <button className="btn btn-danger btn-sm" onClick={() => setEdit(null)}>Batal</button>
+                                    <>
+                                      <button className="btn btn-primary btn-sm mr-2" onClick={() => editCctv(cctv)}>Ubah</button>
+                                      <button className="btn btn-danger btn-sm" onClick={() => setEdit(null)}>Batal</button>
+                                    </>
                                   )
                                 }
                               </td>
@@ -254,10 +275,10 @@ function Cctv() {
             </div>
           </div>
         </div>
-        <div className="col-md-7">
+        <div className="col-md-6">
           <div className="card">
             <div className="card-body">
-              <MapContainer center={center} zoom={position.latitude != null ? 18 : 12} scrollWheelZoom={true} style={{ height: '80vh', width: '100wh' }}>
+              <MapContainer center={center} zoom={12} scrollWheelZoom={true} style={{ height: '80vh', width: '100wh' }}>
                 <TileLayer
                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
@@ -265,13 +286,13 @@ function Cctv() {
                   return (
                     <Marker position={position.lat != null ? position : { lat: cctv.latitude, lng: cctv.longitude }} icon={cctv.status == true ? cctvIcon : cctvIconNotActive}>
                       <Popup>
-                        {position.name != '' ? position.name : cctv.lokasi}<br />
+                        {position.lokasi != '' ? position.lokasi : cctv.lokasi}<br />
                         {cctv.status}
                       </Popup>
                     </Marker>
                   )
                 })}
-                <Markers data={position.longitude ? position : cctv} />
+                <Markers data={cctv} />
               </MapContainer>
             </div>
           </div>
