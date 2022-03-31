@@ -140,7 +140,7 @@ function Cctv() {
     })
   }
   const cariCctv = () => {
-    axios.get(`http://api-dashboard-pimpinan.herokuapp.com/api/v1/master-data-cctv/?cari=jakarta`).then(res => {
+    axios.get(`https://api-dashboard-pimpinan.herokuapp.com/api/v1/master-data-cctv/?cari=jakarta`).then(res => {
 
     })
   }

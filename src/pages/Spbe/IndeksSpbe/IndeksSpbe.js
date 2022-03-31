@@ -58,7 +58,7 @@ function IndeksSpbe() {
     console.log(index_spbe_pertahun.data.data, 'nama_spbe')
   }, [])
   const getIndikatorSPBE = () => {
-    axios.get(`http://api-dashboard-pimpinan.herokuapp.com/api/v1/get-master-indikator-spbe`).then(res => {
+    axios.get(`https://api-dashboard-pimpinan.herokuapp.com/api/v1/get-master-indikator-spbe`).then(res => {
       setIndexSpbe(res.data.data)
     })
   }
