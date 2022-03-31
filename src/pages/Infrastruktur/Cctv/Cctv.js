@@ -34,12 +34,13 @@ function Markers({ data }) {
           icon={marker.status == true ? cctvIcon : cctvIconNotActive}        >
           <Popup>
             <ReactHlsPlayer
-              src="https://pelindung.bandung.go.id:3443/video/DAHUA/Pusda.m3u8"
+              src={marker.link_stream}
               autoPlay={true}
               controls={true}
               width="200px"
               height="auto"
             />
+            <p className='font-weight-bold'>{marker.lokasi}</p>
           </Popup>
         </Marker>
       );
@@ -178,7 +179,7 @@ function Cctv() {
                         show ? (
                           <tr>
                             <td>
-                              <input type="text" value={form.lokasi} name="lokasi" onChange={handleFormChange} className="form-control form-control-sm" placeholder="lokasi" style={{ maxWidth: 80 }} />
+                              <input type="text" value={form.lokasi} name="lokasi" onChange={handleFormChange} className="form-control form-control-sm" placeholder="lokasi" style={{ maxWidth: 140 }} />
                             </td>
                             <td>
                               <input type="text" value={form.latitude} name="latitude" onChange={handleFormChange} className="form-control form-control-sm" placeholder="latitude" style={{ maxWidth: 80 }} />
@@ -187,13 +188,13 @@ function Cctv() {
                               <input type="text" value={form.longitude} name="longitude" onChange={handleFormChange} className="form-control form-control-sm" placeholder="longitude" style={{ maxWidth: 80 }} />
                             </td>
                             <td>
-                              <input type="text" value={form.dinas} name="longitude" onChange={handleFormChange} className="form-control form-control-sm" placeholder="dinas" style={{ maxWidth: 80 }} />
+                              <input type="text" value={form.dinas} name="dinas" onChange={handleFormChange} className="form-control form-control-sm" placeholder="dinas" style={{ maxWidth: 140 }} />
                             </td>
                             <td>
-                              <input type="text" value={form.link_stream} name="link_stream" onChange={handleFormChange} className="form-control form-control-sm" placeholder="stream" style={{ maxWidth: 80 }} />
+                              <input type="text" value={form.link_stream} name="link_stream" onChange={handleFormChange} className="form-control form-control-sm" placeholder="stream" style={{ maxWidth: 350 }} />
                             </td>
                             <td>
-                              <input type="text" value={form.vendor} name="vendor" onChange={handleFormChange} className="form-control form-control-sm" placeholder="vendor" style={{ maxWidth: 80 }} />
+                              <input type="text" value={form.vendor} name="vendor" onChange={handleFormChange} className="form-control form-control-sm" placeholder="vendor" style={{ maxWidth: 100 }} />
                             </td>
                             <td>
                               <div className="form-group">
@@ -220,7 +221,7 @@ function Cctv() {
                                   i != edit ? (
                                     cctv.lokasi)
                                     : (
-                                      <input type="text" name="lokasi" onChange={handleFormChange} className="form-control form-control-sm" defaultValue={cctv.lokasi} style={{ maxWidth: 80, maxHeight: 25 }} />
+                                      <input type="text" name="lokasi" onChange={handleFormChange} className="form-control form-control-sm" defaultValue={cctv.lokasi} style={{ maxWidth: 140, maxHeight: 25 }} />
                                     )
                                 }
                               </td>
@@ -247,7 +248,7 @@ function Cctv() {
                                   i != edit ? (
                                     cctv.dinas)
                                     : (
-                                      <input type="text" name="dinas" onChange={handleFormChange} className="form-control form-control-sm" defaultValue={cctv.dinas} style={{ maxWidth: 80, maxHeight: 25 }} />
+                                      <input type="text" name="dinas" onChange={handleFormChange} className="form-control form-control-sm" defaultValue={cctv.dinas} style={{ maxWidth: 140, maxHeight: 25 }} />
                                     )
                                 }
                               </td>
@@ -256,7 +257,7 @@ function Cctv() {
                                   i != edit ? (
                                     cctv.link_stream)
                                     : (
-                                      <input type="text" name="link_stream" onChange={handleFormChange} className="form-control form-control-sm" defaultValue={cctv.link_stream} style={{ maxWidth: 80, maxHeight: 25 }} />
+                                      <input type="text" name="link_stream" onChange={handleFormChange} className="form-control form-control-sm" defaultValue={cctv.link_stream} style={{ maxWidth: 350, maxHeight: 25 }} />
                                     )
                                 }
                               </td>
@@ -266,7 +267,7 @@ function Cctv() {
                                     cctv.vendor
                                   )
                                     : (
-                                      <input type="text" name="vendor" onChange={handleFormChange} className="form-control form-control-sm" defaultValue={cctv.vendor} style={{ maxWidth: 80, maxHeight: 25 }} />
+                                      <input type="text" name="vendor" onChange={handleFormChange} className="form-control form-control-sm" defaultValue={cctv.vendor} style={{ maxWidth: 100, maxHeight: 25 }} />
                                     )
                                 }
                               </td>
