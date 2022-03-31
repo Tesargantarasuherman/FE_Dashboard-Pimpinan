@@ -6,6 +6,7 @@ import { cctvIcon, cctvIconNotActive, policeIcon } from '../../../components/Ven
 import data_cctv from '../../../localdata/map.json'
 import { Button, Modal } from 'react-bootstrap';
 import Switch from "react-switch";
+import ReactHlsPlayer from 'react-hls-player';
 
 function Markers({ data }) {
   const map = useMap();
@@ -32,7 +33,13 @@ function Markers({ data }) {
           }}
           icon={marker.status == true ? cctvIcon : cctvIconNotActive}        >
           <Popup>
-            <span>{marker.lokasi}</span>
+            <ReactHlsPlayer
+              src="https://pelindung.bandung.go.id:3443/video/DAHUA/Pusda.m3u8"
+              autoPlay={true}
+              controls={true}
+              width="200px"
+              height="auto"
+            />
           </Popup>
         </Marker>
       );
@@ -43,7 +50,7 @@ function Markers({ data }) {
 function Cctv() {
   const [show, setShow] = useState(false);
   const [edit, setEdit] = useState(null);
-  const [form, setForm] = useState({ lokasi: "", latitude: "", longitude: "", vendor: "", dinas: "", status: true });
+  const [form, setForm] = useState({ lokasi: "", latitude: "", longitude: "", vendor: "", dinas: "",link_stream:"", status: true });
   const [cctv, setCCTV] = useState([]);
   const [checked, setChecked] = useState(false)
   const [position, setPosition] = useState([{ lat: null, lng: null, lokasi: '', status: null }]);
@@ -89,7 +96,7 @@ function Cctv() {
     console.log(form)
     axios.post(`https://api-dashboard-pimpinan.herokuapp.com/api/v1/add-master-data-cctv`, form).then(res => {
       setForm(
-        { lokasi: "", latitude: "", longitude: "", vendor: "", dinas: "", status: true }
+        { lokasi: "", latitude: "", longitude: "", vendor: "", dinas: "",link_stream:"", status: true }
       )
       getAllCctv();
 
@@ -103,6 +110,8 @@ function Cctv() {
       latitude: form.latitude == "" ? data.latitude : form.latitude,
       longitude: form.longitude == "" ? data.longitude : form.longitude,
       vendor: form.vendor == "" ? data.vendor : form.vendor,
+      dinas: form.dinas == "" ? data.dinas : form.dinas,
+      link_stream: form.link_stream == "" ? data.link_stream : form.link_stream,
       status: form.status == "" ? data.status : form.status
     }
     axios.put(`https://api-dashboard-pimpinan.herokuapp.com/api/v1/update-master-data-cctv/${data.id}`, ubah_data).then(res => {
@@ -119,6 +128,8 @@ function Cctv() {
       latitude: data.latitude,
       longitude: data.longitude,
       vendor: data.vendor,
+      dinas: data.dinas,
+      link_stream: data.link_stream,
       status: !data.status
     }
     axios.put(`https://api-dashboard-pimpinan.herokuapp.com/api/v1/update-master-data-cctv/${data.id}`, ubah_data).then(res => {
@@ -127,12 +138,17 @@ function Cctv() {
       console.log(err)
     })
   }
+  const cariCctv = () => {
+    axios.get(`http://api-dashboard-pimpinan.herokuapp.com/api/v1/master-data-cctv/?cari=jakarta`).then(res => {
+
+    })
+  }
 
   return (
     <div className="container-fluid">
       <h6 className="m-0 font-weight-bold ">Data CCTV</h6>
       <div className="row no-gutters my-4">
-        <div className="col-md-6">
+        <div className="col-md-12">
           <div className="card">
             <div className="card-body">
               <div className="d-flex justify-content-between">
@@ -148,7 +164,8 @@ function Cctv() {
                     <th scope="col" style={{ minWidth: 110, minHeight: 25 }}>Lokasi</th>
                     <th scope="col" style={{ minWidth: 110, minHeight: 25 }}>Latitude</th>
                     <th scope="col" style={{ minWidth: 110, minHeight: 25 }}>Longitude</th>
-                    {/* <th scope="col">Dinas</th> */}
+                    <th scope="col" style={{ minWidth: 110, minHeight: 25 }}>Dinas</th>
+                    <th scope="col" style={{ minWidth: 110, minHeight: 25 }}>Stream</th>
                     <th scope="col" style={{ minWidth: 110, minHeight: 25 }}>Vendor</th>
                     <th scope="col" style={{ minWidth: 60, minHeight: 25 }}>Status</th>
                     <th scope="col" style={{ minWidth: 110, minHeight: 25 }}>Aksi</th>
@@ -168,6 +185,12 @@ function Cctv() {
                             </td>
                             <td>
                               <input type="text" value={form.longitude} name="longitude" onChange={handleFormChange} className="form-control form-control-sm" placeholder="longitude" style={{ maxWidth: 80 }} />
+                            </td>
+                            <td>
+                              <input type="text" value={form.dinas} name="longitude" onChange={handleFormChange} className="form-control form-control-sm" placeholder="dinas" style={{ maxWidth: 80 }} />
+                            </td>
+                            <td>
+                              <input type="text" value={form.link_stream} name="link_stream" onChange={handleFormChange} className="form-control form-control-sm" placeholder="stream" style={{ maxWidth: 80 }} />
                             </td>
                             <td>
                               <input type="text" value={form.vendor} name="vendor" onChange={handleFormChange} className="form-control form-control-sm" placeholder="vendor" style={{ maxWidth: 80 }} />
@@ -216,6 +239,24 @@ function Cctv() {
                                     cctv.longitude)
                                     : (
                                       <input type="text" name="longitude" onChange={handleFormChange} className="form-control form-control-sm" defaultValue={cctv.longitude} style={{ maxWidth: 80, maxHeight: 25 }} />
+                                    )
+                                }
+                              </td>
+                              <td>
+                                {
+                                  i != edit ? (
+                                    cctv.dinas)
+                                    : (
+                                      <input type="text" name="dinas" onChange={handleFormChange} className="form-control form-control-sm" defaultValue={cctv.dinas} style={{ maxWidth: 80, maxHeight: 25 }} />
+                                    )
+                                }
+                              </td>
+                              <td>
+                                {
+                                  i != edit ? (
+                                    cctv.link_stream)
+                                    : (
+                                      <input type="text" name="link_stream" onChange={handleFormChange} className="form-control form-control-sm" defaultValue={cctv.link_stream} style={{ maxWidth: 80, maxHeight: 25 }} />
                                     )
                                 }
                               </td>
@@ -275,7 +316,7 @@ function Cctv() {
             </div>
           </div>
         </div>
-        <div className="col-md-6">
+        <div className="col-md-12">
           <div className="card">
             <div className="card-body">
               <MapContainer center={center} zoom={12} scrollWheelZoom={true} style={{ height: '80vh', width: '100wh' }}>

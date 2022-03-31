@@ -3,16 +3,45 @@ import React, { useEffect, useState } from 'react'
 import Chart from 'react-apexcharts';
 import index_spbe from '../../../localdata/indexSbpe.json'
 import index_spbe_pertahun from '../../../localdata/indexSbpePertahun.json'
+import DatePicker from "react-datepicker";
 
 function IndeksSpbe() {
   const [indexSpbe, setIndexSpbe] = useState([]);
   const [nilaiSpbe, setNilaiSpbe] = useState([]);
   const [daftarSpbe, setDaftarSpbe] = useState([]);
   const [indexSpbePertahun, setIndexSpbePertahun] = useState([]);
-  const [active, setactive] = useState({ active: 'chart' });
+  const [active, setactive] = useState({ active: 'table' });
+  const [startDate, setStartDate] = useState(new Date());
+  const [formSkalaNilai, setFormSkalaNilai] = useState(null);
+  const [tambah, setTambah] = useState(null)
+
+  const setTambahData = (id) => {
+    setTambah(id)
+    setFormSkalaNilai(null)
+  }
+  const setBatalTambahData = (id) => {
+    setTambah(id)
+    setFormSkalaNilai(id)
+  }
+  const tambahSkalaNilai = (id) => {
+    let data = {
+      id_indikator: id,
+      tahun: startDate.getFullYear(),
+      skala_nilai: parseInt(formSkalaNilai),
+    }
+    axios.post(`http://api-dashboard-pimpinan.herokuapp.com/api/v1/add-index-spbe`, data).then(res => {
+      getIndexPertahun(data.tahun)
+      setTambah(null)
+    }).catch(err => {
+      console.log(err)
+    })
+  }
 
   useEffect(() => {
+    let year = startDate.getFullYear()
+    console.log(startDate, 'tahun')
     getIndikatorSPBE()
+    getIndexPertahun(year)
     // let nama_spbe = indexSpbe
     // let index_spbe = index_spbe_pertahun.data.data
     // let data_spbe = [];
@@ -32,10 +61,18 @@ function IndeksSpbe() {
     axios.get(`http://api-dashboard-pimpinan.herokuapp.com/api/v1/get-master-indikator-spbe`).then(res => {
       setIndexSpbe(res.data.data)
     })
-    axios.get(`http://api-dashboard-pimpinan.herokuapp.com/api/v1/get-index-spbe`).then(res => {
+  }
+  const getIndexPertahun = (value) => {
+    axios.get(`https://api-dashboard-pimpinan.herokuapp.com/api/v1/get-index-spbe/${value}`).then(res => {
       console.log(res.data.data, 'index')
       setNilaiSpbe(res.data.data)
     })
+  }
+  const setYear = (year) => {
+    setFormSkalaNilai('')
+    let _year = year.getFullYear()
+    setStartDate(year)
+    getIndexPertahun(_year)
   }
   const series = [{
     name: 'Nilai Indeks',
@@ -155,37 +192,61 @@ function IndeksSpbe() {
       case "table":
         return (
           <div className="card-body">
-            <h6 className="m-0 font-weight-bold ">Tabel Index SPBE</h6>
+            <h6 className="m-0 font-weight-bold mb-4">Tabel Index SPBE {startDate.getFullYear()}</h6>
             <table className="table table-striped">
               <thead>
-                <tr>
+                <tr style={{ fontSize: '12px', fontWeight: 'bold' }}>
                   <th scope="col">#</th>
                   <th scope="col">Nama Indikator</th>
+                  <th scope="col">Tahun</th>
                   <th scope="col">Bobot</th>
                   <th scope="col">Skala Nilai</th>
                   <th scope="col">Index</th>
+                  <th scope="col">Aksi</th>
                 </tr>
               </thead>
               <tbody>
                 {
                   indexSpbe.map((data, index) => {
-                    // return (
-                    //   nilaiSpbe.map((nilai) => {
-                    //       <tr>
-                    //         <th scope="row">{index + 1}</th>
-                    //         <td>{data.nama_indikator}</td>
-                    //         <td>{data.bobot}</td>
-                    //         <td>
-                    //           <input type="text" class="form-control" placeholder="Nilai" style={{ maxWidth: 80, maxHeight: 25 }} />
-                    //         </td>
-                    //         {
-                    //           nilai
-                    //         }
-
-                    //         <td>{nilai.id_indikator == data.id ? nilai.skala_nilai : ''}</td>
-                    //       </tr>
-                    //   })
-                    // )
+                    return (
+                      //   nilaiSpbe.map((nilai) => {
+                      <tr style={{ fontSize: '12px', fontWeight: 'bold' }}>
+                        <th scope="row">{index + 1}</th>
+                        <td>{data.nama_indikator}</td>
+                        <td>{startDate.getFullYear()}</td>
+                        <td>{data.bobot}</td>
+                        <td>
+                          {
+                            index == tambah ?
+                              <input type="text" required onChange={(e) => setFormSkalaNilai(e.target.value)} value={formSkalaNilai} readOnly={nilaiSpbe[index]?.id_indikator == data.id ? true : false} class="form-control" placeholder="Nilai" style={{ maxWidth: 80, maxHeight: 25 }} />
+                              : (
+                                nilaiSpbe[index]?.id_indikator == data.id ? nilaiSpbe[index].skala_nilai :
+                                  <p className="font-weight-bold text-gray-800">Belum Diisi</p>
+                              )
+                          }
+                        </td>
+                        <td>
+                          {nilaiSpbe[index]?.id_indikator == data.id ? nilaiSpbe[index].index_nilai : ''}
+                        </td>
+                        <td>
+                          {
+                            nilaiSpbe[index]?.id_indikator == data.id ?
+                              <p className="font-weight-bold text-gray-800">Sudah diisi</p>
+                              // <button className="btn btn-primary btn-sm mr-2" onClick={null}>Ubah</button>
+                              : (
+                                index == tambah ?
+                                  <>
+                                    <button className="btn btn-primary btn-sm mr-2" onClick={() => tambahSkalaNilai(data.id)}>Tambah</button>
+                                    <button className="btn btn-danger btn-sm" onClick={() => setBatalTambahData(null)}>Batal</button>
+                                  </>
+                                  :
+                                  <button className="btn btn-primary btn-sm" onClick={() => setTambahData(index)}>Tambah</button>
+                              )
+                          }
+                        </td>
+                      </tr>
+                      //   })
+                    )
                   })
                 }
                 <tr className="font-weight-bold">
@@ -219,9 +280,12 @@ function IndeksSpbe() {
             <div className="card">
               <div className="form-group my-2 mx-2">
                 <label htmlFor="exampleFormControlSelect1">Pilih Tahun</label>
-                <select className="form-control" id="exampleFormControlSelect1">
-                  <option>2021</option>
-                </select>
+                <DatePicker
+                  selected={startDate}
+                  onChange={(date) => setYear(date)}
+                  showYearPicker
+                  dateFormat="yyyy"
+                />
               </div>
               <div className="d-flex justify-content-end my-4 mr-4">
                 <button className={`btn ${active.active == 'chart' ? 'btn-primary btn-sm' : 'btn-light'} px-4 mr-4`} onClick={() => setactive({ active: 'chart' })}>Grafik</button>

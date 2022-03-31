@@ -16,6 +16,7 @@ import { AuthContext } from './contexts/authContext';
 import 'react-toastify/dist/ReactToastify.css';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import 'leaflet/dist/leaflet.css';
+import "react-datepicker/dist/react-datepicker.css";
 
 
 function App() {
