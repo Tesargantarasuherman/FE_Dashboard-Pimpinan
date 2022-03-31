@@ -241,7 +241,7 @@ function IndeksSpbe() {
                   indexSpbe.map((data, index) => {
                     return (
                       //   nilaiSpbe.map((nilai) => {
-                      <tr style={{ fontSize: '12px', fontWeight: 'bold' }}>
+                      <tr style={{ fontSize: '12px', fontWeight: 'bold',maxHeight:'200px !important' }}>
                         <th scope="row">{index + 1}</th>
                         <td>{data.nama_indikator}</td>
                         <td>{startDate.getFullYear()}</td>
