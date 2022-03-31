@@ -40,7 +40,7 @@ function Markers({ data }) {
               width="200px"
               height="auto"
             />
-            <p className='font-weight-bold'>{marker.lokasi}</p>
+            <p className='font-weight-bold m-0'>{marker.lokasi}</p>
           </Popup>
         </Marker>
       );

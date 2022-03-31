@@ -4,6 +4,7 @@ import Chart from 'react-apexcharts';
 import index_spbe from '../../../localdata/indexSbpe.json'
 import index_spbe_pertahun from '../../../localdata/indexSbpePertahun.json'
 import DatePicker from "react-datepicker";
+import moment from "moment";
 
 function IndeksSpbe() {
   const [indexSpbe, setIndexSpbe] = useState([]);
@@ -15,6 +16,24 @@ function IndeksSpbe() {
   const [formSkalaNilai, setFormSkalaNilai] = useState(null);
   const [tambah, setTambah] = useState(null)
   const [nilaiPertahun, setNilaiPertahun] = useState(null)
+  const [grafikIndex, setGrafikIndex] = useState([])
+  const [nilaiGrafikIndex, setNilaiGrafikIndex] = useState([])
+
+  const actionSetNilaiGrafikIndex = () => {
+    axios.get(`http://api-dashboard-pimpinan.herokuapp.com/api/v1/get-nilai-index`).then(res => {
+      let data = res.data.data;
+      let tahunIndex = [];
+      let nilaiIndex = [];
+      
+      for (let i = 0; i < data.length; i++) {
+        tahunIndex.push(data[i].tahun)
+        nilaiIndex.push(data[i].hasil_index)
+      }
+      console.log(res.data.data , 'nilai index')
+      setGrafikIndex(tahunIndex);
+      setNilaiGrafikIndex(nilaiIndex);
+    })
+  }
 
   const setTambahData = (id) => {
     setTambah(id)
@@ -40,16 +59,24 @@ function IndeksSpbe() {
 
   const getNilaiPertahun = (year) => {
     axios.get(`https://api-dashboard-pimpinan.herokuapp.com/api/v1/get-nilai-index/${year}`).then(res => {
-      setNilaiPertahun(res.data.data[0].hasil_index,)
+      let data =res.data.data
+      if (data.length >0){
+        setNilaiPertahun(res.data.data[0].hasil_index)
+      }
+      else{
+        setNilaiPertahun(0)
+      }
+      console.log(data,'data')
     })
   }
 
   useEffect(() => {
-    let year = startDate.getFullYear()
-    console.log(startDate, 'tahun')
-    getNilaiPertahun(year)
-    getIndikatorSPBE()
-    getIndexPertahun(year)
+    let year = startDate.getFullYear();
+    // console.log(startDate, 'tahun');
+    getNilaiPertahun(year);
+    getIndikatorSPBE();
+    getIndexPertahun(year);
+    actionSetNilaiGrafikIndex();
     // let nama_spbe = indexSpbe
     // let index_spbe = index_spbe_pertahun.data.data
     // let data_spbe = [];
@@ -65,6 +92,7 @@ function IndeksSpbe() {
     // setIndexSpbePertahun(data_spbe)
     console.log(index_spbe_pertahun.data.data, 'nama_spbe')
   }, [])
+
   const getIndikatorSPBE = () => {
     axios.get(`https://api-dashboard-pimpinan.herokuapp.com/api/v1/get-master-indikator-spbe`).then(res => {
       setIndexSpbe(res.data.data)
@@ -77,15 +105,15 @@ function IndeksSpbe() {
     })
   }
   const setYear = (year) => {
-    setFormSkalaNilai('')
     let _year = year.getFullYear()
     setStartDate(year)
     getIndexPertahun(_year)
     getNilaiPertahun(_year)
+    setFormSkalaNilai('')
   }
   const series = [{
     name: 'Nilai Indeks',
-    data: [0, 3.11, 3.72, 3.72, 3.19]
+    data: nilaiGrafikIndex
   }]
   const options = {
     chart: {
@@ -111,13 +139,7 @@ function IndeksSpbe() {
       show: false
     },
     xaxis: {
-      categories: [
-        [2017],
-        [2018],
-        [2019],
-        [2020],
-        [2021],
-      ],
+      categories: grafikIndex,
       labels: {
         style: {
           colors: ['#227093'],
@@ -259,7 +281,7 @@ function IndeksSpbe() {
                   })
                 }
                 <tr className="font-weight-bold">
-                  <td colSpan={4}>Total Index</td>
+                  <td colSpan={4}>Nilai Index</td>
                   <td>{nilaiPertahun}</td>
                 </tr>
               </tbody>
@@ -278,13 +300,13 @@ function IndeksSpbe() {
     <div className="container-fluid">
       <div className="card">
         <div className="card-body">
-          <h6 className="m-0 font-weight-bold ">Indeks SPBE</h6>
+          <h6 className="m-0 font-weight-bold ml-3 mb-4">Indeks SPBE</h6>
           <Chart options={options} series={series} type="area" height={300} />
         </div>
       </div>
       <div className="card my-4">
         <div className="card-body">
-          <h6 className="m-0 font-weight-bold ">Indeks SPBE Tahunan</h6>
+          <h6 className="m-0 font-weight-bold mb-4 ml-3">Indeks SPBE Tahunan</h6>
           <div className="col-md-12">
             <div className="card">
               <div className="form-group my-2 mx-2">
