@@ -20,7 +20,7 @@ function IndeksSpbe() {
   const [nilaiGrafikIndex, setNilaiGrafikIndex] = useState([])
 
   const actionSetNilaiGrafikIndex = () => {
-    axios.get(`http://api-dashboard-pimpinan.herokuapp.com/api/v1/get-nilai-index`).then(res => {
+    axios.get(`https://api-dashboard-pimpinan.herokuapp.com/api/v1/get-nilai-index`).then(res => {
       let data = res.data.data;
       let tahunIndex = [];
       let nilaiIndex = [];
