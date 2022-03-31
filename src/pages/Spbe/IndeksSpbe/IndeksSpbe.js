@@ -14,6 +14,7 @@ function IndeksSpbe() {
   const [startDate, setStartDate] = useState(new Date());
   const [formSkalaNilai, setFormSkalaNilai] = useState(null);
   const [tambah, setTambah] = useState(null)
+  const [nilaiPertahun, setNilaiPertahun] = useState(null)
 
   const setTambahData = (id) => {
     setTambah(id)
@@ -29,7 +30,7 @@ function IndeksSpbe() {
       tahun: startDate.getFullYear(),
       skala_nilai: parseInt(formSkalaNilai),
     }
-    axios.post(`http://api-dashboard-pimpinan.herokuapp.com/api/v1/add-index-spbe`, data).then(res => {
+    axios.post(`https://api-dashboard-pimpinan.herokuapp.com/api/v1/add-index-spbe`, data).then(res => {
       getIndexPertahun(data.tahun)
       setTambah(null)
     }).catch(err => {
@@ -37,9 +38,16 @@ function IndeksSpbe() {
     })
   }
 
+  const getNilaiPertahun = (year) => {
+    axios.get(`https://api-dashboard-pimpinan.herokuapp.com/api/v1/get-nilai-index/${year}`).then(res => {
+      setNilaiPertahun(res.data.data[0].hasil_index,)
+    })
+  }
+
   useEffect(() => {
     let year = startDate.getFullYear()
     console.log(startDate, 'tahun')
+    getNilaiPertahun(year)
     getIndikatorSPBE()
     getIndexPertahun(year)
     // let nama_spbe = indexSpbe
@@ -73,6 +81,7 @@ function IndeksSpbe() {
     let _year = year.getFullYear()
     setStartDate(year)
     getIndexPertahun(_year)
+    getNilaiPertahun(_year)
   }
   const series = [{
     name: 'Nilai Indeks',
@@ -218,7 +227,7 @@ function IndeksSpbe() {
                         <td>
                           {
                             index == tambah ?
-                              <input type="text" required onChange={(e) => setFormSkalaNilai(e.target.value)} value={formSkalaNilai} readOnly={nilaiSpbe[index]?.id_indikator == data.id ? true : false} class="form-control" placeholder="Nilai" style={{ maxWidth: 80, maxHeight: 25 }} />
+                              <input type="number" min={1} max={5} required onChange={(e) => setFormSkalaNilai(e.target.value)} value={formSkalaNilai} readOnly={nilaiSpbe[index]?.id_indikator == data.id ? true : false} class="form-control" placeholder="Nilai" style={{ maxWidth: 80, maxHeight: 25 }} />
                               : (
                                 nilaiSpbe[index]?.id_indikator == data.id ? nilaiSpbe[index].skala_nilai :
                                   <p className="font-weight-bold text-gray-800">Belum Diisi</p>
@@ -251,7 +260,7 @@ function IndeksSpbe() {
                 }
                 <tr className="font-weight-bold">
                   <td colSpan={4}>Total Index</td>
-                  <td>3.5</td>
+                  <td>{nilaiPertahun}</td>
                 </tr>
               </tbody>
             </table>
