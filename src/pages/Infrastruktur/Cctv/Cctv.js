@@ -4,9 +4,10 @@ import React, { useEffect, useState } from 'react'
 import { MapContainer, TileLayer, Marker, Popup, Circle, useMap } from 'react-leaflet';
 import { cctvIcon, cctvIconNotActive, policeIcon } from '../../../components/VenueLocationIcon';
 import data_cctv from '../../../localdata/map.json'
-import { Button, Modal } from 'react-bootstrap';
 import Switch from "react-switch";
 import ReactHlsPlayer from 'react-hls-player';
+import ModalAdd from './components/ModalAdd';
+import ModalEdit from './components/ModalEdit';
 
 function Markers({ data }) {
   const map = useMap();
@@ -49,9 +50,11 @@ function Markers({ data }) {
 }
 
 function Cctv() {
+  const [showEdit, setShowEdit] = useState(false);
   const [show, setShow] = useState(false);
+  const [dataEdit, setDataEdit] = useState([]);
   const [edit, setEdit] = useState(null);
-  const [form, setForm] = useState({ lokasi: "", latitude: "", longitude: "", vendor: "", dinas: "",link_stream:"", status: true });
+  const [form, setForm] = useState({ lokasi: "", latitude: "", longitude: "", vendor: "", dinas: "", link_stream: "", status: true });
   const [cctv, setCCTV] = useState([]);
   const [checked, setChecked] = useState(false)
   const [position, setPosition] = useState([{ lat: null, lng: null, lokasi: '', status: null }]);
@@ -94,10 +97,9 @@ function Cctv() {
     );
   }
   const addCctv = () => {
-    console.log(form)
     axios.post(`https://api-dashboard-pimpinan.herokuapp.com/api/v1/add-master-data-cctv`, form).then(res => {
       setForm(
-        { lokasi: "", latitude: "", longitude: "", vendor: "", dinas: "",link_stream:"", status: true }
+        { lokasi: "", latitude: "", longitude: "", vendor: "", dinas: "", link_stream: "", status: true }
       )
       getAllCctv();
 
@@ -117,7 +119,8 @@ function Cctv() {
     }
     axios.put(`https://api-dashboard-pimpinan.herokuapp.com/api/v1/update-master-data-cctv/${data.id}`, ubah_data).then(res => {
       setEdit(null);
-      getAllCctv()
+      getAllCctv();
+      setShowEdit(false)
     }).catch(err => {
       console.log(err)
     })
@@ -141,19 +144,25 @@ function Cctv() {
   }
   const cariCctv = () => {
     axios.get(`https://api-dashboard-pimpinan.herokuapp.com/api/v1/master-data-cctv/?cari=jakarta`).then(res => {
-
     })
+  }
+  const setEditCctv = (data) => {
+    console.table(data)
+    setShowEdit(!showEdit)
+    setDataEdit(data)
   }
 
   return (
     <div className="container-fluid">
-      <h6 className="m-0 font-weight-bold ">Data CCTV</h6>
-      <div className="row no-gutters my-4">
-        <div className="col-md-12">
+      <ModalAdd show={show} setShow={setShow} handleFormChange={handleFormChange} form={form} handleSubmit={addCctv} />
+      <ModalEdit show={showEdit} setShow={setShowEdit} data={dataEdit} handleFormChange={handleFormChange} handleSubmit={editCctv} />
+      <h6 className="m-0 font-weight-bold text-gray-800">Data CCTV</h6>
+      <div className="row my-4">
+        <div className="col-md-5">
           <div className="card">
             <div className="card-body">
               <div className="d-flex justify-content-between">
-                <h6 className="m-0 font-weight-bold ">Tabel CCTV di Kota Bandung ({cctv.length})</h6>
+                <h6 className="m-0 font-weight-bold text-gray-800">Tabel CCTV di Kota Bandung ({cctv.length})</h6>
                 {
                   show ? null :
                     <button className="btn btn-sm btn-primary" onClick={() => setShow(!show)}>Tambah Data CCTV</button>
@@ -162,119 +171,36 @@ function Cctv() {
               <table className="table table-striped table-responsive mt-4" style={{ maxHeight: '74.5vh' }}>
                 <thead>
                   <tr style={{ fontSize: '12px', fontWeight: 'bold' }}>
-                    <th scope="col" style={{ minWidth: 110, minHeight: 25 }}>Lokasi</th>
-                    <th scope="col" style={{ minWidth: 110, minHeight: 25 }}>Latitude</th>
-                    <th scope="col" style={{ minWidth: 110, minHeight: 25 }}>Longitude</th>
-                    <th scope="col" style={{ minWidth: 110, minHeight: 25 }}>Dinas</th>
-                    <th scope="col" style={{ minWidth: 110, minHeight: 25 }}>Stream</th>
-                    <th scope="col" style={{ minWidth: 110, minHeight: 25 }}>Vendor</th>
-                    <th scope="col" style={{ minWidth: 60, minHeight: 25 }}>Status</th>
-                    <th scope="col" style={{ minWidth: 110, minHeight: 25 }}>Aksi</th>
+                    <th scope="col" style={{ minWidth: 150, maxHeight: 25 }}>Lokasi</th>
+                    <th scope="col" style={{ minWidth: 150, maxHeight: 25 }}>Dinas</th>
+                    <th scope="col" style={{ minWidth: 150, maxHeight: 25 }}>Vendor</th>
+                    <th scope="col" style={{ minWidth: 60, maxHeight: 25 }}>Status</th>
+                    <th scope="col" style={{ minWidth: 60, maxHeight: 25 }}>Aksi</th>
                   </tr>
                 </thead>
                 {
-                  cctv.length > 0 ?
+                  cctv.length > 0 ? (
                     <tbody>
-                      {
-                        show ? (
-                          <tr>
-                            <td>
-                              <input type="text" value={form.lokasi} name="lokasi" onChange={handleFormChange} className="form-control form-control-sm" placeholder="lokasi" style={{ maxWidth: 140 }} />
-                            </td>
-                            <td>
-                              <input type="text" value={form.latitude} name="latitude" onChange={handleFormChange} className="form-control form-control-sm" placeholder="latitude" style={{ maxWidth: 80 }} />
-                            </td>
-                            <td>
-                              <input type="text" value={form.longitude} name="longitude" onChange={handleFormChange} className="form-control form-control-sm" placeholder="longitude" style={{ maxWidth: 80 }} />
-                            </td>
-                            <td>
-                              <input type="text" value={form.dinas} name="dinas" onChange={handleFormChange} className="form-control form-control-sm" placeholder="dinas" style={{ maxWidth: 140 }} />
-                            </td>
-                            <td>
-                              <input type="text" value={form.link_stream} name="link_stream" onChange={handleFormChange} className="form-control form-control-sm" placeholder="stream" style={{ maxWidth: 350 }} />
-                            </td>
-                            <td>
-                              <input type="text" value={form.vendor} name="vendor" onChange={handleFormChange} className="form-control form-control-sm" placeholder="vendor" style={{ maxWidth: 100 }} />
-                            </td>
-                            <td>
-                              <div className="form-group">
-                                <select name="status" onChange={handleFormChange} className="form-control" style={{ fontSize: '12px', maxWidth: 80, maxHeight: 31, padding: 0 }}>
-                                  <option style={{ fontSize: '12px', fontWeight: 'bold' }} value={true}>Aktif</option>
-                                  <option style={{ fontSize: '12px', fontWeight: 'bold' }} value={false}>Tidak</option>
-                                </select>
-                              </div>
-                            </td>
-                            <td>
-                              <button className="btn btn-primary btn-sm mr-2" onClick={addCctv}>Tambah</button>
-                              <button className="btn btn-danger btn-sm px-3 my-2" onClick={() => setShow(!show)}>Batal</button>
-                            </td>
-                          </tr>
-                        ) : (null)
-                      }
                       {
                         cctv?.map((cctv, i) => {
                           return (
-                            <tr key={i} onClick={() => setActiveCCTV(cctv)} style={{ fontSize: '12px', fontWeight: 'bold' }}>
-                              {/* <tr key={i}  style={{ fontSize: '12px', fontWeight: 500 }}>  */}
+                            <tr key={i} onClick={() => setActiveCCTV(cctv)} style={{ fontSize: '12px', fontWeight: 'bold',maxHeight:25 }}>
                               <td>
                                 {
-                                  i != edit ? (
-                                    cctv.lokasi)
-                                    : (
-                                      <input type="text" name="lokasi" onChange={handleFormChange} className="form-control form-control-sm" defaultValue={cctv.lokasi} style={{ maxWidth: 140, maxHeight: 25 }} />
-                                    )
+                                  cctv.lokasi
                                 }
                               </td>
                               <td>
                                 {
-                                  i != edit ? (
-                                    cctv.latitude)
-                                    : (
-                                      <input type="text" name="latitude" onChange={handleFormChange} className="form-control form-control-sm" defaultValue={cctv.latitude} style={{ maxWidth: 80, maxHeight: 25 }} />
-                                    )
+                                  cctv.dinas
                                 }
                               </td>
                               <td>
                                 {
-                                  i != edit ? (
-                                    cctv.longitude)
-                                    : (
-                                      <input type="text" name="longitude" onChange={handleFormChange} className="form-control form-control-sm" defaultValue={cctv.longitude} style={{ maxWidth: 80, maxHeight: 25 }} />
-                                    )
+                                  cctv.vendor
                                 }
                               </td>
-                              <td>
-                                {
-                                  i != edit ? (
-                                    cctv.dinas)
-                                    : (
-                                      <input type="text" name="dinas" onChange={handleFormChange} className="form-control form-control-sm" defaultValue={cctv.dinas} style={{ maxWidth: 140, maxHeight: 25 }} />
-                                    )
-                                }
-                              </td>
-                              <td>
-                                {
-                                  i != edit ? (
-                                    cctv.link_stream)
-                                    : (
-                                      <input type="text" name="link_stream" onChange={handleFormChange} className="form-control form-control-sm" defaultValue={cctv.link_stream} style={{ maxWidth: 350, maxHeight: 25 }} />
-                                    )
-                                }
-                              </td>
-                              <td className='text-uppercase'>
-                                {
-                                  i != edit ? (
-                                    cctv.vendor
-                                  )
-                                    : (
-                                      <input type="text" name="vendor" onChange={handleFormChange} className="form-control form-control-sm" defaultValue={cctv.vendor} style={{ maxWidth: 100, maxHeight: 25 }} />
-                                    )
-                                }
-                              </td>
-                              <td>
-                                {/* <label>
-                                  <Switch onChange={(checked)=>handleChange(checked,i)} checked={cctv.status=="aktif" ? checked :false} height={15} width={25}/>
-                                </label> */}
+                              <td className="text-center">
                                 <button className='btn btn-outline-primary btn-sm' data-toggle="tooltip" data-placement="top" title="Ubah Status" onClick={() => ubahStatus(cctv)}>
                                   {
                                     cctv.status == true ? <i className="fa fa-check text-success" aria-hidden="true"></i> : <i className="fa fa-times text-danger" aria-hidden="true"></i>
@@ -282,30 +208,23 @@ function Cctv() {
                                 </button>
                               </td>
                               <td>
-                                {
-                                  i != edit ? (
-                                    <div class="dropdown no-arrow">
-                                      <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-ellipsis-v fa-fw text-gray-800"></i>
-                                      </a>
-                                      <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                                        <a class="dropdown-item" href="#" onClick={() => setUbahData(i)}>
-                                          Ubah
-                                        </a>
-                                      </div>
-                                    </div>) : (
-                                    <>
-                                      <button className="btn btn-primary btn-sm mr-2" onClick={() => editCctv(cctv)}>Ubah</button>
-                                      <button className="btn btn-danger btn-sm" onClick={() => setEdit(null)}>Batal</button>
-                                    </>
-                                  )
-                                }
+                                <div class="dropdown no-arrow">
+                                  <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-ellipsis-v fa-fw text-gray-800"></i>
+                                  </a>
+                                  <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                                    <a class="dropdown-item" href="#" onClick={() => setEditCctv(cctv)}>
+                                      Ubah
+                                    </a>
+                                  </div>
+                                </div>
                               </td>
                             </tr>
                           )
-                        })
-                      }
+                        })}
                     </tbody>
+                  )
+
                     :
                     <div className=' d-flex justify-content-center my-4'>
                       <div className="spinner-border" role="status">
@@ -314,10 +233,11 @@ function Cctv() {
                     </div>
                 }
               </table>
+
             </div>
           </div>
         </div>
-        <div className="col-md-12">
+        <div className="col-md-7">
           <div className="card">
             <div className="card-body">
               <MapContainer center={center} zoom={12} scrollWheelZoom={true} style={{ height: '80vh', width: '100wh' }}>
