@@ -8,6 +8,7 @@ import Switch from "react-switch";
 import ReactHlsPlayer from 'react-hls-player';
 import ModalAdd from './components/ModalAdd';
 import ModalEdit from './components/ModalEdit';
+import { ToastContainer, toast } from 'react-toastify';
 
 function Markers({ data }) {
   const map = useMap();
@@ -52,6 +53,7 @@ function Markers({ data }) {
 function Cctv() {
   const [showEdit, setShowEdit] = useState(false);
   const [show, setShow] = useState(false);
+  const [search, setSearch] = useState(null);
   const [dataEdit, setDataEdit] = useState([]);
   const [edit, setEdit] = useState(null);
   const [form, setForm] = useState({ lokasi: "", latitude: "", longitude: "", vendor: "", dinas: "", link_stream: "", status: true });
@@ -102,9 +104,25 @@ function Cctv() {
         { lokasi: "", latitude: "", longitude: "", vendor: "", dinas: "", link_stream: "", status: true }
       )
       getAllCctv();
-
+      toast.success("Berhasil diubah", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }).catch(err => {
-      console.log(err)
+      toast.error(err.response.data.message, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     })
   }
   const editCctv = (data) => {
@@ -120,7 +138,16 @@ function Cctv() {
     axios.put(`https://api-dashboard-pimpinan.herokuapp.com/api/v1/update-master-data-cctv/${data.id}`, ubah_data).then(res => {
       setEdit(null);
       getAllCctv();
-      setShowEdit(false)
+      setShowEdit(false);
+      toast.success("Berhasil diubah", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }).catch(err => {
       console.log(err)
     })
@@ -142,8 +169,9 @@ function Cctv() {
       console.log(err)
     })
   }
-  const cariCctv = () => {
-    axios.get(`https://api-dashboard-pimpinan.herokuapp.com/api/v1/master-data-cctv/?cari=jakarta`).then(res => {
+  const cariCctv = (val) => {
+    axios.get(`https://api-dashboard-pimpinan.herokuapp.com/api/v1/master-data-cctv/?cari=${val}`).then(res => {
+      setCCTV(res.data.data)
     })
   }
   const setEditCctv = (data) => {
@@ -154,6 +182,17 @@ function Cctv() {
 
   return (
     <div className="container-fluid">
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <ModalAdd show={show} setShow={setShow} handleFormChange={handleFormChange} form={form} handleSubmit={addCctv} />
       <ModalEdit show={showEdit} setShow={setShowEdit} data={dataEdit} handleFormChange={handleFormChange} handleSubmit={editCctv} />
       <h6 className="m-0 font-weight-bold text-gray-800">Data CCTV</h6>
@@ -163,19 +202,29 @@ function Cctv() {
             <div className="card-body">
               <div className="d-flex justify-content-between">
                 <h6 className="m-0 font-weight-bold text-gray-800">Tabel CCTV di Kota Bandung ({cctv.length})</h6>
-                {
-                  show ? null :
-                    <button className="btn btn-sm btn-primary" onClick={() => setShow(!show)}>Tambah Data CCTV</button>
-                }
+                <button className="btn btn-sm btn-primary" onClick={() => setShow(!show)}>Tambah Data CCTV</button>
+              </div>
+              <div className="d-flex justify-content-between">
+                <div className="row">
+                  <div className="col-md-12">
+                    <div className="input-group input-group-sm mb-3">
+                      <div className="input-group-prepend">
+                        <span className="input-group-text"><i className="fa fa-search" aria-hidden="true"></i></span>
+                      </div>
+                      <input type="text" className="form-control" aria-label="Small" placeholder="Cari Data" onChange={(e) => cariCctv(e.target.value)} />
+                    </div>
+                  </div>
+                </div>
               </div>
               <table className="table table-striped table-responsive mt-4" style={{ maxHeight: '74.5vh' }}>
                 <thead>
                   <tr style={{ fontSize: '12px', fontWeight: 'bold' }}>
-                    <th scope="col" style={{ minWidth: 150, maxHeight: 25 }}>Lokasi</th>
-                    <th scope="col" style={{ minWidth: 150, maxHeight: 25 }}>Dinas</th>
-                    <th scope="col" style={{ minWidth: 150, maxHeight: 25 }}>Vendor</th>
-                    <th scope="col" style={{ minWidth: 60, maxHeight: 25 }}>Status</th>
-                    <th scope="col" style={{ minWidth: 60, maxHeight: 25 }}>Aksi</th>
+                    <th scope="col" style={{ minWidth: 20, maxHeight: 25, zIndex: 1 }}>No</th>
+                    <th scope="col" style={{ minWidth: 150, maxHeight: 25, position: 'sticky', left: 0, zIndex: 2, backgroundColor: 'white' }}>Lokasi</th>
+                    <th scope="col" style={{ minWidth: 150, maxHeight: 25, zIndex: 1 }}>Dinas</th>
+                    <th scope="col" style={{ minWidth: 150, maxHeight: 25, zIndex: 1 }}>Vendor</th>
+                    <th scope="col" style={{ minWidth: 60, maxHeight: 25, zIndex: 1 }}>Status</th>
+                    <th scope="col" style={{ minWidth: 60, maxHeight: 25, zIndex: 1 }}>Aksi</th>
                   </tr>
                 </thead>
                 {
@@ -184,8 +233,13 @@ function Cctv() {
                       {
                         cctv?.map((cctv, i) => {
                           return (
-                            <tr key={i} onClick={() => setActiveCCTV(cctv)} style={{ fontSize: '12px', fontWeight: 'bold',maxHeight:25 }}>
+                            <tr key={i} onClick={() => setActiveCCTV(cctv)} style={{ fontSize: '12px', fontWeight: 'bold', maxHeight: 25 }}>
                               <td>
+                                {
+                                  i + 1
+                                }
+                              </td>
+                              <td style={{ position: 'sticky', left: 0, zIndex: 2, backgroundColor: 'white' }}>
                                 {
                                   cctv.lokasi
                                 }
