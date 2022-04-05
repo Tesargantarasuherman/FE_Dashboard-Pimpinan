@@ -15,6 +15,7 @@ function IndeksSpbe() {
   const [startDate, setStartDate] = useState(new Date());
   const [formSkalaNilai, setFormSkalaNilai] = useState(null);
   const [tambah, setTambah] = useState(null)
+  const [ubah, setUbah] = useState(null)
   const [nilaiPertahun, setNilaiPertahun] = useState(null)
   const [grafikIndex, setGrafikIndex] = useState([])
   const [nilaiGrafikIndex, setNilaiGrafikIndex] = useState([])
@@ -24,20 +25,23 @@ function IndeksSpbe() {
       let data = res.data.data;
       let tahunIndex = [];
       let nilaiIndex = [];
-      
+
       for (let i = 0; i < data.length; i++) {
         tahunIndex.push(data[i].tahun)
         nilaiIndex.push(data[i].hasil_index)
       }
-      console.log(res.data.data , 'nilai index')
+      console.log(res.data.data, 'nilai index')
       setGrafikIndex(tahunIndex);
       setNilaiGrafikIndex(nilaiIndex);
     })
   }
-
   const setTambahData = (id) => {
     setTambah(id)
     setFormSkalaNilai(null)
+  }
+  const setUbahData = (id) => {
+    setUbah(id)
+    // setFormSkalaNilai(null)
   }
   const setBatalTambahData = (id) => {
     setTambah(id)
@@ -56,17 +60,34 @@ function IndeksSpbe() {
       console.log(err)
     })
   }
+  const ubahSkalaNilai = (param) => {
+    console.log(param)
+    let data = {
+      id_indikator: param.id,
+      tahun: startDate.getFullYear(),
+      skala_nilai: parseInt(param.skala_nilai ? param.skala_nilai : formSkalaNilai),
+    }
+    axios.put(`https://api-dashboard-pimpinan.herokuapp.com/api/v1/update-index-spbe/${param.id}`, data).then(res => {
+      console.log(res)
+      getIndexPertahun(data.tahun)
+      getNilaiPertahun(data.tahun)
+      actionSetNilaiGrafikIndex()
+      setUbah(null)
+    }).catch(err => {
+      console.log(err)
+    })
+  }
 
   const getNilaiPertahun = (year) => {
     axios.get(`https://api-dashboard-pimpinan.herokuapp.com/api/v1/get-nilai-index/${year}`).then(res => {
-      let data =res.data.data
-      if (data.length >0){
+      let data = res.data.data
+      if (data.length > 0) {
         setNilaiPertahun(res.data.data[0].hasil_index)
       }
-      else{
+      else {
         setNilaiPertahun(0)
       }
-      console.log(data,'data')
+      console.log(data, 'data')
     })
   }
 
@@ -88,7 +109,7 @@ function IndeksSpbe() {
     for (let i = 0; i < nilai_spbe.length; i++) {
       data_spbe.push(nilai_spbe[i].skala_nilai);
     }
-    console.log(indexSpbe,'index spbe')
+    console.log(indexSpbe, 'index spbe')
     setDaftarSpbe(_nama_spbe)
     setIndexSpbePertahun(data_spbe)
     console.log(index_spbe_pertahun.data.data, 'nama_spbe')
@@ -246,15 +267,15 @@ function IndeksSpbe() {
                   indexSpbe.map((data, index) => {
                     return (
                       //   nilaiSpbe.map((nilai) => {
-                      <tr style={{ fontSize: '12px', fontWeight: 'bold',maxHeight:'200px !important' }}>
+                      <tr style={{ fontSize: '12px', fontWeight: 'bold', maxHeight: '200px !important' }}>
                         <th scope="row">{index + 1}</th>
                         <td>{data.nama_indikator}</td>
                         <td>{startDate.getFullYear()}</td>
                         <td>{data.bobot}</td>
                         <td>
                           {
-                            index == tambah ?
-                              <input type="number" min={1} max={5} required onChange={(e) => setFormSkalaNilai(e.target.value)} value={formSkalaNilai} readOnly={nilaiSpbe[index]?.id_indikator == data.id ? true : false} class="form-control" placeholder="Nilai" style={{ maxWidth: 80, maxHeight: 25 }} />
+                            index == tambah || index==ubah ?
+                              <input type="number" min={1} max={5} required onChange={(e) => setFormSkalaNilai(e.target.value)} defaultValue={nilaiSpbe[index]?.id_indikator == data.id ? nilaiSpbe[index].skala_nilai : formSkalaNilai} class="form-control" placeholder="Nilai" style={{ maxWidth: 80, maxHeight: 25 }} />
                               : (
                                 nilaiSpbe[index]?.id_indikator == data.id ? nilaiSpbe[index].skala_nilai :
                                   <p className="font-weight-bold text-gray-800">Belum Diisi</p>
@@ -266,9 +287,17 @@ function IndeksSpbe() {
                         </td>
                         <td>
                           {
-                            nilaiSpbe[index]?.id_indikator == data.id ?
-                              <p className="font-weight-bold text-gray-800">Sudah diisi</p>
-                              // <button className="btn btn-primary btn-sm mr-2" onClick={null}>Ubah</button>
+                            nilaiSpbe[index]?.id_indikator == data.id ? (
+                              // <p className="font-weight-bold text-gray-800">Sudah diisi</p>
+                              index == ubah ? (
+                                <>
+                                  <button className="btn btn-primary btn-sm mr-2" onClick={() => ubahSkalaNilai(data)}>Ubah</button>
+                                  <button className="btn btn-danger btn-sm" onClick={() => setUbah(null)}>Batal</button>
+                                </>
+                              ) : (
+                                <button className="btn btn-primary btn-sm mr-2" onClick={() => setUbahData(index)}>Ubah</button>
+                              )
+                            )
                               : (
                                 index == tambah ?
                                   <>
@@ -292,7 +321,7 @@ function IndeksSpbe() {
               </tbody>
             </table>
 
-          </div>
+          </div >
         );
       default:
         return (
