@@ -211,12 +211,12 @@ function Cctv() {
               <div className="d-flex justify-content-between">
                 <div className="row">
                   <div className="col-md-12">
-                    <div className="input-group input-group-sm mb-3">
+                    {/* <div className="input-group input-group-sm mb-3">
                       <div className="input-group-prepend">
                         <span className="input-group-text"><i className="fa fa-search" aria-hidden="true"></i></span>
                       </div>
                       <input type="text" className="form-control" aria-label="Small" placeholder="Cari Data" onChange={(e) => cariCctv(e.target.value)} />
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>
