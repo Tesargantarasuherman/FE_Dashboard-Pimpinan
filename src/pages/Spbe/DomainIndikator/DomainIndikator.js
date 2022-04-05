@@ -1,14 +1,21 @@
-import React, { useState } from 'react'
+import axios from 'axios';
+import React, { useState,useEffect } from 'react'
 import index_spbe from '../../../localdata/indexSbpe.json'
 
 function DomainIndikator() {
-    const [indexSpbe, setIndexSpbe] = useState(index_spbe.data);
+    const [indexSpbe, setIndexSpbe] = useState([]);
+
+    useEffect (()=>{
+        axios.get(`https://api-dashboard-pimpinan.herokuapp.com/api/v1/get-master-indikator-spbe`).then(res=>{
+            setIndexSpbe(res.data.data)
+        })
+    },[])
 
     return (
         <div className="container-fluid">
             <div className="card my-4">
                 <div className="card-body">
-                    <h6 className="m-0 font-weight-bold ">Daftar Indikator SPBE</h6>
+                    <h6 className="m-0 font-weight-bold mb-4">Daftar Indikator SPBE</h6>
                     <table className="table table-striped">
                         <thead>
                             <tr>

@@ -172,6 +172,10 @@ function Cctv() {
   const cariCctv = (val) => {
     axios.get(`https://api-dashboard-pimpinan.herokuapp.com/api/v1/master-data-cctv/?cari=${val}`).then(res => {
       setCCTV(res.data.data)
+    }).catch(err=>{
+      setCCTV(
+        [{ lokasi: "Tidak Ada", latitude: "Tidak Ada", longitude: "Tidak Ada", vendor: "Tidak Ada", dinas: "Tidak Ada", link_stream: "Tidak Ada", status: true }]
+      )
     })
   }
   const setEditCctv = (data) => {

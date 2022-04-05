@@ -1,7 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Chart from 'react-apexcharts';
 import axios from 'axios'
+import data_aplikasi from '../localdata/dataAplikasi.json'
+
 function Aplikasi() {
+  const [dataAplikasi,setDataAplikasi] = useState(data_aplikasi)
   const seriesPie = [21, 22]
 
   const optionsPie = {
@@ -81,6 +84,7 @@ function Aplikasi() {
     }
   }
   useEffect(() => {
+    console.table(dataAplikasi)
     axios.get('https://aplikasi.bandung.go.id/wp-json/api/v1/aplikasi?page=1&per_page=100', {
       headers: {
         Authorization: '261b3b04f89120d8515b57cd1011610b8fd2272a',
