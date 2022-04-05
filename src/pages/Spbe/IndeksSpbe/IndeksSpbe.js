@@ -53,9 +53,11 @@ function IndeksSpbe() {
       tahun: startDate.getFullYear(),
       skala_nilai: parseInt(formSkalaNilai),
     }
-    axios.post(`https://api-dashboard-pimpinan.herokuapp.com/api/v1/add-index-spbe`, data).then(res => {
-      getIndexPertahun(data.tahun)
+    axios.post(`https://api-dashboard-pimpinan.herokuapp.com/api/v1/add-skala-nilai-spbe`, data).then(res => {
       setTambah(null)
+      getIndexPertahun(data.tahun)
+      getNilaiPertahun(data.tahun)
+      actionSetNilaiGrafikIndex()
     }).catch(err => {
       console.log(err)
     })
