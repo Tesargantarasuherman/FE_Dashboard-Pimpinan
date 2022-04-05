@@ -77,19 +77,20 @@ function IndeksSpbe() {
     getIndikatorSPBE();
     getIndexPertahun(year);
     actionSetNilaiGrafikIndex();
-    // let nama_spbe = indexSpbe
-    // let index_spbe = index_spbe_pertahun.data.data
-    // let data_spbe = [];
-    // let _nama_spbe = [];
-    // for (let i = 0; i < nama_spbe.length; i++) {
-    //   _nama_spbe.push([nama_spbe[i].nama_indikator]);
-    // }
-    // for (let i = 0; i < index_spbe.length; i++) {
-    //   data_spbe.push(index_spbe[i].skala_nilai);
-    // }
-    // console.log(indexSpbe)
-    // setDaftarSpbe(_nama_spbe)
-    // setIndexSpbePertahun(data_spbe)
+    let nama_spbe = indexSpbe
+    let nilai_spbe = nilaiSpbe
+    let index_spbe = index_spbe_pertahun.data.data
+    let data_spbe = [];
+    let _nama_spbe = [];
+    for (let i = 0; i < nama_spbe.length; i++) {
+      _nama_spbe.push([nama_spbe[i].nama_indikator]);
+    }
+    for (let i = 0; i < nilai_spbe.length; i++) {
+      data_spbe.push(nilai_spbe[i].skala_nilai);
+    }
+    console.log(indexSpbe,'index spbe')
+    setDaftarSpbe(_nama_spbe)
+    setIndexSpbePertahun(data_spbe)
     console.log(index_spbe_pertahun.data.data, 'nama_spbe')
   }, [])
 
@@ -167,7 +168,11 @@ function IndeksSpbe() {
     plotOptions: {
       bar: {
         barHeight: '100%',
+        distributed: true,
         horizontal: true,
+        dataLabels: {
+          position: 'bottom'
+        },
       }
     },
     dataLabels: {
@@ -318,9 +323,9 @@ function IndeksSpbe() {
                   dateFormat="yyyy"
                 />
               </div>
-              <div className="d-flex justify-content-end my-4 mr-4">
-                <button className={`btn ${active.active == 'chart' ? 'btn-primary btn-sm' : 'btn-light'} px-4 mr-4`} onClick={() => setactive({ active: 'chart' })}>Grafik</button>
-                <button className={`btn ${active.active == 'table' ? 'btn-primary btn-sm' : 'btn-light'} px-4`} onClick={() => setactive({ active: 'table' })}>Tabel</button>
+              <div className="d-flex justify-content-end mr-4">
+                {/* <button className={`btn ${active.active == 'chart' ? 'btn-primary btn-sm' : 'btn-light'} px-4 mr-4`} onClick={() => setactive({ active: 'chart' })}>Grafik</button> */}
+                {/* <button className={`btn ${active.active == 'table' ? 'btn-primary btn-sm' : 'btn-light'} px-4`} onClick={() => setactive({ active: 'table' })}>Tabel</button> */}
               </div>
               {renderSwitch(active.active)}
             </div>

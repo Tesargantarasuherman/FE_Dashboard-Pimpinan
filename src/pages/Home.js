@@ -1,4 +1,3 @@
-import Axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import Card from '../components/Card';
 import CardProggress from '../components/CardProggress';
@@ -103,7 +102,12 @@ function Home() {
     }
 
     useEffect(() => {
-        Axios.get(`https://api.pray.zone/v2/times/today.json?city=bandung`).then(res => {
+        let date = new Date()
+        var h = date.getHours();
+        var h = date.getHours();
+
+        axios.get(`https://api.pray.zone/v2/times/today.json?city=bandung`).then(res => {
+            console.log(h)
             let salat = res.data.results.datetime[0].times
             setTimeSalat(salat)
         })
