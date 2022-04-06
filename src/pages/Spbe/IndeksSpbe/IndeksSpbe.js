@@ -62,14 +62,13 @@ function IndeksSpbe() {
       console.log(err)
     })
   }
-  const ubahSkalaNilai = (param) => {
-    console.log(param)
+  const ubahSkalaNilai = (param, id) => {
     let data = {
       id_indikator: param.id,
       tahun: startDate.getFullYear(),
       skala_nilai: parseInt(param.skala_nilai ? param.skala_nilai : formSkalaNilai),
     }
-    axios.put(`https://api-dashboard-pimpinan.herokuapp.com/api/v1/update-index-spbe/${param.id}`, data).then(res => {
+    axios.put(`https://api-dashboard-pimpinan.herokuapp.com/api/v1/update-index-spbe/${id}`, data).then(res => {
       console.log(res)
       getIndexPertahun(data.tahun)
       getNilaiPertahun(data.tahun)
@@ -276,7 +275,7 @@ function IndeksSpbe() {
                         <td>{data.bobot}</td>
                         <td>
                           {
-                            index == tambah || index==ubah ?
+                            index == tambah || index == ubah ?
                               <input type="number" min={1} max={5} required onChange={(e) => setFormSkalaNilai(e.target.value)} defaultValue={nilaiSpbe[index]?.id_indikator == data.id ? nilaiSpbe[index].skala_nilai : formSkalaNilai} class="form-control" placeholder="Nilai" style={{ maxWidth: 80, maxHeight: 25 }} />
                               : (
                                 nilaiSpbe[index]?.id_indikator == data.id ? nilaiSpbe[index].skala_nilai :
@@ -293,7 +292,7 @@ function IndeksSpbe() {
                               // <p className="font-weight-bold text-gray-800">Sudah diisi</p>
                               index == ubah ? (
                                 <>
-                                  <button className="btn btn-primary btn-sm mr-2" onClick={() => ubahSkalaNilai(data)}>Ubah</button>
+                                  <button className="btn btn-primary btn-sm mr-2" onClick={() => ubahSkalaNilai(data, nilaiSpbe[index]?.id)}>Ubah</button>
                                   <button className="btn btn-danger btn-sm" onClick={() => setUbah(null)}>Batal</button>
                                 </>
                               ) : (
