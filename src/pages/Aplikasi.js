@@ -4,7 +4,9 @@ import axios from 'axios'
 import data_aplikasi from '../localdata/dataAplikasi.json'
 
 function Aplikasi() {
-  const [dataAplikasi,setDataAplikasi] = useState(data_aplikasi)
+  const [dataAplikasi, setDataAplikasi] = useState(data_aplikasi.data)
+  const [categoryApp, setCategoryApp] = useState([])
+  const [klasifikasiApp, setKlasifikasiApp] = useState([])
   const seriesPie = [21, 22]
 
   const optionsPie = {
@@ -29,7 +31,7 @@ function Aplikasi() {
   }
   const series = [{
     name: 'Jumlah',
-    data: [21, 22, 10, 28, 16, 21, 13, 30, 45, 42, 12, 31, 34, 32, 21, 32, 26, 25]
+    data: klasifikasiApp
   }]
   const options = {
     chart: {
@@ -74,6 +76,9 @@ function Aplikasi() {
         ['Ketenagakerjaan'],
         ['Kewilayahan'],
         ['Kearsipan'],
+        ['Pengawasan'],
+        ['Pengadaan B/J'],
+        ['Akuntabilitas Kinerja'],
       ],
       labels: {
         style: {
@@ -84,7 +89,61 @@ function Aplikasi() {
     }
   }
   useEffect(() => {
-    console.table(dataAplikasi)
+    console.log(dataAplikasi[0]['meta']['detail_aplikasi_bidangsektor'])
+    let data = dataAplikasi;
+    let category = [];
+    let jenis_layanan =[];
+    for (let i = 0; i < data.length; i++) {
+      category.push(data[i].meta.detail_aplikasi_bidangsektor)
+    }
+    for (let i = 0; i < data.length; i++) {
+      jenis_layanan.push(data[i].meta.detail_aplikasi_jenis_layanan)
+    }
+    let counter = 0;
+    let value = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    for (let i = 0; i < category.length; i++) {
+      if (category[i] == "Kepegawaian") {
+        value[0]++;
+      }
+      if (category[i] == "Keuangan") {
+        value[1]++;
+      }
+      if (category[i] == "Pariwisata") {
+        value[2]++;
+      }
+      if (category[i] == "Pekerjaan & Usaha") {
+        value[3]++;
+      }
+      if (category[i] == "Kependudukan") {
+        value[4]++;
+      }
+      if (category[i] == "Kesehatan") {
+        value[5]++;
+      }
+      if (category[i] == "Lingkungan Hidup") {
+        value[6]++;
+      }
+      if (category[i] == "Instruktur Publik") {
+        value[7]++;
+      }
+      if (category[i] == "Kepemudaan") {
+        value[8]++;
+      }
+      if (category[i] == "Keolahragaan") {
+        value[9]++;
+      }
+      if (category[i] == "Perencanaan") {
+        value[10]++;
+      }
+      if (category[i] == "Perdagangan") {
+        value[11]++;
+      }
+    }
+    // value.push(counter)
+    setCategoryApp(category)
+    setKlasifikasiApp(value)
+    console.log('category', value)
+
     axios.get('https://aplikasi.bandung.go.id/wp-json/api/v1/aplikasi?page=1&per_page=100', {
       headers: {
         Authorization: '261b3b04f89120d8515b57cd1011610b8fd2272a',
@@ -95,7 +154,7 @@ function Aplikasi() {
     }).then(res => {
       console.log(res, 'axiosdd')
     })
-  })
+  }, [])
   return (
     <div className="container-fluid">
       <h6 className="m-0 font-weight-bold ">Aplikasi</h6>
@@ -133,7 +192,7 @@ function Aplikasi() {
                             51.2%
                           </p>
                         </td>
-                        <td className="text-center font-weight-bold">43</td>
+                        <td className="text-center font-weight-bold">{dataAplikasi.length}</td>
                       </tr>
                     </tbody>
                   </table>
