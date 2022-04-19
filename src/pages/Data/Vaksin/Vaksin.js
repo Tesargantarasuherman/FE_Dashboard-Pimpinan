@@ -9,8 +9,15 @@ function Vaksin() {
     const [vaksin2, setVaksin2] = useState([]);
     const [vaksin3, setVaksin3] = useState([]);
     useEffect(() => {
+        fetch(`http://data.bandung.go.id/service/index.php/vaksinasi/terkini`, {
+            method: "GET",
+        })
+        .then(response => response.json())
+        .then(result => {
+            console.log(result,'result')
+        })
+        .catch(error => console.log('error', error));
         axios.get(`http://data.bandung.go.id/service/index.php/vaksinasi/terkini`).then(res => {
-            console.log(res)
             setVaksin(res.data)
             setVaksin1(res.data.data[0])
             setVaksin2(res.data.data[1])

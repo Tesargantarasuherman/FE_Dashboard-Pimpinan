@@ -4,11 +4,11 @@ import axios from 'axios'
 import data_aplikasi from '../localdata/dataAplikasi.json'
 
 function Aplikasi() {
-  const [dataAplikasi, setDataAplikasi] = useState(data_aplikasi.data)
+  const [dataAplikasi, setDataAplikasi] = useState([])
   const [categoryApp, setCategoryApp] = useState([])
   const [klasifikasiApp, setKlasifikasiApp] = useState([])
-  const[ total_layanan_publik,set_total_layanan_publik] = useState(0)
-  const[ total_administrasi_pemerintahan,set_total_administrasi_pemerintahan] = useState(0)
+  const [total_layanan_publik, set_total_layanan_publik] = useState(0)
+  const [total_administrasi_pemerintahan, set_total_administrasi_pemerintahan] = useState(0)
   const seriesPie = [total_layanan_publik, total_administrasi_pemerintahan]
 
   const optionsPie = {
@@ -90,111 +90,119 @@ function Aplikasi() {
       }
     }
   }
-  useEffect(() => {
-    let data = dataAplikasi;
+  const getDataAplikasi = () => {
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", "261b3b04f89120d8515b57cd1011610b8fd2272a");
+    var requestOptions = {
+      method: 'GET',
+      headers: myHeaders,
+      redirect: 'follow'
+    };
+
+    fetch("https://aplikasi.bandung.go.id/wp-json/api/v1/aplikasi?page=1&per_page=300", requestOptions)
+      .then(response => response.json())
+      .then(result => {
+        setDataAplikasi(result.data)
+        setChart(result.data)
+      })
+      .catch(error => console.log('error', error));
+  }
+  const setChart =(dataApp)=>{
     let category = [];
-    let jenis_layanan = [];
-    let total_jenis_layanan = { layanan_publik: 0, administrasi_pemerintahan: 0 }
-    for (let i = 0; i < data.length; i++) {
-      category.push(data[i].meta.detail_aplikasi_bidangsektor)
-    }
-
-    for (let i = 0; i < data.length; i++) {
-      if (data[i].meta.detail_aplikasi_jenis_layanan == "Layanan Publik") {
-        total_jenis_layanan.layanan_publik += 1;
-      }
-      else{
-        total_jenis_layanan.administrasi_pemerintahan += 1;
-      }
-      jenis_layanan.push(data[i].meta.detail_aplikasi_jenis_layanan)
-    }
-    set_total_layanan_publik(
-      total_jenis_layanan.layanan_publik
-    )
-    set_total_administrasi_pemerintahan(
-      total_jenis_layanan.administrasi_pemerintahan
-    )
-    let value = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    for (let i = 0; i < category.length; i++) {
-      if (category[i] == "Kepegawaian") {
-        value[0]++;
-      }
-      if (category[i] == "Keuangan") {
-        value[1]++;
-      }
-      if (category[i] == "Pariwisata") {
-        value[2]++;
-      }
-      if (category[i] == "Pekerjaan & Usaha") {
-        value[3]++;
-      }
-      if (category[i] == "Kependudukan") {
-        value[4]++;
-      }
-      if (category[i] == "Kesehatan") {
-        value[5]++;
-      }
-      if (category[i] == "Lingkungan Hidup") {
-        value[6]++;
-      }
-      if (category[i] == "Instruktur Publik") {
-        value[7]++;
-      }
-      if (category[i] == "Kepemudaan") {
-        value[8]++;
-      }
-      if (category[i] == "Keolahragaan") {
-        value[9]++;
-      }
-      if (category[i] == "Perencanaan") {
-        value[10]++;
-      }
-      if (category[i] == "Perdagangan") {
-        value[11]++;
-      }
-      if (category[i] == "Website") {
-        value[12]++;
-      }
-      if (category[i] == "Perhubungan") {
-        value[13]++;
-      }
-      if (category[i] == "Jaminan Sosial") {
-        value[14]++;
-      }
-      if (category[i] == "Ketenagakerjaan") {
-        value[15]++;
-      }
-      if (category[i] == "Pelayanan Kewilayahan") {
-        value[16]++;
-      }
-      if (category[i] == "Kearsipan") {
-        value[17]++;
-      }
-      if (category[i] == "Pengawasan") {
-        value[18]++;
-      }
-      if (category[i] == "Pengadaan B/J") {
-        value[19]++;
-      }
-      if (category[i] == "Akuntabilitas Kinerja") {
-        value[20]++;
-      }
-    }
-    // value.push(counter)
-    setCategoryApp(category)
-    setKlasifikasiApp(value)
-    console.log('jenis_layanan', total_jenis_layanan)
-
-    axios.get('https://aplikasi.bandung.go.id/wp-json/api/v1/aplikasi?page=1&per_page=100', {
-      headers: {
-        Authorization: '261b3b04f89120d8515b57cd1011610b8fd2272a',
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-        'Accept': 'application/json'
-      }
-    }).then(res => {
-      console.log(res, 'axiosdd')
-    })
+        let jenis_layanan = [];
+        let total_jenis_layanan = { layanan_publik: 0, administrasi_pemerintahan: 0 }
+        for (let i = 0; i < dataApp.length; i++) {
+          category.push(dataApp[i].meta.detail_aplikasi_bidangsektor)
+        }
+    
+        for (let i = 0; i < dataApp.length; i++) {
+          if (dataApp[i].meta.detail_aplikasi_jenis_layanan == "Layanan Publik") {
+            total_jenis_layanan.layanan_publik += 1;
+          }
+          else {
+            total_jenis_layanan.administrasi_pemerintahan += 1;
+          }
+          jenis_layanan.push(dataApp[i].meta.detail_aplikasi_jenis_layanan)
+        }
+        set_total_layanan_publik(
+          total_jenis_layanan.layanan_publik
+        )
+        set_total_administrasi_pemerintahan(
+          total_jenis_layanan.administrasi_pemerintahan
+        )
+        let value = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        for (let i = 0; i < category.length; i++) {
+          if (category[i] == "Kepegawaian") {
+            value[0]++;
+          }
+          if (category[i] == "Keuangan") {
+            value[1]++;
+          }
+          if (category[i] == "Pariwisata") {
+            value[2]++;
+          }
+          if (category[i] == "Pekerjaan & Usaha") {
+            value[3]++;
+          }
+          if (category[i] == "Kependudukan") {
+            value[4]++;
+          }
+          if (category[i] == "Kesehatan") {
+            value[5]++;
+          }
+          if (category[i] == "Lingkungan Hidup") {
+            value[6]++;
+          }
+          if (category[i] == "Instruktur Publik") {
+            value[7]++;
+          }
+          if (category[i] == "Kepemudaan") {
+            value[8]++;
+          }
+          if (category[i] == "Keolahragaan") {
+            value[9]++;
+          }
+          if (category[i] == "Perencanaan") {
+            value[10]++;
+          }
+          if (category[i] == "Perdagangan") {
+            value[11]++;
+          }
+          if (category[i] == "Website") {
+            value[12]++;
+          }
+          if (category[i] == "Perhubungan") {
+            value[13]++;
+          }
+          if (category[i] == "Jaminan Sosial") {
+            value[14]++;
+          }
+          if (category[i] == "Ketenagakerjaan") {
+            value[15]++;
+          }
+          if (category[i] == "Pelayanan Kewilayahan") {
+            value[16]++;
+          }
+          if (category[i] == "Kearsipan") {
+            value[17]++;
+          }
+          if (category[i] == "Pengawasan") {
+            value[18]++;
+          }
+          if (category[i] == "Pengadaan B/J") {
+            value[19]++;
+          }
+          if (category[i] == "Akuntabilitas Kinerja") {
+            value[20]++;
+          }
+        }
+        // value.push(counter)
+        setCategoryApp(category)
+        setKlasifikasiApp(value)
+        console.log('jenis_layanan', total_jenis_layanan)
+  }
+  useEffect(() => {
+    getDataAplikasi();
   }, [])
   return (
     <div className="container-fluid">
@@ -224,13 +232,13 @@ function Aplikasi() {
                         <td>
                           <p className="text-center font-weight-bold">
                             {total_layanan_publik}<br />
-                            {total_layanan_publik  /dataAplikasi.length* 100} %
+                            {total_layanan_publik / dataAplikasi.length * 100} %
                           </p>
                         </td>
                         <td>
                           <p className="text-center font-weight-bold">
-                          {total_administrasi_pemerintahan}<br />
-                          {total_administrasi_pemerintahan/dataAplikasi.length * 100} %
+                            {total_administrasi_pemerintahan}<br />
+                            {total_administrasi_pemerintahan / dataAplikasi.length * 100} %
                           </p>
                         </td>
                         <td className="text-center font-weight-bold">{dataAplikasi.length}</td>
