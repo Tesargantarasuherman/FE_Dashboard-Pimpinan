@@ -10,7 +10,9 @@ function Vaksin() {
     const [vaksin3, setVaksin3] = useState([]);
     useEffect(() => {
         fetch(`http://data.bandung.go.id/service/index.php/vaksinasi/terkini`, {
+            'Access-Control-Allow-Credentials': true,
             method: "GET",
+            credentials: 'include'
         })
         .then(response => response.json())
         .then(result => {
