@@ -37,7 +37,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "dev": " set PORT=8081 && set HTTP=true react-scripts start",
+    "dev": " set PORT=8081 && set HTTP=true && react-scripts start",
     "start": "set HTTP=true && serve -s build",
     "build": "set HTTP=true && react-scripts build",
     "test": "set HTTP=true && react-scripts test --env=jsdom",

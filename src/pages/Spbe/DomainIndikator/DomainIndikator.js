@@ -14,7 +14,7 @@ function DomainIndikator() {
     return (
         <div className="container-fluid">
             <div className="card my-4">
-                <div className="card-body">
+                <div className="card-body"   style={{maxHeight:'90vh',overflow:'scroll'}}>
                     <h6 className="m-0 font-weight-bold mb-4">Daftar Indikator SPBE</h6>
                     <table className="table table-striped">
                         <thead>

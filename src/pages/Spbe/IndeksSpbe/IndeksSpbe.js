@@ -316,7 +316,7 @@ function IndeksSpbe() {
                   })
                 }
                 <tr className="font-weight-bold">
-                  <td colSpan={4}>Nilai Index</td>
+                  <td colSpan={5}>Nilai Index</td>
                   <td>{nilaiPertahun}</td>
                 </tr>
               </tbody>
@@ -343,7 +343,7 @@ function IndeksSpbe() {
         <div className="card-body">
           <h6 className="m-0 font-weight-bold mb-4 ml-3">Indeks SPBE Tahunan</h6>
           <div className="col-md-12">
-            <div className="card">
+            <div className="card"  style={{maxHeight:'90vh',overflow:'scroll'}}>
               <div className="form-group my-2 mx-2">
                 <label htmlFor="exampleFormControlSelect1">Pilih Tahun</label>
                 <DatePicker
@@ -353,7 +353,7 @@ function IndeksSpbe() {
                   dateFormat="yyyy"
                 />
               </div>
-              <div className="d-flex justify-content-end mr-4">
+              <div className="d-flex justify-content-end mr-4" >
                 {/* <button className={`btn ${active.active == 'chart' ? 'btn-primary btn-sm' : 'btn-light'} px-4 mr-4`} onClick={() => setactive({ active: 'chart' })}>Grafik</button> */}
                 {/* <button className={`btn ${active.active == 'table' ? 'btn-primary btn-sm' : 'btn-light'} px-4`} onClick={() => setactive({ active: 'table' })}>Tabel</button> */}
               </div>

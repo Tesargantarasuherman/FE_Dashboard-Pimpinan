@@ -55,4 +55,14 @@ const wifiIcon= L.icon({
   iconSize: [50, 50],
   className: 'leaflet-marker-icon'
 });
-export {marketIcon,cctvIcon,policeIcon,wifiIcon,cctvIconNotActive}
+const wifiIconNotActive= L.icon({
+  iconUrl: Wifi,
+  iconRetinaUrl: Wifi,
+  iconAnchor: null,
+  shadowUrl: null,
+  shadowSize: null,
+  shadowAnchor: null,
+  iconSize: [50, 50],
+  className: 'leaflet-marker-icon'
+});
+export {marketIcon,cctvIcon,policeIcon,wifiIcon,cctvIconNotActive,wifiIconNotActive}
