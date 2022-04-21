@@ -39,7 +39,7 @@
   "scripts": {
     "dev": " set PORT=8081 && set HTTP=true react-scripts start",
     "start": "set HTTP=true && serve -s build",
-    "build": "set HTTP=true react-scripts build",
+    "build": "set HTTP=true && react-scripts build",
     "test": "set HTTP=true && react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "heroku-postbuild": "npm run build"
