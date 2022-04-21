@@ -37,10 +37,10 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "dev": "set PORT=8081 && react-scripts start",
-    "start": "serve -s build",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "dev": " set HTTP=true && set PORT=8081 && react-scripts start",
+    "start": "set HTTP=true && serve -s build",
+    "build": "set HTTP=true && react-scripts build",
+    "test": "set HTTP=true && react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "heroku-postbuild": "npm run build"
   },
