@@ -19,50 +19,50 @@ function Login() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        // if (email == 'kepaladinas@bandung.go.id' && password == '123456') {
-        //     localStorage.setItem('data', JSON.stringify({
-        //         login: true,
-        //         role:'kepala dinas'
-        //     }))
-        //     navigate(`/home`);
-        // }
-        // if (email == 'admindashboard@bandung.go.id' && password == '123456') {
-        //     localStorage.setItem('data', JSON.stringify({
-        //         login: true,
-        //         role:'admin'
-        //     }))
-        //     navigate(`/home`);
-        // }
-        // else {
-        //     toast.error('Email tidak terdaftar atau password salah', {
-        //         position: "top-center",
-        //         autoClose: 5000,
-        //         hideProgressBar: false,
-        //         closeOnClick: true,
-        //         pauseOnHover: true,
-        //         draggable: true,
-        //         progress: undefined,
-        //     });
-        // }
-        var formdata = new FormData();
-        formdata.append("email", "demo.kadis@bandung.go.id");
-        formdata.append("password", "123456");
-        formdata.append("regid", "123456");
+        if (email == 'kepaladinas@bandung.go.id' && password == '123456') {
+            localStorage.setItem('data', JSON.stringify({
+                login: true,
+                role:'kepala dinas'
+            }))
+            navigate(`/home`);
+        }
+        if (email == 'admindashboard@bandung.go.id' && password == '123456') {
+            localStorage.setItem('data', JSON.stringify({
+                login: true,
+                role:'admin'
+            }))
+            navigate(`/home`);
+        }
+        else {
+            toast.error('Email tidak terdaftar atau password salah', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+        }
+        // var formdata = new FormData();
+        // formdata.append("email", "demo.kadis@bandung.go.id");
+        // formdata.append("password", "123456");
+        // formdata.append("regid", "123456");
 
-        var requestOptions = {
-            method: 'POST',
-            body: formdata,
-            redirect: 'follow'
-        };
+        // var requestOptions = {
+        //     method: 'POST',
+        //     body: formdata,
+        //     redirect: 'follow'
+        // };
 
-        fetch("https://suratonline.bandung.go.id/api/index.php/login", requestOptions)
-            .then(response => response.json())
-            .then(result => {
-                localStorage.setItem('data', JSON.stringify(result.data))
-                navigate(`/home`);
-                console.log(result.data)
-            })
-            .catch(error => console.log('error', error));
+        // fetch("https://suratonline.bandung.go.id/api/index.php/login", requestOptions)
+        //     .then(response => response.json())
+        //     .then(result => {
+        //         localStorage.setItem('data', JSON.stringify(result.data))
+        //         navigate(`/home`);
+        //         console.log(result.data)
+        //     })
+        //     .catch(error => console.log('error', error));
 
         // let data = new FormData();
         // data.append('email', email);
