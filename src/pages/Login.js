@@ -55,7 +55,7 @@ function Login() {
             redirect: 'follow'
         };
 
-        fetch("https://suratonline.bandung.go.id/api/index.php/", requestOptions)
+        fetch("https://suratonline.bandung.go.id/api/index.php/login", requestOptions)
             .then(response => response.json())
             .then(result => {
                 localStorage.setItem('data', JSON.stringify(result.data))
