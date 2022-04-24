@@ -9,16 +9,15 @@ function Vaksin() {
     const [vaksin2, setVaksin2] = useState([]);
     const [vaksin3, setVaksin3] = useState([]);
     useEffect(() => {
-        fetch(`http://data.bandung.go.id/service/index.php/vaksinasi/terkini`, {
-            'Access-Control-Allow-Credentials': true,
-            method: "GET",
-            credentials: 'include'
-        })
-        .then(response => response.json())
-        .then(result => {
-            console.log(result,'result')
-        })
-        .catch(error => console.log('error', error));
+        var requestOptions = {
+            method: 'GET',
+            redirect: 'follow'
+        };
+
+        fetch("https://covid19.bandung.go.id/ajax/vaksin", requestOptions)
+            .then(response => response.json())
+            .then(result => console.log(result))
+            .catch(error => console.log('error', error));
         axios.get(`http://data.bandung.go.id/service/index.php/vaksinasi/terkini`).then(res => {
             setVaksin(res.data)
             setVaksin1(res.data.data[0])

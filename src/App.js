@@ -22,6 +22,7 @@ import "react-datepicker/dist/react-datepicker.css";
 function App() {
   const [isLogin, setIsLogin] = useState(JSON.parse(localStorage.getItem('data')));
   const [sidebar, setSidebar] = useState(true);
+  
   useEffect(() => {
     console.log(isLogin)
   }, [])

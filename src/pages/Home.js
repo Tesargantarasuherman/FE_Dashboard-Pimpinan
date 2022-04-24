@@ -68,30 +68,33 @@ function Home() {
     var today = new Date();
     var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
     const getAgenda = () => {
-        let data = new FormData();
         var today = new Date();
-        var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-        data.append('token', user[0].token);
-        data.append('start', '2019-06-01');
-        data.append('end', date);
+        var date_now = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+        var myHeaders = new Headers();
+        myHeaders.append("Cookie", "surol=1m5l1g0p6eacprvchqecskf5qm593tup");
 
+        var formdata = new FormData();
+        formdata.append("token", user[0].token);
+        formdata.append("start", "2019-06-01");
+        formdata.append("end", date_now);
 
-        axios.post(`http://localhost:8080/suratonlinebackend/api/index.php/agenda`, data, {
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
-        }).then(res => {
-            console.log(res.data, 'data')
-            let _data = res.data;
-            for (let i = 0; i < _data.length; i++) {
-                _dataAgenda.push({ Id: _data[i].id, Subject: _data[i].perihal, StartTime: _data[i].tanggal_mulai + ' ' + _data[i].jam_mulai, EndTime: _data[i].tanggal_selesai + ' ' + _data[i].jam_selesai })
-            }
-            setAgenda(_dataAgenda)
-        }).catch(err => {
-
-        })
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: formdata,
+            redirect: 'follow'
+        };
+        fetch("https://suratonline.bandung.go.id/api/index.php/agenda/", requestOptions)
+            .then(response => response.json())
+            .then(result => {
+                console.log('data', result)
+                let _data = result;
+                for (let i = 0; i < _data.length; i++) {
+                    _dataAgenda.push({ Id: _data[i].id, Subject: _data[i].perihal, StartTime: _data[i].tanggal_mulai + ' ' + _data[i].jam_mulai, EndTime: _data[i].tanggal_selesai + ' ' + _data[i].jam_selesai })
+                }
+                setAgenda(_dataAgenda)
+            })
+            .catch(error => console.log('error', error));
     }
     const getWeather = () => {
         axios.post(`https://mantra.bandung.go.id/mantra/json/diskominfo/cuaca/sekarang`).then(res => {
