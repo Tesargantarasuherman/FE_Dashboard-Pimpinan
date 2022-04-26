@@ -66,16 +66,21 @@ function Home() {
     const [agenda, setAgenda] = useState(null);
     const [data, setData] = useState([]);
     var today = new Date();
+    const [dateBefore, setDateBefore] = useState('2019-01-01');
+    const [dateNow, setDateNow] = useState(today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate());
     var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+
     const getAgenda = () => {
         var today = new Date();
-        var date_now = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+        var start_date = `2019-01-01`;
+        var end_date = `2022-01-01`;
+        var date_now = today.getFullYear() + '-' + (today.getMonth() ) + '-' + today.getDate();
         var myHeaders = new Headers();
         myHeaders.append("Cookie", "surol=1m5l1g0p6eacprvchqecskf5qm593tup");
 
         var formdata = new FormData();
         formdata.append("token", user[0].token);
-        formdata.append("start", "2019-06-01");
+        formdata.append("start", start_date);
         formdata.append("end", date_now);
 
         var requestOptions = {
@@ -84,9 +89,10 @@ function Home() {
             body: formdata,
             redirect: 'follow'
         };
-        fetch("https://suratonline.bandung.go.id/api/index.php/agenda/", requestOptions)
+        fetch("http://localhost:8001/api/v1/agenda/kegiatan", requestOptions)
             .then(response => response.json())
             .then(result => {
+                console.log(user[0].token)
                 console.log('data', result)
                 let _data = result;
                 for (let i = 0; i < _data.length; i++) {
@@ -97,24 +103,45 @@ function Home() {
             .catch(error => console.log('error', error));
     }
     const getWeather = () => {
-        axios.post(`https://mantra.bandung.go.id/mantra/json/diskominfo/cuaca/sekarang`).then(res => {
-            console.log(res.data.response.data)
+        axios.get(`http://localhost:8001/api/v1/cuaca`).then(res => {
+            console.log('cuaca', res.data.response.data.main)
             setWeather(res.data.response.data.main)
 
         })
+    }
+    const getAgendaKegiatan = () => {
+        var formdata = new FormData();
+        var today = new Date();
+        var start_date = `2019-01-01`;
+        var end_date = `2022-01-01`;
+        var date_now = today.getFullYear() + '-' + (today.getMonth()) + '-' + today.getDate();
+        formdata.append("token", user[0].token);
+        formdata.append("start", start_date);
+        formdata.append("end", end_date);
+
+        axios.get(`http://localhost:8001/api/v1/agenda/kegiatan`, formdata).then(res => {
+            console.log(res.data)
+            let _data = res.data;
+            for (let i = 0; i < _data.length; i++) {
+                _dataAgenda.push({ Id: _data[i].id, Subject: _data[i].perihal, StartTime: _data[i].tanggal_mulai + ' ' + _data[i].jam_mulai, EndTime: _data[i].tanggal_selesai + ' ' + _data[i].jam_selesai })
+            }
+            setAgenda(_dataAgenda)
+        })
+        console.log(user[0].token)
     }
 
     useEffect(() => {
         let date = new Date()
         var h = date.getHours();
         var h = date.getHours();
+        getAgendaKegiatan();
 
         axios.get(`https://api.pray.zone/v2/times/today.json?city=bandung`).then(res => {
             console.log(h)
             let salat = res.data.results.datetime[0].times
             setTimeSalat(salat)
         })
-        getAgenda()
+        // getAgenda()
         getWeather()
     }, [])
     return (

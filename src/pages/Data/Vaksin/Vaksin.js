@@ -18,7 +18,7 @@ function Vaksin() {
             .then(response => response.json())
             .then(result => console.log(result))
             .catch(error => console.log('error', error));
-        axios.get(`http://data.bandung.go.id/service/index.php/vaksinasi/terkini`).then(res => {
+        axios.get(`http://localhost:8000/api/v1/vaksin/terkini`).then(res => {
             setVaksin(res.data)
             setVaksin1(res.data.data[0])
             setVaksin2(res.data.data[1])
