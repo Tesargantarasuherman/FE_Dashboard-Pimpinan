@@ -9,6 +9,7 @@ import ReactHlsPlayer from 'react-hls-player';
 import ModalAdd from './components/ModalAdd';
 import ModalEdit from './components/ModalEdit';
 import { ToastContainer, toast } from 'react-toastify';
+import BaseURL from '../../../utils/BaseURL';
 
 function Markers({ data }) {
   const map = useMap();
@@ -59,7 +60,7 @@ function Wifi() {
     getAllWifi()
   }, [])
   const getAllWifi = () => {
-    axios.get(`https://api-dashboard-pimpinan.herokuapp.com/api/v1/get-master-data-wifi`).then(res => {
+    axios.get(`${BaseURL}get-master-data-wifi`).then(res => {
       console.log(res, 'data')
       setWifi(res.data.data)
     })
@@ -92,7 +93,7 @@ function Wifi() {
     );
   }
   const addWifi = () => {
-    axios.post(`https://api-dashboard-pimpinan.herokuapp.com/api/v1/add-master-data-wifi`, form).then(res => {
+    axios.post(`${BaseURL}add-master-data-wifi`, form).then(res => {
       setForm(
         { lokasi: "", latitude: "", longitude: "", vendor: "", dinas: "", status: true }
       )
@@ -127,7 +128,7 @@ function Wifi() {
       dinas: form.dinas == "" ? data.dinas : form.dinas,
       status: form.status == "" ? data.status : form.status
     }
-    axios.put(`https://api-dashboard-pimpinan.herokuapp.com/api/v1/update-master-data-wifi/${data.id}`, ubah_data).then(res => {
+    axios.put(`${BaseURL}update-master-data-wifi/${data.id}`, ubah_data).then(res => {
       setEdit(null);
       getAllWifi();
       setShowEdit(false);
@@ -154,14 +155,14 @@ function Wifi() {
       dinas: data.dinas,
       status: !data.status
     }
-    axios.put(`https://api-dashboard-pimpinan.herokuapp.com/api/v1/update-master-data-wifi/${data.id}`, ubah_data).then(res => {
+    axios.put(`${BaseURL}update-master-data-wifi/${data.id}`, ubah_data).then(res => {
       getAllWifi()
     }).catch(err => {
       console.log(err)
     })
   }
   const cariWifi = (val) => {
-    axios.get(`https://api-dashboard-pimpinan.herokuapp.com/api/v1/master-data-wifi/?cari=${val}`).then(res => {
+    axios.get(`${BaseURL}master-data-wifi/?cari=${val}`).then(res => {
       setWifi(res.data.data)
     }).catch(err=>{
       setWifi(

@@ -5,6 +5,7 @@ import index_spbe from '../../../localdata/indexSbpe.json'
 import index_spbe_pertahun from '../../../localdata/indexSbpePertahun.json'
 import DatePicker from "react-datepicker";
 import moment from "moment";
+import BaseURL from '../../../utils/BaseURL';
 
 function IndeksSpbe() {
   const [indexSpbe, setIndexSpbe] = useState([]);
@@ -21,7 +22,7 @@ function IndeksSpbe() {
   const [nilaiGrafikIndex, setNilaiGrafikIndex] = useState([])
 
   const actionSetNilaiGrafikIndex = () => {
-    axios.get(`https://api-dashboard-pimpinan.herokuapp.com/api/v1/get-nilai-index`).then(res => {
+    axios.get(`${BaseURL}get-nilai-index`).then(res => {
       let data = res.data.data;
       let tahunIndex = [];
       let nilaiIndex = [];
@@ -53,7 +54,7 @@ function IndeksSpbe() {
       tahun: startDate.getFullYear(),
       skala_nilai: parseInt(formSkalaNilai),
     }
-    axios.post(`https://api-dashboard-pimpinan.herokuapp.com/api/v1/add-skala-nilai-spbe`, data).then(res => {
+    axios.post(`${BaseURL}add-skala-nilai-spbe`, data).then(res => {
       setTambah(null)
       getIndexPertahun(data.tahun)
       getNilaiPertahun(data.tahun)
@@ -68,7 +69,7 @@ function IndeksSpbe() {
       tahun: startDate.getFullYear(),
       skala_nilai: parseInt(param.skala_nilai ? param.skala_nilai : formSkalaNilai),
     }
-    axios.put(`https://api-dashboard-pimpinan.herokuapp.com/api/v1/update-index-spbe/${id}`, data).then(res => {
+    axios.put(`${BaseURL}update-index-spbe/${id}`, data).then(res => {
       console.log(res)
       getIndexPertahun(data.tahun)
       getNilaiPertahun(data.tahun)
@@ -80,7 +81,7 @@ function IndeksSpbe() {
   }
 
   const getNilaiPertahun = (year) => {
-    axios.get(`https://api-dashboard-pimpinan.herokuapp.com/api/v1/get-nilai-index/${year}`).then(res => {
+    axios.get(`${BaseURL}get-nilai-index/${year}`).then(res => {
       let data = res.data.data
       if (data.length > 0) {
         setNilaiPertahun(res.data.data[0].hasil_index)
@@ -117,12 +118,12 @@ function IndeksSpbe() {
   }, [])
 
   const getIndikatorSPBE = () => {
-    axios.get(`https://api-dashboard-pimpinan.herokuapp.com/api/v1/get-master-indikator-spbe`).then(res => {
+    axios.get(`${BaseURL}get-master-indikator-spbe`).then(res => {
       setIndexSpbe(res.data.data)
     })
   }
   const getIndexPertahun = (value) => {
-    axios.get(`https://api-dashboard-pimpinan.herokuapp.com/api/v1/get-index-spbe/${value}`).then(res => {
+    axios.get(`${BaseURL}get-index-spbe/${value}`).then(res => {
       console.log(res.data.data, 'index')
       setNilaiSpbe(res.data.data)
     })

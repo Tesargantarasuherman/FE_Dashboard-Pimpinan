@@ -149,19 +149,20 @@ function Covid() {
         })
     }
     const getCovid = () => {
-        axios.get(`https://covid19.bandung.go.id/api/covid19bdg/v1/covidsummary/list`, {
+        axios.get(`https://api-dashboard-pimpinan.herokuapp.com/api/v1/covid`, {
             headers: {
                 Authorization: 'RkplDPdGFxTSjARZkZUYi3FgRdakJy',
             }
         }).then(res => {
-            let data = res.data.data
+            let data = res.data
+            console.log(data.data);
             let tanggalCovid = []
             let dataCovid = []
             let dataCovidAktif = []
             let dataCovidSembuh = []
             let dataCovidMeninggal = []
             for (let i = 0; i < data.length; i++) {
-                tanggalCovid.push(moment(data[i].date).format("LL"))
+                tanggalCovid.push(moment(data[i].labels).format("LL"))
             }
             for (let i = 0; i < data.length; i++) {
                 dataCovid.push(data[i].positif)
@@ -170,11 +171,11 @@ function Covid() {
                 dataCovidMeninggal.push(data[i].meninggal)
             }
             setCovid(res.data.data)
-            setNilai(dataCovid)
-            setKonfirmasiAktif(dataCovidAktif)
-            setKonfirmasiSembuh(dataCovidSembuh)
-            setKonfirmasiMeninggal(dataCovidMeninggal)
-            setTanggal(tanggalCovid)
+            setNilai(data.data.total_terkonfirmasi)
+            setKonfirmasiAktif(data.data.terkonfirmasi_aktif)
+            setKonfirmasiSembuh(data.data.terkonfirmasi_sembuh)
+            setKonfirmasiMeninggal(data.data.terkonfirmasi_meninggal)
+            setTanggal(res.data.labels)
         }
         )
     }

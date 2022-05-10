@@ -115,11 +115,11 @@ function Home() {
         var start_date = `2019-01-01`;
         var end_date = `2022-01-01`;
         var date_now = today.getFullYear() + '-' + (today.getMonth()) + '-' + today.getDate();
-        formdata.append("token", user[0].token);
+        formdata.append("token", user[0].data.token);
         formdata.append("start", start_date);
         formdata.append("end", end_date);
 
-        axios.get(`http://localhost:8001/api/v1/agenda/kegiatan`, formdata).then(res => {
+        axios.post(`http://localhost:8001/api/v1/agenda/kegiatan`, formdata).then(res => {
             console.log(res.data)
             let _data = res.data;
             for (let i = 0; i < _data.length; i++) {
@@ -127,7 +127,6 @@ function Home() {
             }
             setAgenda(_dataAgenda)
         })
-        console.log(user[0].token)
     }
 
     useEffect(() => {

@@ -9,6 +9,7 @@ import ReactHlsPlayer from 'react-hls-player';
 import ModalAdd from './components/ModalAdd';
 import ModalEdit from './components/ModalEdit';
 import { ToastContainer, toast } from 'react-toastify';
+import BaseURL from '../../../utils/BaseURL';
 
 function Markers({ data }) {
   const map = useMap();
@@ -66,7 +67,7 @@ function Cctv() {
     getAllCctv()
   }, [])
   const getAllCctv = () => {
-    axios.get(`https://api-dashboard-pimpinan.herokuapp.com/api/v1/get-master-data-cctv`).then(res => {
+    axios.get(`${BaseURL}get-master-data-cctv`).then(res => {
       console.log(res, 'data')
       setCCTV(res.data.data)
     })
@@ -99,7 +100,7 @@ function Cctv() {
     );
   }
   const addCctv = () => {
-    axios.post(`https://api-dashboard-pimpinan.herokuapp.com/api/v1/add-master-data-cctv`, form).then(res => {
+    axios.post(`${BaseURL}add-master-data-cctv`, form).then(res => {
       setForm(
         { lokasi: "", latitude: "", longitude: "", vendor: "", dinas: "", link_stream: "", status: true }
       )
@@ -135,7 +136,7 @@ function Cctv() {
       link_stream: form.link_stream == "" ? data.link_stream : form.link_stream,
       status: form.status == "" ? data.status : form.status
     }
-    axios.put(`https://api-dashboard-pimpinan.herokuapp.com/api/v1/update-master-data-cctv/${data.id}`, ubah_data).then(res => {
+    axios.put(`${BaseURL}update-master-data-cctv/${data.id}`, ubah_data).then(res => {
       setEdit(null);
       getAllCctv();
       setShowEdit(false);
@@ -163,14 +164,14 @@ function Cctv() {
       link_stream: data.link_stream,
       status: !data.status
     }
-    axios.put(`https://api-dashboard-pimpinan.herokuapp.com/api/v1/update-master-data-cctv/${data.id}`, ubah_data).then(res => {
+    axios.put(`${BaseURL}update-master-data-cctv/${data.id}`, ubah_data).then(res => {
       getAllCctv()
     }).catch(err => {
       console.log(err)
     })
   }
   const cariCctv = (val) => {
-    axios.get(`https://api-dashboard-pimpinan.herokuapp.com/api/v1/master-data-cctv/?cari=${val}`).then(res => {
+    axios.get(`${BaseURL}master-data-cctv/?cari=${val}`).then(res => {
       setCCTV(res.data.data)
     }).catch(err=>{
       setCCTV(

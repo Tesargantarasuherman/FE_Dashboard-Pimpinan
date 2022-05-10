@@ -1,12 +1,13 @@
 import axios from 'axios';
 import React, { useState,useEffect } from 'react'
 import index_spbe from '../../../localdata/indexSbpe.json'
+import BaseURL from '../../../utils/BaseURL';
 
 function DomainIndikator() {
     const [indexSpbe, setIndexSpbe] = useState([]);
 
     useEffect (()=>{
-        axios.get(`https://api-dashboard-pimpinan.herokuapp.com/api/v1/get-master-indikator-spbe`).then(res=>{
+        axios.get(`${BaseURL}get-master-indikator-spbe`).then(res=>{
             setIndexSpbe(res.data.data)
         })
     },[])

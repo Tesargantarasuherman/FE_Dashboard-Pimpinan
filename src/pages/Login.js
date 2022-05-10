@@ -55,7 +55,7 @@ function Login() {
             redirect: 'follow'
         };
 
-        fetch("http://localhost:8001/api/v1/user-login", requestOptions)
+        fetch("http://localhost:8001/api/v1/login", requestOptions)
             .then(response => response.json())
             .then(result => {
                 if (result.data != undefined) {
